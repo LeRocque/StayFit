@@ -15,16 +15,24 @@ workoutRouter.post(
   "/add",
   workoutController.addWorkout,
   (_req: Request, res: Response) => {
-    return res.status(200).json("Workout succesfully created");
+    return res.status(200).json("Workout successfully created");
   }
 );
 
-workoutRouter.put("/edit", (_req: Request, res: Response) => {
-  return res.status(200);
-});
+workoutRouter.put(
+  "/edit",
+  workoutController.editWorkout,
+  (_req: Request, res: Response) => {
+    return res.status(200).json(res.locals.update);
+  }
+);
 
-workoutRouter.delete("/remove", (_req: Request, res: Response) => {
-  return res.status(200);
-});
+workoutRouter.delete(
+  "/remove/:workout_id",
+  workoutController.removeWorkout,
+  (_req: Request, res: Response) => {
+    return res.status(200).json("Workout successfully deleted");
+  }
+);
 
 export default workoutRouter;

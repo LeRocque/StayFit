@@ -13,10 +13,14 @@ export type UserRequest = Request & {
 
 export type WorkoutRequest = Request & {
   body: {
-    routineName: string;
+    workout_id?: number;
     muscleTarget: string;
     workoutName: string;
     weight: number;
     reps: number;
+  };
+  params: {
+    user_id?: string;
+    workout_id?: string;
   };
 };
