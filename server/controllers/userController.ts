@@ -1,7 +1,7 @@
 import bcrypt from "bcryptjs";
 import db from "../models/dbModel";
 import { Response, NextFunction } from "express";
-import UserRequest from "../backendTypes";
+import { UserRequest } from "../backendTypes";
 
 /*
 Create user table with the following

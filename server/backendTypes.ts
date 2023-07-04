@@ -1,6 +1,6 @@
 import { Request } from "express";
 
-type UserRequest = Request & {
+export type UserRequest = Request & {
   body: {
     email?: string;
     firstName?: string;
@@ -11,4 +11,12 @@ type UserRequest = Request & {
   };
 };
 
-export default UserRequest;
+export type WorkoutRequest = Request & {
+  body: {
+    routineName: string;
+    muscleTarget: string;
+    workoutName: string;
+    weight: number;
+    reps: number;
+  };
+};

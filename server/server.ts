@@ -6,7 +6,7 @@ import express, {
 } from "express";
 import path from "path";
 import cookieParser from "cookie-parser";
-import workoutRouter from "./routes/workout";
+import workoutRouter from "./routes/workoutRouter";
 import userRouter from "./routes/userRouter";
 
 const app: Express = express();
