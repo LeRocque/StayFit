@@ -21,7 +21,7 @@ app.use("/workout", workoutRouter);
 app.use("/user", userRouter);
 
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.resolve(__dirname, "../dist")));
+  app.use(express.static(path.resolve(__dirname, "../build")));
   app.use("/assets", express.static(path.resolve(__dirname, "../src/assets")));
 }
 
