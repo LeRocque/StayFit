@@ -1,7 +1,15 @@
 import "./App.css";
+import { Routes, Route } from "react-router-dom";
+import LoginPage from "./pages/LoginPage";
+import HomePage from "./pages/HomePage";
 
-function App() {
-  return <div>Home</div>;
-}
+const App = () => {
+  return (
+    <Routes>
+      <Route path="/" element={<LoginPage />} />
+      <Route path="/home" element={<HomePage userId={userId} />} />
+    </Routes>
+  );
+};
 
 export default App;
