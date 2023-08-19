@@ -15,11 +15,11 @@ workoutRouter.post(
   "/add",
   workoutController.addWorkout,
   (_req: Request, res: Response) => {
-    return res.status(200).json("Workout successfully created");
+    return res.status(200).json(res.locals.workout);
   }
 );
 
-workoutRouter.put(
+workoutRouter.patch(
   "/edit",
   workoutController.editWorkout,
   (_req: Request, res: Response) => {
@@ -31,7 +31,7 @@ workoutRouter.delete(
   "/remove/:workout_id",
   workoutController.removeWorkout,
   (_req: Request, res: Response) => {
-    return res.status(200).json("Workout successfully deleted");
+    return res.status(200).json(res.locals.deleted);
   }
 );
 

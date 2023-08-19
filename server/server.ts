@@ -27,7 +27,8 @@ if (process.env.NODE_ENV === "production") {
 
 // Catch-all error handler
 app.use("*", (_req, res) => {
-  res.status(404).send("This page can't be found");
+  console.log("Catch-All Hit");
+  return res.status(404).send("This page can't be found");
 });
 
 // Global error handler

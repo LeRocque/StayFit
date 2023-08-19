@@ -26,8 +26,8 @@ const workoutController = {
     if (user_id && muscleTarget && workoutName && weight && reps) {
       try {
         const queryString =
-          "INSERT INTO workouts (user_id, muscleTarget, workoutName, weight, reps) VALUES ($1, $2, $3, $4, $5)";
-        await db.query(queryString, [
+          "INSERT INTO workouts (user_id, muscleTarget, workoutName, weight, reps) VALUES ($1, $2, $3, $4, $5) RETURNING *";
+        const result = await db.query(queryString, [
           user_id,
           muscleTarget,
           workoutName,
@@ -35,6 +35,7 @@ const workoutController = {
           reps,
         ]);
         console.log("Workout created");
+        res.locals.workout = result.rows[0];
         return next();
       } catch (err) {
         return next({
@@ -61,7 +62,7 @@ const workoutController = {
       const result = await db.query(queryString);
       // if result.rows length is 0, return 'No workouts exist for this user', otherwise store result.rows on res.locals.workouts and call next
       if (result.rows.length === 0) {
-        res.json("No workouts exist for this user");
+        return res.status(400).json("No workouts exist for this user");
       } else {
         console.log("query result", result.rows);
         res.locals.workouts = result.rows;
@@ -115,8 +116,9 @@ const workoutController = {
       if (result.rows.length === 0) {
         return res.status(400).json("Workout not found");
       } else {
-        const deleteQuery = `DELETE FROM workouts WHERE workout_id = ${workout_id}`;
-        await db.query(deleteQuery);
+        const deleteQuery = `DELETE FROM workouts WHERE workout_id = ${workout_id} RETURNING *`;
+        const result = await db.query(deleteQuery);
+        res.locals.deleted = result.rows[0];
         return next();
       }
     } catch (err) {
