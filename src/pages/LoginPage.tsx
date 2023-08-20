@@ -5,7 +5,6 @@ import SignupModal from "./SignupModal";
 const LoginPage = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [userId, setUserId] = useState();
   const [showSignupModal, setShowSignupModal] = useState(false);
 
   const navigate = useNavigate();
@@ -41,7 +40,6 @@ const LoginPage = () => {
         const returnedUserId = await response.json();
         const returnedId = returnedUserId.user_id;
         console.log("returnedId is:", returnedId);
-        setUserId(returnedId);
         navigate(`/home?userId=${returnedId}`);
       } else if (response.status === 401) {
         alert("Invalid username or password");
