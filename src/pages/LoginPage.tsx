@@ -1,5 +1,7 @@
 import { ChangeEvent, FormEvent, useState } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { loginUserActionCreator } from "../actions/actions";
 import SignupModal from "./SignupModal";
 
 const LoginPage = () => {
@@ -8,6 +10,7 @@ const LoginPage = () => {
   const [showSignupModal, setShowSignupModal] = useState(false);
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleModal = () => {
     setShowSignupModal(!showSignupModal);
@@ -39,7 +42,8 @@ const LoginPage = () => {
       if (response.ok) {
         const returnedUserId = await response.json();
         const returnedId = returnedUserId.user_id;
-        console.log("returnedId is:", returnedId);
+        console.log("username is:", username);
+        dispatch(loginUserActionCreator(username));
         navigate(`/home?userId=${returnedId}`);
       } else if (response.status === 401) {
         alert("Invalid username or password");

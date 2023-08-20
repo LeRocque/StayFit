@@ -12,3 +12,12 @@ export interface LogoutUserAction {
 }
 
 export type UserActionTypes = LoginUserAction | LogoutUserAction;
+
+export const loginUserActionCreator = (username: string): UserActionTypes => ({
+  type: types.LOGIN_USER,
+  payload: { username },
+});
+
+export const logoutUserActionCreator = (): UserActionTypes => ({
+  type: types.LOGOUT_USER,
+});

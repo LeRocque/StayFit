@@ -1,11 +1,15 @@
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
+import { logoutUserActionCreator } from "../actions/actions";
 
 const HomePage = () => {
   const [userWorkouts, setUserWorkouts] = useState([]);
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const userId = searchParams.get("userId");
+
+  const dispatch = useDispatch();
   useEffect(() => {
     const getUserWorkouts = async () => {
       try {
@@ -19,7 +23,19 @@ const HomePage = () => {
     getUserWorkouts();
   }, [userId]);
   console.log("userWorkouts are:", userWorkouts);
-  return <div>HomePage</div>;
+
+  const handleLogout = () => {
+    dispatch(logoutUserActionCreator());
+  };
+
+  return (
+    <div>
+      HomePage
+      <button className="signupButton" onClick={handleLogout}>
+        Logout
+      </button>
+    </div>
+  );
 };
 
 export default HomePage;
