@@ -61,7 +61,6 @@ const userController = {
   },
   verifyUser: async (req: UserRequest, res: Response, next: NextFunction) => {
     const { username, password } = req.body;
-    console.log("verifyUser called", username, password);
     // if username and password are passed in, select user_id, username, and password from DB where username matches input username
     if (username && password) {
       try {
@@ -69,6 +68,9 @@ const userController = {
           "SELECT user_id, username, password FROM users WHERE username = $1";
         const result = await db.query(queryString, [username]);
         console.log("query result", result.rows[0]);
+        if (!result.rows[0]) {
+          return res.status(401).json("Invalid username or password");
+        }
         // check if stored hashed password matches input password, if so assign user_id to res.locals.id and return next, else response with invalid username or password
         const compare = await bcrypt.compare(password, result.rows[0].password);
         console.log("compare", compare);

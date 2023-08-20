@@ -1,12 +1,18 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import SignupModal from "./SignupModal";
 
 const LoginPage = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [userId, setUserId] = useState("");
+  const [userId, setUserId] = useState();
+  const [showSignupModal, setShowSignupModal] = useState(false);
 
   const navigate = useNavigate();
+
+  const handleModal = () => {
+    setShowSignupModal(!showSignupModal);
+  };
 
   const handleSetUsername = (e: ChangeEvent<HTMLInputElement>) => {
     setUsername(e.target.value);
@@ -17,51 +23,65 @@ const LoginPage = () => {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    const response = await fetch("/user/login", {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
+    try {
+      const response = await fetch("/user/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
         credentials: "include",
         body: JSON.stringify({
           username: username,
           password: password,
         }),
-      },
-    });
-    setUsername("");
-    setPassword("");
-    if (response.ok) {
-      const returnedUserId = await response.json();
-      setUserId(returnedUserId);
-      navigate(`/home?userId=${userId}`);
-    } else {
-      // SHOW SIGNUP MODAL
+      });
+      setUsername("");
+      setPassword("");
+      if (response.ok) {
+        const returnedUserId = await response.json();
+        const returnedId = returnedUserId.user_id;
+        console.log("returnedId is:", returnedId);
+        setUserId(returnedId);
+        navigate("/home");
+      } else if (response.status === 401) {
+        alert("Invalid username or password");
+      } else if (response.status === 400) {
+        alert("both fields required");
+      }
+    } catch (err) {
+      console.error(err);
     }
   };
   return (
     <div>
-      <div>Welcome to Workout Tracker!</div>
-      <form className="login-form" onSubmit={handleSubmit}>
-        <input
-          type="text"
-          required
-          name="username"
-          placeholder="Enter your username"
-          value={username}
-          onChange={handleSetUsername}
-        />
-        <input
-          type="password"
-          required
-          name="password"
-          placeholder="Enter your password"
-          value={password}
-          onChange={handleSetPassword}
-        />
-        <button className="submitButton" type="submit">
-          Submit
+      <div id="login-container">
+        <div>Welcome to Workout Tracker!</div>
+        <form className="login-form" onSubmit={handleSubmit}>
+          <input
+            type="text"
+            required
+            name="username"
+            placeholder="Enter your username"
+            value={username}
+            onChange={handleSetUsername}
+          />
+          <input
+            type="password"
+            required
+            name="password"
+            placeholder="Enter your password"
+            value={password}
+            onChange={handleSetPassword}
+          />
+          <button className="submitButton" type="submit">
+            Login
+          </button>
+        </form>
+        <button className="signupButton" onClick={handleModal}>
+          Signup
         </button>
-      </form>
+      </div>
+      {showSignupModal && <SignupModal handleModal={handleModal} />}
     </div>
   );
 };
