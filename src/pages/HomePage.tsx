@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { logoutUserActionCreator } from "../actions/actions";
+import { useAppDispatch } from "../hooks";
 
 const HomePage = () => {
   const [userWorkouts, setUserWorkouts] = useState([]);
@@ -9,7 +9,7 @@ const HomePage = () => {
   const searchParams = new URLSearchParams(location.search);
   const userId = searchParams.get("userId");
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   useEffect(() => {
     const getUserWorkouts = async () => {
       try {

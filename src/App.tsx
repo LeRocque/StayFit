@@ -2,8 +2,8 @@ import "./App.css";
 import { Routes, Route, Navigate } from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
 import HomePage from "./pages/HomePage";
-import { useSelector } from "react-redux";
 import { RootState } from "./store";
+import { useAppSelector } from "./hooks";
 
 const App = () => {
   return (
@@ -16,7 +16,7 @@ const App = () => {
 
 const ProtectedRoute = () => {
   console.log("ProtectedRoute called");
-  const isAuthenticated = useSelector(
+  const isAuthenticated = useAppSelector(
     (state: RootState) => state.users.isAuthenticated
   );
   console.log("isAuthenticated:", isAuthenticated);

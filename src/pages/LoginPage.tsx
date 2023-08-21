@@ -1,8 +1,8 @@
 import { ChangeEvent, FormEvent, useState } from "react";
-import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { loginUserActionCreator } from "../actions/actions";
-import SignupModal from "./SignupModal";
+import SignupModal from "../components/SignupModal";
+import { useAppDispatch } from "../hooks";
 
 const LoginPage = () => {
   const [username, setUsername] = useState("");
@@ -10,7 +10,7 @@ const LoginPage = () => {
   const [showSignupModal, setShowSignupModal] = useState(false);
 
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const handleModal = () => {
     setShowSignupModal(!showSignupModal);
