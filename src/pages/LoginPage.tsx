@@ -44,7 +44,7 @@ const LoginPage = () => {
         const returnedId = returnedUserId.user_id;
         console.log("username is:", username);
         dispatch(loginUserActionCreator(username));
-        navigate(`/home?userId=${returnedId}`);
+        navigate(`/home/${returnedId}`);
       } else if (response.status === 401) {
         alert("Invalid username or password");
       } else if (response.status === 400) {

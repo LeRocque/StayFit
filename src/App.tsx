@@ -9,7 +9,7 @@ const App = () => {
   return (
     <Routes>
       <Route path="/" element={<LoginPage />} />
-      <Route path="/home" element={<ProtectedRoute />} />
+      <Route path="/home/:userId" element={<ProtectedRoute />} />
     </Routes>
   );
 };
@@ -23,6 +23,7 @@ const ProtectedRoute = () => {
   if (isAuthenticated) {
     return <HomePage />;
   } else {
+    alert("You must be logged in to view that page");
     return <Navigate to={"/"} />;
   }
 };

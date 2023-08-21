@@ -1,13 +1,11 @@
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { logoutUserActionCreator } from "../actions/actions";
 import { useAppDispatch } from "../hooks";
 
 const HomePage = () => {
+  const { userId } = useParams();
   const [userWorkouts, setUserWorkouts] = useState([]);
-  const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
-  const userId = searchParams.get("userId");
 
   const dispatch = useAppDispatch();
   useEffect(() => {
