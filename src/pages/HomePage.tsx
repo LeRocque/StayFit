@@ -59,34 +59,38 @@ export const HomePage = () => {
 
   return (
     <div>
-      {userWorkouts.map((el) => (
-        <div key={el.workout_id} className="workoutCell">
-          <ul>
-            {el.workoutname}
-            <li>Muscle Target - {el.muscletarget}</li>
-            <li>Weight - {el.weight}</li>
-            <li>Reps - {el.reps}</li>
-          </ul>
-          {editingWorkoutId === el.workout_id && (
-            <EditWorkoutModal
-              workout_id={el.workout_id}
-              handleEditModal={() => handleEditModal(el.workout_id)}
-            />
-          )}
-          <button
-            className="frontendButton"
-            onClick={() => handleEditModal(el.workout_id)}
-          >
-            Edit Workout
-          </button>
-          <button
-            className="frontendButton"
-            onClick={() => handleDelete(el.workout_id)}
-          >
-            Delete Workout
-          </button>
-        </div>
-      ))}
+      {userWorkouts.length > 0 ? (
+        userWorkouts.map((el) => (
+          <div key={el.workout_id} className="workoutCell">
+            <ul>
+              {el.workoutname}
+              <li>Muscle Target - {el.muscletarget}</li>
+              <li>Weight - {el.weight}</li>
+              <li>Reps - {el.reps}</li>
+            </ul>
+            {editingWorkoutId === el.workout_id && (
+              <EditWorkoutModal
+                workout_id={el.workout_id}
+                handleEditModal={() => handleEditModal(el.workout_id)}
+              />
+            )}
+            <button
+              className="frontendButton"
+              onClick={() => handleEditModal(el.workout_id)}
+            >
+              Edit Workout
+            </button>
+            <button
+              className="frontendButton"
+              onClick={() => handleDelete(el.workout_id)}
+            >
+              Delete Workout
+            </button>
+          </div>
+        ))
+      ) : (
+        <div>No workouts added yet.</div>
+      )}
       <button className="frontendButton" onClick={handleWorkoutModal}>
         Add Workout
       </button>

@@ -38,14 +38,7 @@ export interface WorkoutState {
   workouts: Workout[];
 }
 
-export interface GetWorkoutAction {
-  type: typeof types.GET_WORKOUT;
-  payload: {
-    workout_id: number;
-  };
-}
-
-export type WorkoutActionTypes = SetWorkoutsAction | GetWorkoutAction;
+export type WorkoutActionTypes = SetWorkoutsAction
 
 export type UserActionTypes = LoginUserAction | LogoutUserAction;
 
@@ -70,9 +63,3 @@ export const setWorkoutsActionCreator = (workouts: {
   payload: { workouts },
 });
 
-export const getWorkoutActionCreator = (
-  workout_id: number
-): WorkoutActionTypes => ({
-  type: types.GET_WORKOUT,
-  payload: { workout_id },
-});

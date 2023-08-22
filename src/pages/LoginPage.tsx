@@ -42,7 +42,6 @@ export const LoginPage = () => {
       if (response.ok) {
         const returnedUserId = await response.json();
         const returnedId = returnedUserId.user_id;
-        console.log("username is:", username);
         dispatch(loginUserActionCreator(username));
         navigate(`/home/${returnedId}`);
       } else if (response.status === 401) {
