@@ -75,11 +75,11 @@ const LoginPage = () => {
             value={password}
             onChange={handleSetPassword}
           />
-          <button className="submitButton" type="submit">
+          <button className="frontendButton" type="submit">
             Login
           </button>
         </form>
-        <button className="signupButton" onClick={handleModal}>
+        <button className="frontendButton" onClick={handleModal}>
           Signup
         </button>
       </div>
