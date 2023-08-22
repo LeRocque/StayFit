@@ -1,7 +1,7 @@
 import { ChangeEvent, FormEvent, MouseEvent, useState } from "react";
 import { SignupModalProps } from "../frontendTypes";
 
-const SignupModal = ({ handleModal }: SignupModalProps) => {
+export const SignupModal = ({ handleModal }: SignupModalProps) => {
   const [email, setEmail] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -130,4 +130,3 @@ const SignupModal = ({ handleModal }: SignupModalProps) => {
   );
 };
 
-export default SignupModal;

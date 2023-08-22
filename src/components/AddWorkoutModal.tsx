@@ -1,7 +1,10 @@
 import { ChangeEvent, FormEvent, MouseEvent, useState } from "react";
 import { WorkoutModalProps } from "../frontendTypes";
 
-export const AddWorkoutModal = ({ userId, handleModal }: WorkoutModalProps) => {
+export const AddWorkoutModal = ({
+  userId,
+  handleWorkoutModal,
+}: WorkoutModalProps) => {
   const [workoutName, setWorkoutName] = useState("");
   const [muscleTarget, setMuscleTarget] = useState("");
   const [weight, setWeight] = useState("");
@@ -28,7 +31,7 @@ export const AddWorkoutModal = ({ userId, handleModal }: WorkoutModalProps) => {
         setMuscleTarget("");
         setWeight("");
         setReps("");
-        handleModal();
+        handleWorkoutModal();
       } else {
         alert("invalid input");
       }
@@ -39,7 +42,7 @@ export const AddWorkoutModal = ({ userId, handleModal }: WorkoutModalProps) => {
 
   const handleModalClick = (e: MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) {
-      handleModal();
+      handleWorkoutModal();
     }
   };
 
