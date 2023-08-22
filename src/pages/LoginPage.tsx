@@ -44,7 +44,7 @@ const LoginPage = () => {
         const returnedId = returnedUserId.user_id;
         console.log("username is:", username);
         dispatch(loginUserActionCreator(username));
-        navigate(`/home?userId=${returnedId}`);
+        navigate(`/home/${returnedId}`);
       } else if (response.status === 401) {
         alert("Invalid username or password");
       } else if (response.status === 400) {
@@ -75,11 +75,11 @@ const LoginPage = () => {
             value={password}
             onChange={handleSetPassword}
           />
-          <button className="submitButton" type="submit">
+          <button className="frontendButton" type="submit">
             Login
           </button>
         </form>
-        <button className="signupButton" onClick={handleModal}>
+        <button className="frontendButton" onClick={handleModal}>
           Signup
         </button>
       </div>
