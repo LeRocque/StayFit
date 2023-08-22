@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useId, useState } from "react";
 import { useParams } from "react-router-dom";
 import {
   logoutUserActionCreator,
@@ -60,19 +60,30 @@ export const HomePage = () => {
     }
   };
 
+  const id = useId();
+
   return (
     <div>
       {userWorkouts.length ? (
         userWorkouts.map((el) => (
           <div key={el.workout_id} className="workoutCell">
             <ul>
-              {el.workoutname}
-              <li>Muscle Target - {el.muscletarget}</li>
-              <li>Weight - {el.weight}</li>
-              <li>Reps - {el.reps}</li>
+              <label htmlFor={id}>{el.workoutname}</label>
+              <li>
+                <label htmlFor={id + "2"}>
+                  Muscle Target - {el.muscletarget}
+                </label>
+              </li>
+              <li>
+                <label htmlFor={id + "3"}>Weight - {el.weight}</label>
+              </li>
+              <li>
+                <label htmlFor={id + "4"}>Reps - {el.reps}</label>
+              </li>
             </ul>
             {editingWorkoutId === el.workout_id && (
               <EditWorkoutModal
+                id={id}
                 workout_id={el.workout_id}
                 handleEditModal={() => handleEditModal(el.workout_id)}
               />

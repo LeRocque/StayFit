@@ -38,7 +38,7 @@ export interface WorkoutState {
   workouts: Workout[];
 }
 
-export type WorkoutActionTypes = SetWorkoutsAction
+export type WorkoutActionTypes = SetWorkoutsAction;
 
 export type UserActionTypes = LoginUserAction | LogoutUserAction;
 
@@ -62,4 +62,3 @@ export const setWorkoutsActionCreator = (workouts: {
   type: types.SET_WORKOUTS,
   payload: { workouts },
 });
-

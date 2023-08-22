@@ -7,6 +7,7 @@ import {
 import { useAppSelector } from "../hooks";
 
 export const EditWorkoutModal = ({
+  id,
   workout_id,
   handleEditModal,
 }: EditWorkoutModalProps) => {
@@ -79,6 +80,7 @@ export const EditWorkoutModal = ({
     <div id="modal-container" onClick={handleModalClick}>
       <form id="addWorkoutForm" onSubmit={handleSubmit}>
         <input
+          id={id}
           type="text"
           name="workoutname"
           required
@@ -87,6 +89,7 @@ export const EditWorkoutModal = ({
           onChange={handleWorkoutName}
         />
         <select
+          id={id + "2"}
           name="muscletarget"
           required
           placeholder="Muscle Target"
@@ -105,6 +108,7 @@ export const EditWorkoutModal = ({
           <option value="Triceps">Triceps</option>
         </select>
         <input
+          id={id + "3"}
           name="weight"
           required
           placeholder="Weight"
@@ -112,6 +116,7 @@ export const EditWorkoutModal = ({
           onChange={handleWeight}
         />
         <input
+          id={id + "4"}
           name="reps"
           required
           placeholder="Reps"
