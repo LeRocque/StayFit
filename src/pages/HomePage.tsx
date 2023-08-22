@@ -61,9 +61,6 @@ export const HomePage = () => {
   };
 
   const id = useId();
-  const id2 = id + "2";
-  const id3 = id + "3";
-  const id4 = id + "4";
 
   return (
     <div>
@@ -73,21 +70,20 @@ export const HomePage = () => {
             <ul>
               <label htmlFor={id}>{el.workoutname}</label>
               <li>
-                <label htmlFor={id2}>Muscle Target - {el.muscletarget}</label>
+                <label htmlFor={id + "2"}>
+                  Muscle Target - {el.muscletarget}
+                </label>
               </li>
               <li>
-                <label htmlFor={id3}>Weight - {el.weight}</label>
+                <label htmlFor={id + "3"}>Weight - {el.weight}</label>
               </li>
               <li>
-                <label htmlFor={id4}>Reps - {el.reps}</label>
+                <label htmlFor={id + "4"}>Reps - {el.reps}</label>
               </li>
             </ul>
             {editingWorkoutId === el.workout_id && (
               <EditWorkoutModal
                 id={id}
-                id2={id2}
-                id3={id3}
-                id4={id4}
                 workout_id={el.workout_id}
                 handleEditModal={() => handleEditModal(el.workout_id)}
               />
