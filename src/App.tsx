@@ -15,11 +15,9 @@ const App = () => {
 };
 
 const ProtectedRoute = () => {
-  console.log("ProtectedRoute called");
   const isAuthenticated = useAppSelector(
     (state: RootState) => state.users.isAuthenticated
   );
-  console.log("isAuthenticated:", isAuthenticated);
   if (isAuthenticated) {
     return <HomePage />;
   } else {

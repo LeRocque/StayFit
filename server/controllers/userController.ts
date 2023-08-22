@@ -18,7 +18,6 @@ CREATE TABLE users (
 
 const userController = {
   createUser: async (req: UserRequest, res: Response, next: NextFunction) => {
-    console.log("createUser called");
     const { email, firstName, lastName, address, username, password } =
       req.body;
     // if all fields are passed in, check if username already exists, if so return 'Username exists'
@@ -27,7 +26,6 @@ const userController = {
         let queryString = "SELECT user_id FROM users WHERE username=($1)";
         let result = await db.query(queryString, [username]);
         if (result.rows[0]) {
-          console.log("Username already exists");
           return res
             .status(401)
             .json("Username already exists, please select another");
@@ -45,7 +43,6 @@ const userController = {
             hashed,
           ]);
           res.locals.id = result.rows[0].user_id;
-          console.log("new user created", result.rows[0]);
           return next();
         }
       } catch (err) {
@@ -56,7 +53,6 @@ const userController = {
         });
       }
     }
-    console.log("Signup field missing");
     return res.status(400).json("Please fill out all fields");
   },
   verifyUser: async (req: UserRequest, res: Response, next: NextFunction) => {
@@ -67,13 +63,11 @@ const userController = {
         const queryString =
           "SELECT user_id, username, password FROM users WHERE username = $1";
         const result = await db.query(queryString, [username]);
-        console.log("query result", result.rows[0]);
         if (!result.rows[0]) {
           return res.status(401).json("Invalid username or password");
         }
         // check if stored hashed password matches input password, if so assign user_id to res.locals.id and return next, else response with invalid username or password
         const compare = await bcrypt.compare(password, result.rows[0].password);
-        console.log("compare", compare);
         if (compare) {
           res.locals.id = result.rows[0].user_id;
           return next();
@@ -88,7 +82,6 @@ const userController = {
         });
       }
     }
-    console.log("username or password not entered");
     return res.status(400).json("Please enter a username and password");
   },
 };

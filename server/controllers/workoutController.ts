@@ -58,7 +58,7 @@ const workoutController = {
       const result = await db.query(queryString);
       // if result.rows length is 0, return 'No workouts exist for this user', otherwise store result.rows on res.locals.workouts and call next
       if (result.rows.length === 0) {
-        return res.status(400).json("No workouts exist for this user");
+        return res.status(204).json([]);
       } else {
         res.locals.workouts = result.rows;
         return next();

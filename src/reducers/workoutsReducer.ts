@@ -11,12 +11,6 @@ const workoutsReducer = (state = initialState, action: WorkoutActionTypes) => {
         ...state,
         workouts: action.payload.workouts,
       };
-    case types.GET_WORKOUT: {
-      const foundWorkout = state.workouts.find(
-        (workout) => workout.workout_id === action.payload.workout_id
-      );
-      return foundWorkout ? foundWorkout : state;
-    }
     default:
       return state;
   }
