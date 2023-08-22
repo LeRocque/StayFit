@@ -21,6 +21,9 @@ export const HomePage = () => {
     const getUserWorkouts = async () => {
       try {
         const result = await fetch(`/workout/${userId}`);
+        if (result.status === 204) {
+          return;
+        }
         const workouts = await result.json();
         setUserWorkouts(workouts);
         dispatch(setWorkoutsActionCreator(workouts));
@@ -59,7 +62,7 @@ export const HomePage = () => {
 
   return (
     <div>
-      {userWorkouts.length > 0 ? (
+      {userWorkouts.length ? (
         userWorkouts.map((el) => (
           <div key={el.workout_id} className="workoutCell">
             <ul>
