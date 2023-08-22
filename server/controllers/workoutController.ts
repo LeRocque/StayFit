@@ -77,14 +77,12 @@ const workoutController = {
     res: Response,
     next: NextFunction
   ) => {
-    console.log("editWorkout called");
     const { workout_id, muscleTarget, workoutName, weight, reps } = req.body;
     // if all fields have been passed in, UPDATE the workouts with the passed in values WHERE the workout_id matches the passed in id, then store the updated workout on res.locals.update and call next
     if (workout_id && muscleTarget && workoutName && weight && reps) {
       try {
         const queryString = `UPDATE workouts SET muscleTarget = '${muscleTarget}', workoutName = '${workoutName}', weight = '${weight}', reps = '${reps}' WHERE workout_id = ${workout_id} RETURNING *`;
         const result = await db.query(queryString);
-        console.log("workout updated", result);
         res.locals.update = result.rows[0];
         return next();
       } catch (err) {
@@ -95,7 +93,6 @@ const workoutController = {
         });
       }
     }
-    console.log("missing update fields", req.body);
     return res.status(400).json("Please enter all fields");
   },
 

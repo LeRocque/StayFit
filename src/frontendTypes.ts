@@ -18,7 +18,7 @@ export type WorkoutModalProps = {
 
 export type EditWorkoutModalProps = {
   workout_id: number;
-  handleEditModal: (value: void) => void;
+  handleEditModal: (value: null) => void | null;
 };
 
 export type WorkoutState = {

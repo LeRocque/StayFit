@@ -29,7 +29,7 @@ export const HomePage = () => {
       }
     };
     getUserWorkouts();
-  }, [dispatch, userId, showAddWorkoutModal, workoutDeleted]);
+  }, [dispatch, editingWorkoutId, userId, showAddWorkoutModal, workoutDeleted]);
 
   const handleLogout = () => {
     dispatch(logoutUserActionCreator());
@@ -37,7 +37,7 @@ export const HomePage = () => {
 
   const handleWorkoutModal = () => setShowAddWorkoutModal(!showAddWorkoutModal);
 
-  const handleEditModal = (workout_id: number) => {
+  const handleEditModal = (workout_id: number | null) => {
     setEditingWorkoutId((prevId) =>
       prevId === workout_id ? null : workout_id
     );

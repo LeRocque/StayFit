@@ -19,7 +19,7 @@ workoutRouter.post(
   }
 );
 
-workoutRouter.patch(
+workoutRouter.put(
   "/edit",
   workoutController.editWorkout,
   (_req: Request, res: Response) => {
