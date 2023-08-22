@@ -1,25 +1,45 @@
-import { ChangeEvent, FormEvent, MouseEvent, useState } from "react";
-import { WorkoutModalProps } from "../frontendTypes";
+import { ChangeEvent, FormEvent, MouseEvent, useEffect, useState } from "react";
+import {
+  EditWorkoutModalProps,
+  UserWorkoutsTypes,
+  WorkoutState,
+} from "../frontendTypes";
+import { useAppSelector } from "../hooks";
 
-export const AddWorkoutModal = ({
-  userId,
-  handleWorkoutModal,
-}: WorkoutModalProps) => {
+export const EditWorkoutModal = ({
+  workout_id,
+  handleEditModal,
+}: EditWorkoutModalProps) => {
   const [workoutName, setWorkoutName] = useState("");
   const [muscleTarget, setMuscleTarget] = useState("");
   const [weight, setWeight] = useState("");
   const [reps, setReps] = useState("");
 
+  const workoutToEdit = useAppSelector((state: WorkoutState) =>
+    state.workouts.workouts.find(
+      (workout: UserWorkoutsTypes) => workout.workout_id === workout_id
+    )
+  );
+
+  useEffect(() => {
+    if (workoutToEdit) {
+      setWorkoutName(workoutToEdit.workoutname);
+      setMuscleTarget(workoutToEdit.muscletarget);
+      setWeight(workoutToEdit.weight);
+      setReps(workoutToEdit.reps);
+    }
+  }, [workoutToEdit]);
+
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     try {
-      const response = await fetch("/workout/add", {
-        method: "POST",
+      const response = await fetch("/workout/edit", {
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          user_id: userId,
+          workout_id: workout_id,
           workoutName: workoutName,
           muscleTarget: muscleTarget,
           weight: weight,
@@ -31,18 +51,12 @@ export const AddWorkoutModal = ({
         setMuscleTarget("");
         setWeight("");
         setReps("");
-        handleWorkoutModal();
+        handleEditModal(null);
       } else {
         alert("invalid input");
       }
     } catch (err) {
       console.error(err);
-    }
-  };
-
-  const handleModalClick = (e: MouseEvent<HTMLDivElement>) => {
-    if (e.target === e.currentTarget) {
-      handleWorkoutModal();
     }
   };
 
@@ -54,6 +68,12 @@ export const AddWorkoutModal = ({
     setWeight(e.target.value);
   const handleReps = (e: ChangeEvent<HTMLInputElement>) =>
     setReps(e.target.value);
+
+  const handleModalClick = (e: MouseEvent<HTMLDivElement>) => {
+    if (e.target === e.currentTarget) {
+      handleEditModal(null);
+    }
+  };
 
   return (
     <div id="modal-container" onClick={handleModalClick}>

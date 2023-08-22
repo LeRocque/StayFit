@@ -1,10 +1,10 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { loginUserActionCreator } from "../actions/actions";
-import SignupModal from "../components/SignupModal";
+import { SignupModal } from "../components/SignupModal";
 import { useAppDispatch } from "../hooks";
 
-const LoginPage = () => {
+export const LoginPage = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showSignupModal, setShowSignupModal] = useState(false);
@@ -87,5 +87,3 @@ const LoginPage = () => {
     </div>
   );
 };
-
-export default LoginPage;

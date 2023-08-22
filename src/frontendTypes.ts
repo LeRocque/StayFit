@@ -13,5 +13,20 @@ export type UserWorkoutsTypes = {
 
 export type WorkoutModalProps = {
   userId: string | undefined;
-  handleModal: (value: void) => void;
+  handleWorkoutModal: (value: void) => void;
+};
+
+export type EditWorkoutModalProps = {
+  workout_id: number;
+  handleEditModal: (value: null) => void | null;
+};
+
+export type WorkoutState = {
+  workouts: {
+    workouts: {
+      find: (
+        callback: (workout: UserWorkoutsTypes) => boolean
+      ) => UserWorkoutsTypes | undefined;
+    };
+  };
 };
