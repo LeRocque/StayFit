@@ -20,9 +20,7 @@ const workoutController = {
     res: Response,
     next: NextFunction
   ) => {
-    console.log("addWorkout called");
     const { user_id, muscleTarget, workoutName, weight, reps } = req.body;
-    console.log("muscleTarget is:", muscleTarget);
     // if all fields have been passed to addWorkout insert them into workouts table, otherwise sent a status 400 back to client
     if (user_id && muscleTarget && workoutName && weight && reps) {
       try {
@@ -35,7 +33,6 @@ const workoutController = {
           weight,
           reps,
         ]);
-        console.log("Workout created");
         res.locals.workout = result.rows[0];
         return next();
       } catch (err) {
@@ -46,7 +43,6 @@ const workoutController = {
         });
       }
     }
-    console.log("Missing workout fields, failed to create workout");
     return res.status(400).json("Please fill out all fields");
   },
 
@@ -58,14 +54,12 @@ const workoutController = {
     const { user_id } = req.params;
     try {
       // select all from workouts table where the user_id foreign key matches the user_id param
-      console.log("getWorkout called");
       const queryString = `SELECT * FROM workouts where user_id = ${user_id} ORDER BY muscletarget`;
       const result = await db.query(queryString);
       // if result.rows length is 0, return 'No workouts exist for this user', otherwise store result.rows on res.locals.workouts and call next
       if (result.rows.length === 0) {
         return res.status(400).json("No workouts exist for this user");
       } else {
-        console.log("query result", result.rows);
         res.locals.workouts = result.rows;
         return next();
       }

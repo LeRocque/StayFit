@@ -9,6 +9,7 @@ const HomePage = () => {
   const { userId } = useParams();
   const [userWorkouts, setUserWorkouts] = useState<UserWorkoutsTypes[]>([]);
   const [showModal, setShowModal] = useState(false);
+  const [workoutDeleted, setWorkoutDeleted] = useState(false);
 
   const dispatch = useAppDispatch();
   useEffect(() => {
@@ -22,14 +23,27 @@ const HomePage = () => {
       }
     };
     getUserWorkouts();
-  }, [userId, showModal]);
-  console.log("userWorkouts are:", userWorkouts);
+  }, [userId, showModal, workoutDeleted]);
 
   const handleLogout = () => {
     dispatch(logoutUserActionCreator());
   };
 
   const handleModal = () => setShowModal(!showModal);
+
+  const handleDelete = async (e: number) => {
+    try {
+      const result = await fetch(`/workout/remove/${e}`, {
+        method: "DELETE",
+      });
+      if (result.ok) {
+        alert("Workout Deleted!");
+        setWorkoutDeleted(!workoutDeleted);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   return (
     <div>
@@ -42,6 +56,12 @@ const HomePage = () => {
             <li>Reps - {el.reps}</li>
           </ul>
           <button className="frontendButton">Edit Workout</button>
+          <button
+            className="frontendButton"
+            onClick={() => handleDelete(el.workout_id)}
+          >
+            Delete Workout
+          </button>
         </div>
       ))}
       <button className="frontendButton" onClick={handleModal}>
