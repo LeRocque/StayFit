@@ -122,7 +122,10 @@ export const SignupModal = ({ handleModal }: SignupModalProps) => {
           value={password}
           onChange={handleSetPassword}
         />
-        <button className="submitButton" type="submit">
+        <button
+          className="m-2 text-2xl text-blue-400 outline hover:text-blue-800"
+          type="submit"
+        >
           Submit
         </button>
       </form>

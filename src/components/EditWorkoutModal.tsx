@@ -123,7 +123,12 @@ export const EditWorkoutModal = ({
           value={reps}
           onChange={handleReps}
         />
-        <button type="submit">Submit</button>
+        <button
+          className="text-2xl text-white outline hover:text-gray-200"
+          type="submit"
+        >
+          Submit
+        </button>
       </form>
     </div>
   );

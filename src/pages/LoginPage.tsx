@@ -54,14 +54,18 @@ export const LoginPage = () => {
     }
   };
   return (
-    <div>
+    <div className="my-0 mx-auto w-1/4">
       <div
         id="login-container"
-        className="mb-10 w-full bg-gradient-to-b from-yellow-400 via-orange-500 to-red-500 p-7 text-center"
+        className="my-10 w-full bg-gradient-to-b from-blue-200 via-blue-400 to-blue-900 p-7 text-center"
       >
         <div>Welcome to Workout Tracker!</div>
-        <form className="login-form" onSubmit={handleSubmit}>
+        <form
+          className="mb-10 flex flex-col items-center justify-center rounded-lg bg-slate-400 p-5 shadow-lg"
+          onSubmit={handleSubmit}
+        >
           <input
+            className="m-1 text-lg"
             type="text"
             required
             name="username"
@@ -70,6 +74,7 @@ export const LoginPage = () => {
             onChange={handleSetUsername}
           />
           <input
+            className="m-1 text-lg"
             type="password"
             required
             name="password"
@@ -78,13 +83,16 @@ export const LoginPage = () => {
             onChange={handleSetPassword}
           />
           <button
-            className="text-2xl text-white outline hover:text-gray-200"
+            className="m-2 rounded-full bg-white py-2 px-4 font-bold text-blue-400 hover:text-blue-800"
             type="submit"
           >
             Login
           </button>
         </form>
-        <button className="frontendButton" onClick={handleModal}>
+        <button
+          className="rounded-full bg-white py-2 px-4 font-bold text-blue-400 hover:text-blue-800"
+          onClick={handleModal}
+        >
           Signup
         </button>
       </div>

@@ -7,12 +7,7 @@ import "./style.css";
 
 const App = () => {
   return (
-    <div
-      className="m-0 p-0"
-      style={{
-        background: "url(https://pets-images.dev-apis.com/pets/wallpaperA.jpg)",
-      }}
-    >
+    <div className="background-red m-0 bg-gradient-to-b from-blue-200 via-blue-400 to-blue-900 p-0">
       <Routes>
         <Route path="/" element={<LoginPage />} />
         <Route path="/home/:userId" element={<ProtectedRoute />} />

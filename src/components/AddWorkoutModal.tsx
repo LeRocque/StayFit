@@ -98,7 +98,12 @@ export const AddWorkoutModal = ({
           value={reps}
           onChange={handleReps}
         />
-        <button type="submit">Submit</button>
+        <button
+          className="m-2 text-2xl text-blue-400 outline hover:text-blue-800"
+          type="submit"
+        >
+          Submit
+        </button>
       </form>
     </div>
   );
