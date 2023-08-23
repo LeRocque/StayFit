@@ -77,6 +77,7 @@ export const SignupModal = ({ handleModal }: SignupModalProps) => {
         <input
           type="text"
           required
+          className="mb-5 block w-60"
           name="email"
           placeholder="Enter your email address"
           value={email}
@@ -85,6 +86,7 @@ export const SignupModal = ({ handleModal }: SignupModalProps) => {
         <input
           type="text"
           required
+          className="mb-5 block w-60"
           name="firstName"
           placeholder="Enter your first name"
           value={firstName}
@@ -93,6 +95,7 @@ export const SignupModal = ({ handleModal }: SignupModalProps) => {
         <input
           type="text"
           required
+          className="mb-5 block w-60"
           name="lastName"
           placeholder="Enter your last name"
           value={lastName}
@@ -101,6 +104,7 @@ export const SignupModal = ({ handleModal }: SignupModalProps) => {
         <input
           type="text"
           required
+          className="mb-5 block w-60"
           name="address"
           placeholder="Enter your address"
           value={address}
@@ -109,6 +113,7 @@ export const SignupModal = ({ handleModal }: SignupModalProps) => {
         <input
           type="text"
           required
+          className="mb-5 block w-60"
           name="username"
           placeholder="Enter a username"
           value={username}
@@ -117,13 +122,14 @@ export const SignupModal = ({ handleModal }: SignupModalProps) => {
         <input
           type="password"
           required
+          className="mb-5 block w-60"
           name="password"
           placeholder="Enter a password"
           value={password}
           onChange={handleSetPassword}
         />
         <button
-          className="m-2 text-2xl text-blue-400 outline hover:text-blue-800"
+          className="m-2 rounded-full bg-blue-600 py-2 px-4 font-bold text-white hover:opacity-50"
           type="submit"
         >
           Submit

@@ -58,11 +58,11 @@ export const LoginPage = () => {
       <div id="login-container" className="m-10 w-full p-7 text-center">
         <div className="text-slate-600">Welcome to Workout Tracker!</div>
         <form
-          className="mb-10 mt-3 flex flex-col items-center justify-center rounded-lg bg-slate-600 p-2"
+          className="mb-10 mt-3 flex flex-col items-center justify-center rounded-lg bg-slate-600 px-3 py-10"
           onSubmit={handleSubmit}
         >
           <input
-            className="m-1 text-lg"
+            className="mb-5 block w-60"
             type="text"
             required
             name="username"
@@ -71,7 +71,7 @@ export const LoginPage = () => {
             onChange={handleSetUsername}
           />
           <input
-            className="m-1 text-lg"
+            className="mb-5 block w-60"
             type="password"
             required
             name="password"
@@ -80,14 +80,14 @@ export const LoginPage = () => {
             onChange={handleSetPassword}
           />
           <button
-            className="m-2 rounded-full bg-white py-2 px-4 font-bold text-blue-400 hover:text-blue-800"
+            className="m-2 rounded-full bg-blue-600 py-2 px-4 font-bold text-white hover:opacity-50"
             type="submit"
           >
             Login
           </button>
         </form>
         <button
-          className="rounded-full bg-white py-2 px-4 font-bold text-blue-400 hover:text-blue-800"
+          className="m-2 rounded-full bg-blue-600 py-2 px-4 font-bold text-white hover:opacity-50"
           onClick={handleModal}
         >
           Signup

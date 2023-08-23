@@ -30,6 +30,7 @@
     "tsx": "^3.12.7"
   },
   "devDependencies": {
+    "@tailwindcss/forms": "^0.5.3",
     "@types/bcryptjs": "^2.4.2",
     "@types/cookie-parser": "^1.4.3",
     "@types/pg": "^8.10.2",

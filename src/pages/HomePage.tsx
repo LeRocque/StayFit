@@ -89,13 +89,13 @@ export const HomePage = () => {
               />
             )}
             <button
-              className="m-2 rounded-full bg-white py-2 px-4 font-bold text-blue-400 hover:text-blue-800"
+              className="m-2 rounded-full bg-blue-600 py-2 px-4 font-bold text-white hover:opacity-50"
               onClick={() => handleEditModal(el.workout_id)}
             >
               Edit Workout
             </button>
             <button
-              className="m-2 rounded-full bg-white py-2 px-4 font-bold text-blue-400 hover:text-blue-800"
+      className="m-2 rounded-full bg-blue-600 py-2 px-4 font-bold text-white hover:opacity-50"
               onClick={() => handleDelete(el.workout_id)}
             >
               Delete Workout
@@ -106,13 +106,13 @@ export const HomePage = () => {
         <div>No workouts added yet.</div>
       )}
       <button
-        className="m-2 rounded-full bg-white py-2 px-4 font-bold text-blue-400 hover:text-blue-800"
+        className="m-2 rounded-full bg-blue-600 py-2 px-4 font-bold text-white hover:opacity-50"
         onClick={handleWorkoutModal}
       >
         Add Workout
       </button>
       <button
-        className="m-2 rounded-full bg-white py-2 px-4 font-bold text-blue-400 hover:text-blue-800"
+        className="m-2 rounded-full bg-blue-600 py-2 px-4 font-bold text-white hover:opacity-50"
         onClick={handleLogout}
       >
         Logout
