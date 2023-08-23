@@ -54,14 +54,11 @@ export const LoginPage = () => {
     }
   };
   return (
-    <div className="my-0 mx-auto w-1/4">
-      <div
-        id="login-container"
-        className="my-10 w-full bg-gradient-to-b from-blue-200 via-blue-400 to-blue-900 p-7 text-center"
-      >
-        <div>Welcome to Workout Tracker!</div>
+    <div className="h-100 my-0 mx-auto flex w-1/4">
+      <div id="login-container" className="m-10 w-full p-7 text-center">
+        <div className="text-slate-600">Welcome to Workout Tracker!</div>
         <form
-          className="mb-10 flex flex-col items-center justify-center rounded-lg bg-slate-400 p-5 shadow-lg"
+          className="mb-10 mt-3 flex flex-col items-center justify-center rounded-lg bg-slate-600 p-2"
           onSubmit={handleSubmit}
         >
           <input

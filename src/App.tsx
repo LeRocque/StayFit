@@ -4,10 +4,14 @@ import { HomePage } from "./pages/HomePage";
 import { RootState } from "./store";
 import { useAppSelector } from "./hooks";
 import "./style.css";
+import "./App.css";
 
 const App = () => {
   return (
-    <div className="background-red m-0 bg-gradient-to-b from-blue-200 via-blue-400 to-blue-900 p-0">
+    <div
+      id="root-app"
+      className="background-red m-0 bg-gradient-to-b from-blue-200 via-blue-400 to-blue-900 p-0"
+    >
       <Routes>
         <Route path="/" element={<LoginPage />} />
         <Route path="/home/:userId" element={<ProtectedRoute />} />
