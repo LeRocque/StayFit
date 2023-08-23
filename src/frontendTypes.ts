@@ -26,7 +26,7 @@ export type WorkoutState = {
   workouts: {
     workouts: {
       find: (
-        callback: (workout: UserWorkoutsTypes) => boolean
+        callback: (workout: UserWorkoutsTypes) => boolean,
       ) => UserWorkoutsTypes | undefined;
     };
   };

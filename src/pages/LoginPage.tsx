@@ -55,7 +55,10 @@ export const LoginPage = () => {
   };
   return (
     <div>
-      <div id="login-container">
+      <div
+        id="login-container"
+        className="mb-10 w-full bg-gradient-to-b from-yellow-400 via-orange-500 to-red-500 p-7 text-center"
+      >
         <div>Welcome to Workout Tracker!</div>
         <form className="login-form" onSubmit={handleSubmit}>
           <input
@@ -74,7 +77,10 @@ export const LoginPage = () => {
             value={password}
             onChange={handleSetPassword}
           />
-          <button className="frontendButton" type="submit">
+          <button
+            className="text-2xl text-white outline hover:text-gray-200"
+            type="submit"
+          >
             Login
           </button>
         </form>

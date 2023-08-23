@@ -42,7 +42,7 @@ export const HomePage = () => {
 
   const handleEditModal = (workout_id: number | null) => {
     setEditingWorkoutId((prevId) =>
-      prevId === workout_id ? null : workout_id
+      prevId === workout_id ? null : workout_id,
     );
   };
 

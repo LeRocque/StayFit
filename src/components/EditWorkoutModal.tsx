@@ -18,8 +18,8 @@ export const EditWorkoutModal = ({
 
   const workoutToEdit = useAppSelector((state: WorkoutState) =>
     state.workouts.workouts.find(
-      (workout: UserWorkoutsTypes) => workout.workout_id === workout_id
-    )
+      (workout: UserWorkoutsTypes) => workout.workout_id === workout_id,
+    ),
   );
 
   useEffect(() => {
