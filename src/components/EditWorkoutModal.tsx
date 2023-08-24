@@ -81,7 +81,7 @@ export const EditWorkoutModal = ({
       <form id="addWorkoutForm" onSubmit={handleSubmit}>
         <input
           id={id}
-          className="mb-5 block w-60"
+          className="search-input"
           type="text"
           name="workoutname"
           required
@@ -91,7 +91,7 @@ export const EditWorkoutModal = ({
         />
         <select
           id={id + "2"}
-          className="mb-5 block w-60"
+          className="search-input"
           name="muscletarget"
           required
           placeholder="Muscle Target"
@@ -111,7 +111,7 @@ export const EditWorkoutModal = ({
         </select>
         <input
           id={id + "3"}
-          className="mb-5 block w-60"
+          className="search-input"
           type="text"
           name="weight"
           required
@@ -121,7 +121,7 @@ export const EditWorkoutModal = ({
         />
         <input
           id={id + "4"}
-          className="mb-5 block w-60"
+          className="search-input"
           type="text"
           name="reps"
           required
@@ -130,7 +130,7 @@ export const EditWorkoutModal = ({
           onChange={handleReps}
         />
         <button
-           className="m-2 rounded-full bg-blue-600 py-2 px-4 font-bold text-white hover:opacity-50"
+           className="button-theme"
           type="submit"
         >
           Submit

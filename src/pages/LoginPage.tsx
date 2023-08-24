@@ -62,7 +62,7 @@ export const LoginPage = () => {
           onSubmit={handleSubmit}
         >
           <input
-            className="mb-5 block w-60"
+            className="search-input"
             type="text"
             required
             name="username"
@@ -71,7 +71,7 @@ export const LoginPage = () => {
             onChange={handleSetUsername}
           />
           <input
-            className="mb-5 block w-60"
+            className="search-input"
             type="password"
             required
             name="password"
@@ -79,17 +79,11 @@ export const LoginPage = () => {
             value={password}
             onChange={handleSetPassword}
           />
-          <button
-            className="m-2 rounded-full bg-blue-600 py-2 px-4 font-bold text-white hover:opacity-50"
-            type="submit"
-          >
+          <button className="button-theme" type="submit">
             Login
           </button>
         </form>
-        <button
-          className="m-2 rounded-full bg-blue-600 py-2 px-4 font-bold text-white hover:opacity-50"
-          onClick={handleModal}
-        >
+        <button className="button-theme" onClick={handleModal}>
           Signup
         </button>
       </div>

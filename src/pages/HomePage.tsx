@@ -64,65 +64,63 @@ export const HomePage = () => {
 
   return (
     <div>
-      {userWorkouts.length ? (
-        userWorkouts.map((el) => (
-          <div key={el.workout_id} className="workoutCell">
-            <ul>
-              <label htmlFor={id}>{el.workoutname}</label>
-              <li>
-                <label htmlFor={id + "2"}>
-                  Muscle Target - {el.muscletarget}
-                </label>
-              </li>
-              <li>
-                <label htmlFor={id + "3"}>Weight - {el.weight}</label>
-              </li>
-              <li>
-                <label htmlFor={id + "4"}>Reps - {el.reps}</label>
-              </li>
-            </ul>
-            {editingWorkoutId === el.workout_id && (
-              <EditWorkoutModal
-                id={id}
-                workout_id={el.workout_id}
-                handleEditModal={() => handleEditModal(el.workout_id)}
-              />
-            )}
-            <button
-              className="m-2 rounded-full bg-blue-600 py-2 px-4 font-bold text-white hover:opacity-50"
-              onClick={() => handleEditModal(el.workout_id)}
-            >
-              Edit Workout
-            </button>
-            <button
-      className="m-2 rounded-full bg-blue-600 py-2 px-4 font-bold text-white hover:opacity-50"
-              onClick={() => handleDelete(el.workout_id)}
-            >
-              Delete Workout
-            </button>
-          </div>
-        ))
-      ) : (
-        <div>No workouts added yet.</div>
-      )}
-      <button
-        className="m-2 rounded-full bg-blue-600 py-2 px-4 font-bold text-white hover:opacity-50"
-        onClick={handleWorkoutModal}
-      >
-        Add Workout
-      </button>
-      <button
-        className="m-2 rounded-full bg-blue-600 py-2 px-4 font-bold text-white hover:opacity-50"
-        onClick={handleLogout}
-      >
-        Logout
-      </button>
-      {showAddWorkoutModal && (
-        <AddWorkoutModal
-          userId={userId}
-          handleWorkoutModal={handleWorkoutModal}
-        />
-      )}
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {userWorkouts.length ? (
+          userWorkouts.map((el) => (
+            <div key={el.workout_id} className=" m-10 ">
+              <ul>
+                <label htmlFor={id}>{el.workoutname}</label>
+                <li>
+                  <label htmlFor={id + "2"}>
+                    Muscle Target - {el.muscletarget}
+                  </label>
+                </li>
+                <li>
+                  <label htmlFor={id + "3"}>Weight - {el.weight}</label>
+                </li>
+                <li>
+                  <label htmlFor={id + "4"}>Reps - {el.reps}</label>
+                </li>
+              </ul>
+              {editingWorkoutId === el.workout_id && (
+                <EditWorkoutModal
+                  id={id}
+                  workout_id={el.workout_id}
+                  handleEditModal={() => handleEditModal(el.workout_id)}
+                />
+              )}
+              <button
+                className="button-theme"
+                onClick={() => handleEditModal(el.workout_id)}
+              >
+                Edit Workout
+              </button>
+              <button
+                className="button-theme"
+                onClick={() => handleDelete(el.workout_id)}
+              >
+                Delete Workout
+              </button>
+            </div>
+          ))
+        ) : (
+          <div>No workouts added yet.</div>
+        )}
+      </div>
+      <div className="flex items-center justify-center">
+        <button className="button-theme" onClick={handleWorkoutModal}>
+          Add Workout
+        </button>
+        <button className="button-theme" onClick={handleLogout}>
+          Logout
+        </button>
+        {showAddWorkoutModal && (
+          <AddWorkoutModal
+            userId={userId}
+            handleWorkoutModal={handleWorkoutModal}
+          />
+        )}
+      </div>
     </div>
   );
 };

@@ -4,7 +4,6 @@ import { HomePage } from "./pages/HomePage";
 import { RootState } from "./store";
 import { useAppSelector } from "./hooks";
 import "./style.css";
-import "./App.css";
 
 const App = () => {
   return (
