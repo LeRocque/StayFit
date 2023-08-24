@@ -54,11 +54,15 @@ export const LoginPage = () => {
     }
   };
   return (
-    <div>
-      <div id="login-container">
-        <div>Welcome to Workout Tracker!</div>
-        <form className="login-form" onSubmit={handleSubmit}>
+    <div className="h-100 my-0 mx-auto flex w-1/4">
+      <div id="login-container" className="m-10 w-full p-7 text-center">
+        <div className="text-slate-600">Welcome to Workout Tracker!</div>
+        <form
+          className="mb-10 mt-3 flex flex-col items-center justify-center rounded-lg bg-slate-600 px-3 py-10"
+          onSubmit={handleSubmit}
+        >
           <input
+            className="search-input"
             type="text"
             required
             name="username"
@@ -67,6 +71,7 @@ export const LoginPage = () => {
             onChange={handleSetUsername}
           />
           <input
+            className="search-input"
             type="password"
             required
             name="password"
@@ -74,11 +79,11 @@ export const LoginPage = () => {
             value={password}
             onChange={handleSetPassword}
           />
-          <button className="frontendButton" type="submit">
+          <button className="button-theme" type="submit">
             Login
           </button>
         </form>
-        <button className="frontendButton" onClick={handleModal}>
+        <button className="button-theme" onClick={handleModal}>
           Signup
         </button>
       </div>

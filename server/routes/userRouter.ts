@@ -8,7 +8,7 @@ userRouter.post(
   userController.verifyUser,
   (_req: Request, res: Response) => {
     return res.status(200).json({ user_id: res.locals.id });
-  }
+  },
 );
 
 userRouter.post(
@@ -16,7 +16,7 @@ userRouter.post(
   userController.createUser,
   (_req: Request, res: Response) => {
     return res.status(200).json({ user_id: res.locals.id });
-  }
+  },
 );
 
 export default userRouter;
