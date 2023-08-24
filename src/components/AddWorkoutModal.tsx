@@ -60,6 +60,7 @@ export const AddWorkoutModal = ({
       <form id="addWorkoutForm" onSubmit={handleSubmit}>
         <input
           type="text"
+          className="search-input"
           name="workoutname"
           required
           placeholder="Workout Name"
@@ -67,6 +68,7 @@ export const AddWorkoutModal = ({
           onChange={handleWorkoutName}
         />
         <select
+          className="search-input"
           name="muscletarget"
           required
           placeholder="Muscle Target"
@@ -85,6 +87,8 @@ export const AddWorkoutModal = ({
           <option value="Triceps">Triceps</option>
         </select>
         <input
+          className="search-input"
+          type="text"
           name="weight"
           required
           placeholder="Weight"
@@ -92,13 +96,20 @@ export const AddWorkoutModal = ({
           onChange={handleWeight}
         />
         <input
+          className="search-input"
+          type="text"
           name="reps"
           required
           placeholder="Reps"
           value={reps}
           onChange={handleReps}
         />
-        <button type="submit">Submit</button>
+        <button
+          className="button-theme"
+          type="submit"
+        >
+          Submit
+        </button>
       </form>
     </div>
   );

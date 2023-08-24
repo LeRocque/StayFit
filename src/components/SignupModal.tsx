@@ -77,6 +77,7 @@ export const SignupModal = ({ handleModal }: SignupModalProps) => {
         <input
           type="text"
           required
+          className="search-input"
           name="email"
           placeholder="Enter your email address"
           value={email}
@@ -85,6 +86,7 @@ export const SignupModal = ({ handleModal }: SignupModalProps) => {
         <input
           type="text"
           required
+          className="search-input"
           name="firstName"
           placeholder="Enter your first name"
           value={firstName}
@@ -93,6 +95,7 @@ export const SignupModal = ({ handleModal }: SignupModalProps) => {
         <input
           type="text"
           required
+          className="search-input"
           name="lastName"
           placeholder="Enter your last name"
           value={lastName}
@@ -101,6 +104,7 @@ export const SignupModal = ({ handleModal }: SignupModalProps) => {
         <input
           type="text"
           required
+          className="search-input"
           name="address"
           placeholder="Enter your address"
           value={address}
@@ -109,6 +113,7 @@ export const SignupModal = ({ handleModal }: SignupModalProps) => {
         <input
           type="text"
           required
+          className="search-input"
           name="username"
           placeholder="Enter a username"
           value={username}
@@ -117,12 +122,13 @@ export const SignupModal = ({ handleModal }: SignupModalProps) => {
         <input
           type="password"
           required
+          className="search-input"
           name="password"
           placeholder="Enter a password"
           value={password}
           onChange={handleSetPassword}
         />
-        <button className="submitButton" type="submit">
+        <button className="button-theme" type="submit">
           Submit
         </button>
       </form>

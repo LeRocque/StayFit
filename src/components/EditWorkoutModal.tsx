@@ -18,8 +18,8 @@ export const EditWorkoutModal = ({
 
   const workoutToEdit = useAppSelector((state: WorkoutState) =>
     state.workouts.workouts.find(
-      (workout: UserWorkoutsTypes) => workout.workout_id === workout_id
-    )
+      (workout: UserWorkoutsTypes) => workout.workout_id === workout_id,
+    ),
   );
 
   useEffect(() => {
@@ -81,6 +81,7 @@ export const EditWorkoutModal = ({
       <form id="addWorkoutForm" onSubmit={handleSubmit}>
         <input
           id={id}
+          className="search-input"
           type="text"
           name="workoutname"
           required
@@ -90,6 +91,7 @@ export const EditWorkoutModal = ({
         />
         <select
           id={id + "2"}
+          className="search-input"
           name="muscletarget"
           required
           placeholder="Muscle Target"
@@ -109,6 +111,8 @@ export const EditWorkoutModal = ({
         </select>
         <input
           id={id + "3"}
+          className="search-input"
+          type="text"
           name="weight"
           required
           placeholder="Weight"
@@ -117,13 +121,20 @@ export const EditWorkoutModal = ({
         />
         <input
           id={id + "4"}
+          className="search-input"
+          type="text"
           name="reps"
           required
           placeholder="Reps"
           value={reps}
           onChange={handleReps}
         />
-        <button type="submit">Submit</button>
+        <button
+           className="button-theme"
+          type="submit"
+        >
+          Submit
+        </button>
       </form>
     </div>
   );

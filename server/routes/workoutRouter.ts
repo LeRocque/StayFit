@@ -8,7 +8,7 @@ workoutRouter.get(
   workoutController.getWorkout,
   (_req: Request, res: Response) => {
     return res.status(200).json(res.locals.workouts);
-  }
+  },
 );
 
 workoutRouter.post(
@@ -16,7 +16,7 @@ workoutRouter.post(
   workoutController.addWorkout,
   (_req: Request, res: Response) => {
     return res.status(200).json(res.locals.workout);
-  }
+  },
 );
 
 workoutRouter.put(
@@ -24,7 +24,7 @@ workoutRouter.put(
   workoutController.editWorkout,
   (_req: Request, res: Response) => {
     return res.status(200).json(res.locals.update);
-  }
+  },
 );
 
 workoutRouter.delete(
@@ -32,7 +32,7 @@ workoutRouter.delete(
   workoutController.removeWorkout,
   (_req: Request, res: Response) => {
     return res.status(200).json(res.locals.deleted);
-  }
+  },
 );
 
 export default workoutRouter;

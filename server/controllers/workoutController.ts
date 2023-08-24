@@ -18,7 +18,7 @@ const workoutController = {
   addWorkout: async (
     req: WorkoutRequest,
     res: Response,
-    next: NextFunction
+    next: NextFunction,
   ) => {
     const { user_id, muscleTarget, workoutName, weight, reps } = req.body;
     // if all fields have been passed to addWorkout insert them into workouts table, otherwise sent a status 400 back to client
@@ -49,7 +49,7 @@ const workoutController = {
   getWorkout: async (
     req: WorkoutRequest,
     res: Response,
-    next: NextFunction
+    next: NextFunction,
   ) => {
     const { user_id } = req.params;
     try {
@@ -75,7 +75,7 @@ const workoutController = {
   editWorkout: async (
     req: WorkoutRequest,
     res: Response,
-    next: NextFunction
+    next: NextFunction,
   ) => {
     const { workout_id, muscleTarget, workoutName, weight, reps } = req.body;
     // if all fields have been passed in, UPDATE the workouts with the passed in values WHERE the workout_id matches the passed in id, then store the updated workout on res.locals.update and call next
@@ -99,7 +99,7 @@ const workoutController = {
   removeWorkout: async (
     req: WorkoutRequest,
     res: Response,
-    next: NextFunction
+    next: NextFunction,
   ) => {
     const { workout_id } = req.params;
     try {
