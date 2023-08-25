@@ -20,6 +20,7 @@ const workoutController = {
     res: Response,
     next: NextFunction,
   ) => {
+    console.log(req.body);
     const { user_id, muscleTarget, workoutName, weight, reps } = req.body;
     // if all fields have been passed to addWorkout insert them into workouts table, otherwise sent a status 400 back to client
     if (user_id && muscleTarget && workoutName && weight && reps) {

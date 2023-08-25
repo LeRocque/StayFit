@@ -1,12 +1,16 @@
 import express, { Request, Response } from "express";
 import userController from "../controllers/userController";
+import authController from "../controllers/authController";
+import { UserRequest } from "../backendTypes";
 
 const userRouter = express.Router();
 
 userRouter.post(
   "/login",
   userController.verifyUser,
-  (_req: Request, res: Response) => {
+  authController.assignJwt,
+  authController.cookieCreator,
+  (_req: UserRequest, res: Response) => {
     return res.status(200).json({ user_id: res.locals.id });
   },
 );
@@ -14,8 +18,20 @@ userRouter.post(
 userRouter.post(
   "/signup",
   userController.createUser,
-  (_req: Request, res: Response) => {
+  (_req: UserRequest, res: Response) => {
     return res.status(200).json({ user_id: res.locals.id });
+  },
+);
+
+userRouter.get("/isAuthenticated", (_req: Request, res: Response) => {
+  return res.status(200).json("User Authenticated");
+});
+
+userRouter.get(
+  "/logout",
+  userController.logout,
+  (_req: UserRequest, res: Response) => {
+    return res.status(201).json("Successful logout");
   },
 );
 

@@ -84,6 +84,13 @@ const userController = {
     }
     return res.status(400).json("Please enter a username and password");
   },
+
+  logout: (_req: UserRequest, res: Response, next: NextFunction) => {
+    res
+      .clearCookie("ssid", { httpOnly: true })
+      .clearCookie("token", { httpOnly: true });
+    return next();
+  },
 };
 
 export default userController;

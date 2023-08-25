@@ -34,8 +34,19 @@ export const HomePage = () => {
     getUserWorkouts();
   }, [dispatch, editingWorkoutId, userId, showAddWorkoutModal, workoutDeleted]);
 
-  const handleLogout = () => {
-    dispatch(logoutUserActionCreator());
+  const handleLogout = async () => {
+    try {
+      const result = await fetch("/user/logout", {
+        credentials: "include",
+      });
+      if (result.ok) {
+        dispatch(logoutUserActionCreator());
+      } else {
+        alert("unable to logout");
+      }
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   const handleWorkoutModal = () => setShowAddWorkoutModal(!showAddWorkoutModal);
