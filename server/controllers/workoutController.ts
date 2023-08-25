@@ -128,13 +128,11 @@ const workoutController = {
     res: Response,
     next: NextFunction,
   ) => {
-    console.log("getImages called");
     try {
       const response = await fetch(
         "https://wger.de/api/v2/exerciseimage/?is_main=True&limit=46",
       );
       const images = await response.json();
-      console.log("images are:", images);
       res.locals.images = images;
       return next();
     } catch (err) {

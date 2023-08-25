@@ -12,10 +12,10 @@ const workoutsReducer = (state = initialState, action: WorkoutActionTypes) => {
         ...state,
         workouts: action.payload.workouts,
       };
-      case types.SET_IMAGES:
+    case types.SET_IMAGES:
       return {
         ...state,
-        workouts: action.payload.images,
+        images: action.payload.images,
       };
     default:
       return state;

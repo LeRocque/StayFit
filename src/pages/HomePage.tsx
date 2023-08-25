@@ -4,8 +4,8 @@ import {
   logoutUserActionCreator,
   setWorkoutsActionCreator,
 } from "../actions/actions";
-import { useAppDispatch } from "../hooks";
-import { UserWorkoutsTypes } from "../frontendTypes";
+import { useAppDispatch, useAppSelector } from "../hooks";
+import { UserWorkoutsTypes, WorkoutImageState } from "../frontendTypes";
 import { AddWorkoutModal } from "../components/AddWorkoutModal";
 import { EditWorkoutModal } from "../components/EditWorkoutModal";
 
@@ -17,6 +17,11 @@ export const HomePage = () => {
   const [workoutDeleted, setWorkoutDeleted] = useState(false);
 
   const dispatch = useAppDispatch();
+
+  const workoutImages = useAppSelector(
+    (state: WorkoutImageState) => state.workouts.images,
+  );
+  console.log("workoutImages are:", workoutImages);
   useEffect(() => {
     const getUserWorkouts = async () => {
       try {
@@ -27,6 +32,7 @@ export const HomePage = () => {
         const workouts = await result.json();
         setUserWorkouts(workouts);
         dispatch(setWorkoutsActionCreator(workouts));
+        useAppSelector;
       } catch (err) {
         console.error(err);
       }

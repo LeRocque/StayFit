@@ -31,3 +31,9 @@ export type WorkoutState = {
     };
   };
 };
+
+export type WorkoutImageState = {
+  workouts: {
+    images: Array<number>;
+  };
+};
