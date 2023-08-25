@@ -6,6 +6,14 @@ import { WorkoutRequest } from "../backendTypes";
 const workoutRouter = express.Router();
 
 workoutRouter.get(
+  "/images",
+  workoutController.getImages,
+  (_req: WorkoutRequest, res: Response) => {
+    return res.status(200).json({ images: res.locals.images });
+  },
+);
+
+workoutRouter.get(
   "/:user_id",
   authController.isAuthenticated,
   workoutController.getWorkout,

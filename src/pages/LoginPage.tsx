@@ -1,6 +1,9 @@
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { loginUserActionCreator } from "../actions/actions";
+import {
+  loginUserActionCreator,
+  setImagesActionCreator,
+} from "../actions/actions";
 import { SignupModal } from "../components/SignupModal";
 import { useAppDispatch } from "../hooks";
 
@@ -8,9 +11,26 @@ export const LoginPage = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showSignupModal, setShowSignupModal] = useState(false);
+  // const [workoutImages, setWorkoutImages] = useState([]);
 
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    const getWorkoutImages = async () => {
+      try {
+        const result = await fetch("/workout/images");
+        const images = await result.json();
+        // setWorkoutImages(images);
+        dispatch(setImagesActionCreator(images));
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    getWorkoutImages();
+  }, [dispatch]);
+
+  // console.log("workoutImages are:", workoutImages);
 
   const handleModal = () => {
     setShowSignupModal(!showSignupModal);
