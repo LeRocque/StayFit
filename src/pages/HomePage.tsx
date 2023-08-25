@@ -12,7 +12,7 @@ import {
 import { AddWorkoutModal } from "../components/AddWorkoutModal";
 import { EditWorkoutModal } from "../components/EditWorkoutModal";
 
-export const HomePage = () => {
+const HomePage = () => {
   const { userId } = useParams();
   const [userWorkouts, setUserWorkouts] = useState<UserWorkoutsTypes[]>([]);
   const [showAddWorkoutModal, setShowAddWorkoutModal] = useState(false);
@@ -149,3 +149,4 @@ export const HomePage = () => {
     </div>
   );
 };
+export default HomePage;

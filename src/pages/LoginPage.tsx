@@ -7,7 +7,7 @@ import {
 import { SignupModal } from "../components/SignupModal";
 import { useAppDispatch } from "../hooks";
 
-export const LoginPage = () => {
+ const LoginPage = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showSignupModal, setShowSignupModal] = useState(false);
@@ -111,3 +111,5 @@ export const LoginPage = () => {
     </div>
   );
 };
+
+export default LoginPage;
