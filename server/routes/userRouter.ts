@@ -23,10 +23,6 @@ userRouter.post(
   },
 );
 
-userRouter.get("/isAuthenticated", (_req: Request, res: Response) => {
-  return res.status(200).json("User Authenticated");
-});
-
 userRouter.get(
   "/logout",
   userController.logout,
