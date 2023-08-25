@@ -6,7 +6,7 @@ export const AddWorkoutModal = ({
   handleWorkoutModal,
 }: WorkoutModalProps) => {
   const [workoutName, setWorkoutName] = useState("");
-  const [muscleTarget, setMuscleTarget] = useState("");
+  const [muscleTarget, setMuscleTarget] = useState("Back");
   const [weight, setWeight] = useState("");
   const [reps, setReps] = useState("");
 
@@ -104,10 +104,7 @@ export const AddWorkoutModal = ({
           value={reps}
           onChange={handleReps}
         />
-        <button
-          className="button-theme"
-          type="submit"
-        >
+        <button className="button-theme" type="submit">
           Submit
         </button>
       </form>

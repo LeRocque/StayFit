@@ -5,6 +5,7 @@ import express, {
   ErrorRequestHandler,
 } from "express";
 import path from "path";
+import cors from "cors";
 import cookieParser from "cookie-parser";
 import workoutRouter from "./routes/workoutRouter";
 import userRouter from "./routes/userRouter";
@@ -16,6 +17,7 @@ const PORT = process.env.PORT || 3000;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
+app.use(cors());
 
 app.use("/workout", workoutRouter);
 app.use("/user", userRouter);
