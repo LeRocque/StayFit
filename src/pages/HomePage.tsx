@@ -5,7 +5,10 @@ import {
   setWorkoutsActionCreator,
 } from "../actions/actions";
 import { useAppDispatch, useAppSelector } from "../hooks";
-import { UserWorkoutsTypes, WorkoutImageState } from "../frontendTypes";
+import {
+  UserWorkoutsTypes,
+  WorkoutImageState,
+} from "../frontendTypes";
 import { AddWorkoutModal } from "../components/AddWorkoutModal";
 import { EditWorkoutModal } from "../components/EditWorkoutModal";
 
@@ -99,6 +102,11 @@ export const HomePage = () => {
                   <label htmlFor={id + "4"}>Reps - {el.reps}</label>
                 </li>
               </ul>
+              {workoutImages.images.results.length > 0 ? (
+                <img src={workoutImages.images.results[0].image} />
+              ) : (
+                <p>No workout images available</p>
+              )}
               {editingWorkoutId === el.workout_id && (
                 <EditWorkoutModal
                   id={id}
