@@ -1,4 +1,4 @@
-import express, { Request, Response } from "express";
+import express, { Response } from "express";
 import userController from "../controllers/userController";
 import authController from "../controllers/authController";
 import { UserRequest } from "../backendTypes";
@@ -22,10 +22,6 @@ userRouter.post(
     return res.status(200).json({ user_id: res.locals.id });
   },
 );
-
-userRouter.get("/isAuthenticated", (_req: Request, res: Response) => {
-  return res.status(200).json("User Authenticated");
-});
 
 userRouter.get(
   "/logout",

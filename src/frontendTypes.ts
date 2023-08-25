@@ -11,6 +11,22 @@ export type UserWorkoutsTypes = {
   reps: string;
 };
 
+export interface resultImages {
+  author_history: Array<number>;
+  exercise_base: number;
+  exercise_base_uuid: string;
+  id: number;
+  image: string;
+  is_main: boolean;
+  license: number;
+  license_author: string;
+  license_derivative_source_url: string;
+  license_object_url: string;
+  license_title: string;
+  style: string;
+  uuid: string;
+}
+
 export type WorkoutModalProps = {
   userId: string | undefined;
   handleWorkoutModal: (value: void) => void;
@@ -28,6 +44,27 @@ export type WorkoutState = {
       find: (
         callback: (workout: UserWorkoutsTypes) => boolean,
       ) => UserWorkoutsTypes | undefined;
+    };
+  };
+};
+
+export type WorkoutImages = {
+  images: {
+    count: number;
+    next: string;
+    previous: null;
+    results: resultImages[];
+  };
+};
+
+export type WorkoutImageState = {
+  workouts: {
+    images: {
+      count: number;
+      next: string;
+      previous: null;
+      images: {
+        results: resultImages[];}
     };
   };
 };
