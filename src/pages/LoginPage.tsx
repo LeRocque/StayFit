@@ -33,18 +33,18 @@ const LoginPage = () => {
 
   // console.log("workoutImages are:", workoutImages);
 
-  const handleModal = () => {
+  const handleModal = (): void => {
     setShowSignupModal(!showSignupModal);
   };
 
-  const handleSetUsername = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleSetUsername = (e: ChangeEvent<HTMLInputElement>): void => {
     setUsername(e.target.value);
   };
-  const handleSetPassword = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleSetPassword = (e: ChangeEvent<HTMLInputElement>): void => {
     setPassword(e.target.value);
   };
 
-  const handleSubmit = async (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent): Promise<void> => {
     e.preventDefault();
     try {
       const response = await fetch("/user/login", {
