@@ -1,4 +1,10 @@
-import { ChangeEvent, FormEvent, MouseEvent, useState } from "react";
+import {
+  ChangeEvent,
+  FormEvent,
+  MouseEvent,
+  useState,
+  useTransition,
+} from "react";
 import { WorkoutModalProps } from "../frontendTypes";
 
 export const AddWorkoutModal = ({
@@ -9,6 +15,7 @@ export const AddWorkoutModal = ({
   const [muscleTarget, setMuscleTarget] = useState("Back");
   const [weight, setWeight] = useState("");
   const [reps, setReps] = useState("");
+  const [isPending, startTransition] = useTransition();
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -31,7 +38,9 @@ export const AddWorkoutModal = ({
         setMuscleTarget("");
         setWeight("");
         setReps("");
-        handleWorkoutModal();
+        startTransition(() => {
+          handleWorkoutModal();
+        });
       } else {
         alert("invalid input");
       }
@@ -104,9 +113,15 @@ export const AddWorkoutModal = ({
           value={reps}
           onChange={handleReps}
         />
-        <button className="button-theme" type="submit">
-          Submit
-        </button>
+        {isPending ? (
+          <div className="mini loading-pane">
+            <h2 className="loader">💪</h2>
+          </div>
+        ) : (
+          <button className="button-theme" type="submit">
+            Submit
+          </button>
+        )}
       </form>
     </div>
   );

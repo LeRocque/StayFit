@@ -71,23 +71,12 @@ interface resultImages {
   uuid: string;
 }
 
-// export interface imagesAPI {
-//   count: number;
-//   next: string;
-//   previous: null;
-//   results: resultImages[]
-// }
-
-// export interface imagesAPI {
-//   results: resultImages[];
-// }
-
 export interface WorkoutState {
   workouts: Workout[];
   images: resultImages[];
 }
 
-export type WorkoutActionTypes = SetWorkoutsAction | SetImagesAction
+export type WorkoutActionTypes = SetWorkoutsAction | SetImagesAction;
 
 export type UserActionTypes = LoginUserAction | LogoutUserAction;
 

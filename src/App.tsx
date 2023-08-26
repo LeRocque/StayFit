@@ -1,9 +1,13 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-import { LoginPage } from "./pages/LoginPage";
-import { HomePage } from "./pages/HomePage";
+// import { LoginPage } from "./pages/LoginPage";
+// import { HomePage } from "./pages/HomePage";
 import { RootState } from "./store";
+import { lazy, Suspense } from "react";
 import { useAppSelector } from "./hooks";
 import "./style.css";
+
+const LoginPage = lazy(() => import("./pages/LoginPage"));
+const HomePage = lazy(() => import("./pages/HomePage"));
 
 const App = () => {
   return (
@@ -11,10 +15,18 @@ const App = () => {
       id="root-app"
       className="background-red m-0 bg-gradient-to-b from-blue-200 via-blue-400 to-blue-900 p-0"
     >
-      <Routes>
-        <Route path="/" element={<LoginPage />} />
-        <Route path="/home/:userId" element={<ProtectedRoute />} />
-      </Routes>
+      <Suspense
+        fallback={
+          <div className="loading-pane">
+            <h2 className="loader">🏋️</h2>
+          </div>
+        }
+      >
+        <Routes>
+          <Route path="/" element={<LoginPage />} />
+          <Route path="/home/:userId" element={<ProtectedRoute />} />
+        </Routes>
+      </Suspense>
     </div>
   );
 };
