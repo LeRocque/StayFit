@@ -16,8 +16,9 @@ export const AddWorkoutModal = ({
   const [weight, setWeight] = useState("");
   const [reps, setReps] = useState("");
   const [isPending, startTransition] = useTransition();
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  const handleSubmit = async (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent): Promise<void> => {
     e.preventDefault();
     try {
       const response = await fetch("/workout/add", {
@@ -46,26 +47,51 @@ export const AddWorkoutModal = ({
       }
     } catch (err) {
       console.error(err);
+      setErrorMessage("An error occuring while attempting to add new workout");
     }
   };
 
-  const handleModalClick = (e: MouseEvent<HTMLDivElement>) => {
+  const handleModalClick = (e: MouseEvent<HTMLDivElement>): void => {
     if (e.target === e.currentTarget) {
       handleWorkoutModal();
     }
   };
+  const handleModalKeyPress = (
+    e: React.KeyboardEvent<HTMLDivElement>,
+  ): void => {
+    if (e.key === "Enter") {
+      handleWorkoutModal();
+    }
+  };
 
-  const handleWorkoutName = (e: ChangeEvent<HTMLInputElement>) =>
+  const handleWorkoutName = (e: ChangeEvent<HTMLInputElement>): void =>
     setWorkoutName(e.target.value);
-  const handleMuscleTarget = (e: ChangeEvent<HTMLSelectElement>) =>
+  const handleMuscleTarget = (e: ChangeEvent<HTMLSelectElement>): void =>
     setMuscleTarget(e.target.value);
-  const handleWeight = (e: ChangeEvent<HTMLInputElement>) =>
+  const handleWeight = (e: ChangeEvent<HTMLInputElement>): void =>
     setWeight(e.target.value);
-  const handleReps = (e: ChangeEvent<HTMLInputElement>) =>
+  const handleReps = (e: ChangeEvent<HTMLInputElement>): void =>
     setReps(e.target.value);
 
   return (
-    <div id="modal-container" onClick={handleModalClick}>
+    <div
+      id="modal-container"
+      onClick={handleModalClick}
+      onKeyDown={handleModalKeyPress}
+      role="button"
+      tabIndex={0}
+    >
+      {errorMessage && (
+        <div className="error-message">
+          {errorMessage}
+          <button
+            className="close-button"
+            onClick={() => setErrorMessage(null)}
+          >
+            Dismiss Error
+          </button>
+        </div>
+      )}
       <form id="addWorkoutForm" onSubmit={handleSubmit}>
         <input
           type="text"

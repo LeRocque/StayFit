@@ -5,10 +5,7 @@ import {
   setWorkoutsActionCreator,
 } from "../actions/actions";
 import { useAppDispatch, useAppSelector } from "../hooks";
-import {
-  UserWorkoutsTypes,
-  WorkoutImageState,
-} from "../frontendTypes";
+import { UserWorkoutsTypes, WorkoutImageState } from "../frontendTypes";
 import { AddWorkoutModal } from "../components/AddWorkoutModal";
 import { EditWorkoutModal } from "../components/EditWorkoutModal";
 
@@ -18,6 +15,7 @@ const HomePage = () => {
   const [showAddWorkoutModal, setShowAddWorkoutModal] = useState(false);
   const [editingWorkoutId, setEditingWorkoutId] = useState<number | null>(null);
   const [workoutDeleted, setWorkoutDeleted] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const dispatch = useAppDispatch();
 
@@ -26,24 +24,26 @@ const HomePage = () => {
   );
   console.log("workoutImages are:", workoutImages);
   useEffect(() => {
-    const getUserWorkouts = async () => {
+    const getUserWorkouts = async (): Promise<void> => {
       try {
-        const result = await fetch(`/workout/${userId}`);
-        if (result.status === 204) {
-          return;
+        if (userId) {
+          const result = await fetch(`/workout/${userId}`);
+          if (result.status === 204) {
+            return;
+          }
+          const workouts = (await result.json()) as UserWorkoutsTypes[];
+          setUserWorkouts(workouts);
+          dispatch(setWorkoutsActionCreator(workouts));
         }
-        const workouts = await result.json();
-        setUserWorkouts(workouts);
-        dispatch(setWorkoutsActionCreator(workouts));
-        useAppSelector;
       } catch (err) {
         console.error(err);
+        setErrorMessage("An error occurred while fetching user workouts.");
       }
     };
-    getUserWorkouts();
+    void getUserWorkouts();
   }, [dispatch, editingWorkoutId, userId, showAddWorkoutModal, workoutDeleted]);
 
-  const handleLogout = async () => {
+  const handleLogout = async (): Promise<void> => {
     try {
       const result = await fetch("/user/logout", {
         credentials: "include",
@@ -55,18 +55,20 @@ const HomePage = () => {
       }
     } catch (err) {
       console.error(err);
+      setErrorMessage("An error occurred while logging out.");
     }
   };
 
-  const handleWorkoutModal = () => setShowAddWorkoutModal(!showAddWorkoutModal);
+  const handleWorkoutModal = (): void =>
+    setShowAddWorkoutModal(!showAddWorkoutModal);
 
-  const handleEditModal = (workout_id: number | null) => {
+  const handleEditModal = (workout_id: number | null): void => {
     setEditingWorkoutId((prevId) =>
       prevId === workout_id ? null : workout_id,
     );
   };
 
-  const handleDelete = async (e: number) => {
+  const handleDelete = async (e: number): Promise<void> => {
     try {
       const result = await fetch(`/workout/remove/${e}`, {
         method: "DELETE",
@@ -84,6 +86,17 @@ const HomePage = () => {
 
   return (
     <div>
+      {errorMessage && (
+        <div className="error-message">
+          {errorMessage}
+          <button
+            className="close-button"
+            onClick={() => setErrorMessage(null)}
+          >
+            Dismiss Error
+          </button>
+        </div>
+      )}
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {userWorkouts.length ? (
           userWorkouts.map((el) => (
@@ -103,7 +116,10 @@ const HomePage = () => {
                 </li>
               </ul>
               {workoutImages.images.results.length > 0 ? (
-                <img src={workoutImages.images.results[0].image} />
+                <img
+                  src={workoutImages.images.results[0].image}
+                  alt="Workout"
+                />
               ) : (
                 <p>No workout images available</p>
               )}

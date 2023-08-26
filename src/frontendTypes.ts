@@ -2,6 +2,10 @@ export type SignupModalProps = {
   handleModal: (value: void) => void;
 };
 
+export interface ReturnedUserId {
+  user_id: number;
+}
+
 export type UserWorkoutsTypes = {
   workout_id: number;
   workoutname: string;
@@ -64,7 +68,8 @@ export type WorkoutImageState = {
       next: string;
       previous: null;
       images: {
-        results: resultImages[];}
+        results: resultImages[];
+      };
     };
   };
 };
