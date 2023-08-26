@@ -3,7 +3,7 @@ export type SignupModalProps = {
 };
 
 export interface ReturnedUserId {
-  user_id: number
+  user_id: number;
 }
 
 export type UserWorkoutsTypes = {
@@ -68,7 +68,8 @@ export type WorkoutImageState = {
       next: string;
       previous: null;
       images: {
-        results: resultImages[];}
+        results: resultImages[];
+      };
     };
   };
 };

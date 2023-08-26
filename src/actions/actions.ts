@@ -15,7 +15,7 @@ export interface LogoutUserAction {
 export interface SetWorkoutsAction {
   type: typeof types.SET_WORKOUTS;
   payload: {
-    workouts: UserWorkoutsTypes[]
+    workouts: UserWorkoutsTypes[];
   };
 }
 
@@ -76,7 +76,9 @@ export const setWorkoutsActionCreator = (
   payload: { workouts },
 });
 
-export const setImagesActionCreator = (images: WorkoutImages): SetImagesAction => ({
+export const setImagesActionCreator = (
+  images: WorkoutImages,
+): SetImagesAction => ({
   type: types.SET_IMAGES,
   payload: { images },
 });
