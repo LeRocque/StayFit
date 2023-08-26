@@ -2,6 +2,10 @@ export type SignupModalProps = {
   handleModal: (value: void) => void;
 };
 
+export interface ReturnedUserId {
+  user_id: number
+}
+
 export type UserWorkoutsTypes = {
   workout_id: number;
   workoutname: string;

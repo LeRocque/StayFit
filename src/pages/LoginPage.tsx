@@ -6,12 +6,12 @@ import {
 } from "../actions/actions";
 import { SignupModal } from "../components/SignupModal";
 import { useAppDispatch } from "../hooks";
+import { ReturnedUserId, WorkoutImages } from "../frontendTypes";
 
- const LoginPage = () => {
+const LoginPage = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showSignupModal, setShowSignupModal] = useState(false);
-  // const [workoutImages, setWorkoutImages] = useState([]);
 
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -20,8 +20,7 @@ import { useAppDispatch } from "../hooks";
     const getWorkoutImages = async () => {
       try {
         const result = await fetch("/workout/images");
-        const images = await result.json();
-        // setWorkoutImages(images);
+        const images = (await result.json()) as WorkoutImages;
         dispatch(setImagesActionCreator(images));
       } catch (err) {
         console.error(err);
@@ -60,7 +59,7 @@ import { useAppDispatch } from "../hooks";
       setUsername("");
       setPassword("");
       if (response.ok) {
-        const returnedUserId = await response.json();
+        const returnedUserId = (await response.json()) as ReturnedUserId;
         const returnedId = returnedUserId.user_id;
         dispatch(loginUserActionCreator(username));
         navigate(`/home/${returnedId}`);

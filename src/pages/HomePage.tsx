@@ -5,10 +5,7 @@ import {
   setWorkoutsActionCreator,
 } from "../actions/actions";
 import { useAppDispatch, useAppSelector } from "../hooks";
-import {
-  UserWorkoutsTypes,
-  WorkoutImageState,
-} from "../frontendTypes";
+import { UserWorkoutsTypes, WorkoutImageState } from "../frontendTypes";
 import { AddWorkoutModal } from "../components/AddWorkoutModal";
 import { EditWorkoutModal } from "../components/EditWorkoutModal";
 
@@ -26,16 +23,17 @@ const HomePage = () => {
   );
   console.log("workoutImages are:", workoutImages);
   useEffect(() => {
-    const getUserWorkouts = async () => {
+    const getUserWorkouts = async (): Promise<void> => {
       try {
-        const result = await fetch(`/workout/${userId}`);
-        if (result.status === 204) {
-          return;
+        if (userId) {
+          const result = await fetch(`/workout/${userId}`);
+          if (result.status === 204) {
+            return;
+          }
+          const workouts = (await result.json()) as UserWorkoutsTypes[];
+          setUserWorkouts(workouts);
+          dispatch(setWorkoutsActionCreator(workouts));
         }
-        const workouts = await result.json();
-        setUserWorkouts(workouts);
-        dispatch(setWorkoutsActionCreator(workouts));
-        useAppSelector;
       } catch (err) {
         console.error(err);
       }
@@ -43,7 +41,7 @@ const HomePage = () => {
     getUserWorkouts();
   }, [dispatch, editingWorkoutId, userId, showAddWorkoutModal, workoutDeleted]);
 
-  const handleLogout = async () => {
+  const handleLogout = async (): Promise<void> => {
     try {
       const result = await fetch("/user/logout", {
         credentials: "include",
@@ -58,15 +56,16 @@ const HomePage = () => {
     }
   };
 
-  const handleWorkoutModal = () => setShowAddWorkoutModal(!showAddWorkoutModal);
+  const handleWorkoutModal = (): void =>
+    setShowAddWorkoutModal(!showAddWorkoutModal);
 
-  const handleEditModal = (workout_id: number | null) => {
+  const handleEditModal = (workout_id: number | null): void => {
     setEditingWorkoutId((prevId) =>
       prevId === workout_id ? null : workout_id,
     );
   };
 
-  const handleDelete = async (e: number) => {
+  const handleDelete = async (e: number): Promise<void> => {
     try {
       const result = await fetch(`/workout/remove/${e}`, {
         method: "DELETE",
@@ -103,7 +102,10 @@ const HomePage = () => {
                 </li>
               </ul>
               {workoutImages.images.results.length > 0 ? (
-                <img src={workoutImages.images.results[0].image} />
+                <img
+                  src={workoutImages.images.results[0].image}
+                  alt="Workout"
+                />
               ) : (
                 <p>No workout images available</p>
               )}
