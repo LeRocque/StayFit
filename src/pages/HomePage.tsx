@@ -15,6 +15,7 @@ const HomePage = () => {
   const [showAddWorkoutModal, setShowAddWorkoutModal] = useState(false);
   const [editingWorkoutId, setEditingWorkoutId] = useState<number | null>(null);
   const [workoutDeleted, setWorkoutDeleted] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const dispatch = useAppDispatch();
 
@@ -36,9 +37,10 @@ const HomePage = () => {
         }
       } catch (err) {
         console.error(err);
+        setErrorMessage("An error occurred while fetching user workouts.");
       }
     };
-    getUserWorkouts();
+    void getUserWorkouts();
   }, [dispatch, editingWorkoutId, userId, showAddWorkoutModal, workoutDeleted]);
 
   const handleLogout = async (): Promise<void> => {
@@ -53,6 +55,7 @@ const HomePage = () => {
       }
     } catch (err) {
       console.error(err);
+      setErrorMessage("An error occurred while logging out.");
     }
   };
 
@@ -83,6 +86,17 @@ const HomePage = () => {
 
   return (
     <div>
+      {errorMessage && (
+        <div className="error-message">
+          {errorMessage}
+          <button
+            className="close-button"
+            onClick={() => setErrorMessage(null)}
+          >
+            Dismiss Error
+          </button>
+        </div>
+      )}
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {userWorkouts.length ? (
           userWorkouts.map((el) => (

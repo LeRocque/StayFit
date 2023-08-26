@@ -28,7 +28,6 @@ module.exports = {
     "react/prop-types": 0,
     "react/react-in-jsx-scope": 0,
     "@typescript-eslint/no-misused-promises": "off",
-    "@typescript-eslint/no-floating-promises": "off",
   },
   settings: {
     react: {

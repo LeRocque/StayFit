@@ -15,6 +15,7 @@ export const EditWorkoutModal = ({
   const [muscleTarget, setMuscleTarget] = useState("");
   const [weight, setWeight] = useState("");
   const [reps, setReps] = useState("");
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const workoutToEdit = useAppSelector((state: WorkoutState) =>
     state.workouts.workouts.find(
@@ -58,6 +59,7 @@ export const EditWorkoutModal = ({
       }
     } catch (err) {
       console.error(err);
+      setErrorMessage("And error occurred while attempting to edit workout");
     }
   };
 
@@ -91,6 +93,17 @@ export const EditWorkoutModal = ({
       role="button"
       tabIndex={0}
     >
+      {errorMessage && (
+        <div className="error-message">
+          {errorMessage}
+          <button
+            className="close-button"
+            onClick={() => setErrorMessage(null)}
+          >
+            Dismiss Error
+          </button>
+        </div>
+      )}
       <form id="addWorkoutForm" onSubmit={handleSubmit}>
         <input
           id={id}

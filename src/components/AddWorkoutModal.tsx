@@ -16,6 +16,7 @@ export const AddWorkoutModal = ({
   const [weight, setWeight] = useState("");
   const [reps, setReps] = useState("");
   const [isPending, startTransition] = useTransition();
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const handleSubmit = async (e: FormEvent): Promise<void> => {
     e.preventDefault();
@@ -46,6 +47,7 @@ export const AddWorkoutModal = ({
       }
     } catch (err) {
       console.error(err);
+      setErrorMessage("An error occuring while attempting to add new workout");
     }
   };
 
@@ -79,6 +81,17 @@ export const AddWorkoutModal = ({
       role="button"
       tabIndex={0}
     >
+      {errorMessage && (
+        <div className="error-message">
+          {errorMessage}
+          <button
+            className="close-button"
+            onClick={() => setErrorMessage(null)}
+          >
+            Dismiss Error
+          </button>
+        </div>
+      )}
       <form id="addWorkoutForm" onSubmit={handleSubmit}>
         <input
           type="text"

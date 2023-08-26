@@ -8,6 +8,7 @@ export const SignupModal = ({ handleModal }: SignupModalProps) => {
   const [address, setAddress] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const handleSetEmail = (e: ChangeEvent<HTMLInputElement>): void => {
     setEmail(e.target.value);
@@ -75,6 +76,7 @@ export const SignupModal = ({ handleModal }: SignupModalProps) => {
       }
     } catch (err) {
       console.error(err);
+      setErrorMessage("An error occurred while attempting to sign up");
     }
   };
 
@@ -86,6 +88,17 @@ export const SignupModal = ({ handleModal }: SignupModalProps) => {
       role="button"
       tabIndex={0}
     >
+      {errorMessage && (
+        <div className="error-message">
+          {errorMessage}
+          <button
+            className="close-button"
+            onClick={() => setErrorMessage(null)}
+          >
+            Dismiss Error
+          </button>
+        </div>
+      )}
       <form className="signup-form" onSubmit={handleSubmit}>
         <input
           type="text"

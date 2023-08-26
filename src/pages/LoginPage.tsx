@@ -12,6 +12,7 @@ const LoginPage = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showSignupModal, setShowSignupModal] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -24,9 +25,10 @@ const LoginPage = () => {
         dispatch(setImagesActionCreator(images));
       } catch (err) {
         console.error(err);
+        setErrorMessage("An error occured fetching images");
       }
     };
-    getWorkoutImages();
+    void getWorkoutImages();
   }, [dispatch]);
 
   // console.log("workoutImages are:", workoutImages);
@@ -70,12 +72,24 @@ const LoginPage = () => {
       }
     } catch (err) {
       console.error(err);
+      setErrorMessage("An error occured while attempting to log in");
     }
   };
   return (
     <div className="h-100 my-0 mx-auto flex w-1/4">
       <div id="login-container" className="m-10 w-full p-7 text-center">
         <div className="text-slate-600">Welcome to Workout Tracker!</div>
+        {errorMessage && (
+          <div className="error-message">
+            {errorMessage}
+            <button
+              className="close-button"
+              onClick={() => setErrorMessage(null)}
+            >
+              Dismiss Error
+            </button>
+          </div>
+        )}
         <form
           className="mb-10 mt-3 flex flex-col items-center justify-center rounded-lg bg-slate-600 px-3 py-10"
           onSubmit={handleSubmit}
