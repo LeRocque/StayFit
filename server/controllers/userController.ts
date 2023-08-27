@@ -1,7 +1,13 @@
 import bcrypt from "bcryptjs";
 import db from "../models/dbModel";
 import { Response, NextFunction } from "express";
-import { ReqBodyWorkout, UserRequest } from "../backendTypes";
+import {
+  ExistingUserQuery,
+  ReqBodyUser,
+  UserRequest,
+  UserRow,
+} from "../backendTypes";
+import { QueryResult } from "pg";
 
 /*
 Create user table with the following
@@ -19,38 +25,39 @@ CREATE TABLE users (
 const userController = {
   createUser: async (req: UserRequest, res: Response, next: NextFunction) => {
     const { email, firstName, lastName, address, username, password } =
-      req.body as ReqBodyWorkout;
+      req.body as ReqBodyUser;
     // if all fields are passed in, check if username already exists, if so return 'Username exists'
     if (email && firstName && lastName && address && username && password) {
-      console.log("correct inputs hit");
       try {
         let queryString = "SELECT user_id FROM users WHERE username=($1)";
-        let result = await db.query(queryString, [username]);
-        console.log("result is:", result);
-        if (result.rows[0]) {
+        let result = (await db.query(queryString, [
+          username,
+        ])) as ExistingUserQuery;
+        const userRow = result.rows[0] as UserRow | undefined;
+        if (userRow) {
           return res
             .status(401)
             .json("Username already exists, please select another");
         } else {
           // if username does not exist, hash the password, then add fields with hashed password to users table, assign user_id to res.locals.id,  finally return next
           const hashed = await bcrypt.hash(password, 10);
-          console.log("hashed is:", hashed);
           queryString =
             "INSERT INTO users (email, firstName, lastName, address, username, password) VALUES ($1, $2, $3, $4, $5, $6) RETURNING user_id";
-          result = await db.query(queryString, [
+          result = (await db.query(queryString, [
             email,
             firstName,
             lastName,
             address,
             username,
             hashed,
-          ]);
+          ])) as QueryResult;
           res.locals.id = result.rows[0].user_id;
           return next();
         }
       } catch (err) {
+        const error: string = err as string;
         return next({
-          log: `Error in userController.createUser: ${err}`,
+          log: `Error in userController.createUser: ${error}`,
           status: 500,
           message: "unable to create account",
         });
@@ -59,27 +66,35 @@ const userController = {
     return res.status(400).json("Please fill out all fields");
   },
   verifyUser: async (req: UserRequest, res: Response, next: NextFunction) => {
-    const { username, password } = req.body;
+    const { username, password } = req.body as ReqBodyUser;
     // if username and password are passed in, select user_id, username, and password from DB where username matches input username
     if (username && password) {
       try {
         const queryString =
           "SELECT user_id, username, password FROM users WHERE username = $1";
-        const result = await db.query(queryString, [username]);
+        const result = (await db.query(queryString, [
+          username,
+        ])) as ExistingUserQuery;
         if (!result.rows[0]) {
           return res.status(401).json("Invalid username or password");
         }
         // check if stored hashed password matches input password, if so assign user_id to res.locals.id and return next, else response with invalid username or password
-        const compare = await bcrypt.compare(password, result.rows[0].password);
-        if (compare) {
-          res.locals.id = result.rows[0].user_id;
-          return next();
-        } else {
-          return res.status(401).json("Invalid username or password");
+        if (result.rows[0].password) {
+          const compare = await bcrypt.compare(
+            password,
+            result.rows[0].password,
+          );
+          if (compare) {
+            res.locals.id = result.rows[0].user_id;
+            return next();
+          } else {
+            return res.status(401).json("Invalid username or password");
+          }
         }
       } catch (err) {
+        const error: string = err as string;
         return next({
-          log: `Error in verifyUser: ${err}`,
+          log: `Error in verifyUser: ${error}`,
           status: 500,
           message: "Error verifying account",
         });

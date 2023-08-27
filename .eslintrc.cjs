@@ -34,6 +34,7 @@ module.exports = {
         checksVoidReturn: false,
       },
     ],
+    "import/default": "off",
   },
   settings: {
     react: {
