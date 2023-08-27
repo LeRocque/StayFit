@@ -75,6 +75,7 @@ export const AddWorkoutModal = ({
 
   return (
     <div
+      className="position-fixed fixed top-0 left-0 z-50 flex h-full w-full items-center justify-center bg-opacity-90 bg-gradient-to-br from-slate-200 via-slate-500 to-slate-700 opacity-90"
       id="modal-container"
       onClick={handleModalClick}
       onKeyDown={handleModalKeyPress}
@@ -144,9 +145,18 @@ export const AddWorkoutModal = ({
             <h2 className="loader">💪</h2>
           </div>
         ) : (
-          <button className="button-theme" type="submit">
-            Submit
-          </button>
+          <div>
+            <button className="button-theme" type="submit">
+              Submit
+            </button>
+            <button
+              className="button-theme"
+              type="button"
+              onClick={() => handleWorkoutModal()}
+            >
+              Cancel
+            </button>
+          </div>
         )}
       </form>
     </div>

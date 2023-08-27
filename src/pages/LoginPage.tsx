@@ -76,9 +76,11 @@ const LoginPage = () => {
     }
   };
   return (
-    <div className="h-100 my-0 mx-auto flex w-1/4">
-      <div id="login-container" className="m-10 w-full p-7 text-center">
-        <div className="text-slate-600">Welcome to Workout Tracker!</div>
+    <div className="flex h-screen flex-col items-center justify-center  bg-gradient-to-br from-blue-200 via-blue-500 to-blue-700">
+      <div className="mb-10 rounded-md bg-white p-4 text-center shadow-lg">
+        <h1 className="text-3xl font-semibold text-blue-800">
+          Welcome to Workout Tracker!
+        </h1>
         {errorMessage && (
           <div className="error-message">
             {errorMessage}
@@ -91,7 +93,7 @@ const LoginPage = () => {
           </div>
         )}
         <form
-          className="mb-10 mt-3 flex flex-col items-center justify-center rounded-lg bg-slate-600 px-3 py-10"
+          className="mb-5 mt-3 flex flex-col items-center justify-center rounded-lg bg-slate-400 px-3 py-10"
           onSubmit={handleSubmit}
         >
           <input

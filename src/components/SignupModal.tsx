@@ -82,7 +82,7 @@ export const SignupModal = ({ handleModal }: SignupModalProps) => {
 
   return (
     <div
-      id="signupModalContainer"
+      className="position-fixed fixed top-0 left-0 z-50 flex h-full w-full items-center justify-center bg-opacity-90 bg-gradient-to-br from-blue-200 via-blue-500 to-blue-700"
       onClick={handleModalClick}
       onKeyDown={handleModalKeyPress}
       role="button"
@@ -105,7 +105,7 @@ export const SignupModal = ({ handleModal }: SignupModalProps) => {
           required
           className="search-input"
           name="email"
-          placeholder="Enter your email address"
+          placeholder="Enter your email"
           value={email}
           onChange={handleSetEmail}
         />
@@ -156,6 +156,13 @@ export const SignupModal = ({ handleModal }: SignupModalProps) => {
         />
         <button className="button-theme" type="submit">
           Submit
+        </button>
+        <button
+          className="button-theme"
+          type="button"
+          onClick={() => handleModal()}
+        >
+          Cancel
         </button>
       </form>
     </div>

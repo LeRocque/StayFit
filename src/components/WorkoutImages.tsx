@@ -5,7 +5,7 @@ const GetWorkoutImages = (
   workoutImages: WorkoutImages,
 ): string | undefined => {
   let imageResult;
-  console.log("workoutImages are:", workoutImages);
+
   const cleanName = workoutName.replace(/[^a-zA-Z]/g, "").toLowerCase();
   if (cleanName === "situps") {
     imageResult = workoutImages.images.results[0].image;

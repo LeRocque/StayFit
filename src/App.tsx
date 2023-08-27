@@ -13,7 +13,7 @@ const App = () => {
   return (
     <div
       id="root-app"
-      className="background-red m-0 bg-gradient-to-b from-blue-200 via-blue-400 to-blue-900 p-0"
+      className="m-0 h-full bg-gradient-to-b from-blue-200 via-blue-400 to-blue-900 p-0"
     >
       <Suspense
         fallback={
