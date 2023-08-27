@@ -1,29 +1,50 @@
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { loginUserActionCreator } from "../actions/actions";
+import {
+  loginUserActionCreator,
+  setImagesActionCreator,
+} from "../actions/actions";
 import { SignupModal } from "../components/SignupModal";
 import { useAppDispatch } from "../hooks";
+import { ReturnedUserId, WorkoutImages } from "../frontendTypes";
 
-export const LoginPage = () => {
+const LoginPage = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showSignupModal, setShowSignupModal] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  const handleModal = () => {
+  useEffect(() => {
+    const getWorkoutImages = async () => {
+      try {
+        const result = await fetch("/workout/images");
+        const images = (await result.json()) as WorkoutImages;
+        dispatch(setImagesActionCreator(images));
+      } catch (err) {
+        console.error(err);
+        setErrorMessage("An error occured fetching images");
+      }
+    };
+    void getWorkoutImages();
+  }, [dispatch]);
+
+  // console.log("workoutImages are:", workoutImages);
+
+  const handleModal = (): void => {
     setShowSignupModal(!showSignupModal);
   };
 
-  const handleSetUsername = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleSetUsername = (e: ChangeEvent<HTMLInputElement>): void => {
     setUsername(e.target.value);
   };
-  const handleSetPassword = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleSetPassword = (e: ChangeEvent<HTMLInputElement>): void => {
     setPassword(e.target.value);
   };
 
-  const handleSubmit = async (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent): Promise<void> => {
     e.preventDefault();
     try {
       const response = await fetch("/user/login", {
@@ -40,7 +61,7 @@ export const LoginPage = () => {
       setUsername("");
       setPassword("");
       if (response.ok) {
-        const returnedUserId = await response.json();
+        const returnedUserId = (await response.json()) as ReturnedUserId;
         const returnedId = returnedUserId.user_id;
         dispatch(loginUserActionCreator(username));
         navigate(`/home/${returnedId}`);
@@ -51,14 +72,28 @@ export const LoginPage = () => {
       }
     } catch (err) {
       console.error(err);
+      setErrorMessage("An error occured while attempting to log in");
     }
   };
   return (
-    <div className="h-100 my-0 mx-auto flex w-1/4">
-      <div id="login-container" className="m-10 w-full p-7 text-center">
-        <div className="text-slate-600">Welcome to Workout Tracker!</div>
+    <div className="flex h-screen flex-col items-center justify-center  bg-gradient-to-br from-blue-200 via-blue-500 to-blue-700">
+      <div className="mb-10 rounded-md bg-white p-4 text-center shadow-lg">
+        <h1 className="text-3xl font-semibold text-blue-800">
+          Welcome to Workout Tracker!
+        </h1>
+        {errorMessage && (
+          <div className="error-message">
+            {errorMessage}
+            <button
+              className="close-button"
+              onClick={() => setErrorMessage(null)}
+            >
+              Dismiss Error
+            </button>
+          </div>
+        )}
         <form
-          className="mb-10 mt-3 flex flex-col items-center justify-center rounded-lg bg-slate-600 px-3 py-10"
+          className="mb-5 mt-3 flex flex-col items-center justify-center rounded-lg bg-slate-400 px-3 py-10"
           onSubmit={handleSubmit}
         >
           <input
@@ -91,3 +126,5 @@ export const LoginPage = () => {
     </div>
   );
 };
+
+export default LoginPage;

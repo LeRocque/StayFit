@@ -15,6 +15,7 @@ export const EditWorkoutModal = ({
   const [muscleTarget, setMuscleTarget] = useState("");
   const [weight, setWeight] = useState("");
   const [reps, setReps] = useState("");
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const workoutToEdit = useAppSelector((state: WorkoutState) =>
     state.workouts.workouts.find(
@@ -31,7 +32,7 @@ export const EditWorkoutModal = ({
     }
   }, [workoutToEdit]);
 
-  const handleSubmit = async (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent): Promise<void> => {
     e.preventDefault();
     try {
       const response = await fetch("/workout/edit", {
@@ -58,27 +59,55 @@ export const EditWorkoutModal = ({
       }
     } catch (err) {
       console.error(err);
+      setErrorMessage("And error occurred while attempting to edit workout");
     }
   };
 
-  const handleWorkoutName = (e: ChangeEvent<HTMLInputElement>) =>
+  const handleWorkoutName = (e: ChangeEvent<HTMLInputElement>): void =>
     setWorkoutName(e.target.value);
-  const handleMuscleTarget = (e: ChangeEvent<HTMLSelectElement>) =>
+  const handleMuscleTarget = (e: ChangeEvent<HTMLSelectElement>): void =>
     setMuscleTarget(e.target.value);
-  const handleWeight = (e: ChangeEvent<HTMLInputElement>) =>
+  const handleWeight = (e: ChangeEvent<HTMLInputElement>): void =>
     setWeight(e.target.value);
-  const handleReps = (e: ChangeEvent<HTMLInputElement>) =>
+  const handleReps = (e: ChangeEvent<HTMLInputElement>): void =>
     setReps(e.target.value);
 
-  const handleModalClick = (e: MouseEvent<HTMLDivElement>) => {
+  const handleModalClick = (e: MouseEvent<HTMLDivElement>): void => {
     if (e.target === e.currentTarget) {
+      handleEditModal(null);
+    }
+  };
+  const handleModalKeyPress = (
+    e: React.KeyboardEvent<HTMLDivElement>,
+  ): void => {
+    if (e.key === "Enter") {
       handleEditModal(null);
     }
   };
 
   return (
-    <div id="modal-container" onClick={handleModalClick}>
-      <form id="addWorkoutForm" onSubmit={handleSubmit}>
+    <div
+      id="modal-container"
+      onClick={handleModalClick}
+      onKeyDown={handleModalKeyPress}
+      role="button"
+      tabIndex={0}
+    >
+      {errorMessage && (
+        <div className="error-message">
+          {errorMessage}
+          <button
+            className="close-button"
+            onClick={() => setErrorMessage(null)}
+          >
+            Dismiss Error
+          </button>
+        </div>
+      )}
+      <form
+        className="mt-4 flex flex-col items-center justify-center"
+        onSubmit={handleSubmit}
+      >
         <input
           id={id}
           className="search-input"
@@ -129,11 +158,15 @@ export const EditWorkoutModal = ({
           value={reps}
           onChange={handleReps}
         />
-        <button
-           className="button-theme"
-          type="submit"
-        >
+        <button className="button-theme" type="submit">
           Submit
+        </button>
+        <button
+          className="button-theme"
+          type="button"
+          onClick={() => handleEditModal(null)}
+        >
+          Cancel
         </button>
       </form>
     </div>

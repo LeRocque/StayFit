@@ -2,6 +2,10 @@ export type SignupModalProps = {
   handleModal: (value: void) => void;
 };
 
+export interface ReturnedUserId {
+  user_id: number;
+}
+
 export type UserWorkoutsTypes = {
   workout_id: number;
   workoutname: string;
@@ -10,6 +14,22 @@ export type UserWorkoutsTypes = {
   weight: string;
   reps: string;
 };
+
+export interface resultImages {
+  author_history: Array<number>;
+  exercise_base: number;
+  exercise_base_uuid: string;
+  id: number;
+  image: string;
+  is_main: boolean;
+  license: number;
+  license_author: string;
+  license_derivative_source_url: string;
+  license_object_url: string;
+  license_title: string;
+  style: string;
+  uuid: string;
+}
 
 export type WorkoutModalProps = {
   userId: string | undefined;
@@ -28,6 +48,33 @@ export type WorkoutState = {
       find: (
         callback: (workout: UserWorkoutsTypes) => boolean,
       ) => UserWorkoutsTypes | undefined;
+    };
+  };
+};
+
+export type WorkoutImage = {
+  image: string;
+}
+
+export type WorkoutImages = {
+    count: number;
+    next: string | null;
+    previous: null | null;
+    images: {
+      results: WorkoutImage[];
+    }
+    
+};
+
+export type WorkoutImageState = {
+  workouts: {
+    images: {
+      count: number;
+      next: string;
+      previous: null;
+      images: {
+        results: resultImages[];
+      };
     };
   };
 };

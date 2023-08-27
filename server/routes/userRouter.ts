@@ -1,4 +1,4 @@
-import express, { Request, Response } from "express";
+import express, { Response } from "express";
 import userController from "../controllers/userController";
 import authController from "../controllers/authController";
 import { UserRequest } from "../backendTypes";
@@ -11,7 +11,8 @@ userRouter.post(
   authController.assignJwt,
   authController.cookieCreator,
   (_req: UserRequest, res: Response) => {
-    return res.status(200).json({ user_id: res.locals.id });
+    const returnedId = res.locals.id as number;
+    return res.status(200).json({ user_id: returnedId });
   },
 );
 
@@ -19,13 +20,10 @@ userRouter.post(
   "/signup",
   userController.createUser,
   (_req: UserRequest, res: Response) => {
-    return res.status(200).json({ user_id: res.locals.id });
+    const returnedId = res.locals.id as number;
+    return res.status(200).json({ user_id: returnedId });
   },
 );
-
-userRouter.get("/isAuthenticated", (_req: Request, res: Response) => {
-  return res.status(200).json("User Authenticated");
-});
 
 userRouter.get(
   "/logout",

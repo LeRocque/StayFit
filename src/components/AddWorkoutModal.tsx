@@ -1,4 +1,10 @@
-import { ChangeEvent, FormEvent, MouseEvent, useState } from "react";
+import {
+  ChangeEvent,
+  FormEvent,
+  MouseEvent,
+  useState,
+  useTransition,
+} from "react";
 import { WorkoutModalProps } from "../frontendTypes";
 
 export const AddWorkoutModal = ({
@@ -9,8 +15,10 @@ export const AddWorkoutModal = ({
   const [muscleTarget, setMuscleTarget] = useState("Back");
   const [weight, setWeight] = useState("");
   const [reps, setReps] = useState("");
+  const [isPending, startTransition] = useTransition();
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  const handleSubmit = async (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent): Promise<void> => {
     e.preventDefault();
     try {
       const response = await fetch("/workout/add", {
@@ -31,32 +39,60 @@ export const AddWorkoutModal = ({
         setMuscleTarget("");
         setWeight("");
         setReps("");
-        handleWorkoutModal();
+        startTransition(() => {
+          handleWorkoutModal();
+        });
       } else {
         alert("invalid input");
       }
     } catch (err) {
       console.error(err);
+      setErrorMessage("An error occuring while attempting to add new workout");
     }
   };
 
-  const handleModalClick = (e: MouseEvent<HTMLDivElement>) => {
+  const handleModalClick = (e: MouseEvent<HTMLDivElement>): void => {
     if (e.target === e.currentTarget) {
       handleWorkoutModal();
     }
   };
+  const handleModalKeyPress = (
+    e: React.KeyboardEvent<HTMLDivElement>,
+  ): void => {
+    if (e.key === "Enter") {
+      handleWorkoutModal();
+    }
+  };
 
-  const handleWorkoutName = (e: ChangeEvent<HTMLInputElement>) =>
+  const handleWorkoutName = (e: ChangeEvent<HTMLInputElement>): void =>
     setWorkoutName(e.target.value);
-  const handleMuscleTarget = (e: ChangeEvent<HTMLSelectElement>) =>
+  const handleMuscleTarget = (e: ChangeEvent<HTMLSelectElement>): void =>
     setMuscleTarget(e.target.value);
-  const handleWeight = (e: ChangeEvent<HTMLInputElement>) =>
+  const handleWeight = (e: ChangeEvent<HTMLInputElement>): void =>
     setWeight(e.target.value);
-  const handleReps = (e: ChangeEvent<HTMLInputElement>) =>
+  const handleReps = (e: ChangeEvent<HTMLInputElement>): void =>
     setReps(e.target.value);
 
   return (
-    <div id="modal-container" onClick={handleModalClick}>
+    <div
+      className="position-fixed fixed top-0 left-0 z-50 flex h-full w-full items-center justify-center bg-opacity-90 bg-gradient-to-br from-slate-200 via-slate-500 to-slate-700 opacity-90"
+      id="modal-container"
+      onClick={handleModalClick}
+      onKeyDown={handleModalKeyPress}
+      role="button"
+      tabIndex={0}
+    >
+      {errorMessage && (
+        <div className="error-message">
+          {errorMessage}
+          <button
+            className="close-button"
+            onClick={() => setErrorMessage(null)}
+          >
+            Dismiss Error
+          </button>
+        </div>
+      )}
       <form id="addWorkoutForm" onSubmit={handleSubmit}>
         <input
           type="text"
@@ -104,9 +140,24 @@ export const AddWorkoutModal = ({
           value={reps}
           onChange={handleReps}
         />
-        <button className="button-theme" type="submit">
-          Submit
-        </button>
+        {isPending ? (
+          <div className="mini loading-pane">
+            <h2 className="loader">💪</h2>
+          </div>
+        ) : (
+          <div>
+            <button className="button-theme" type="submit">
+              Submit
+            </button>
+            <button
+              className="button-theme"
+              type="button"
+              onClick={() => handleWorkoutModal()}
+            >
+              Cancel
+            </button>
+          </div>
+        )}
       </form>
     </div>
   );
