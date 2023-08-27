@@ -1,13 +1,7 @@
 import bcrypt from "bcryptjs";
 import db from "../models/dbModel";
 import { Response, NextFunction } from "express";
-import {
-  ExistingUserQuery,
-  ReqBodyUser,
-  UserRequest,
-  UserRow,
-} from "../backendTypes";
-import { QueryResult } from "pg";
+import { DbQuery, ReqBodyUser, UserRequest, UserRow } from "../backendTypes";
 
 /*
 Create user table with the following
@@ -30,9 +24,7 @@ const userController = {
     if (email && firstName && lastName && address && username && password) {
       try {
         let queryString = "SELECT user_id FROM users WHERE username=($1)";
-        let result = (await db.query(queryString, [
-          username,
-        ])) as ExistingUserQuery;
+        let result = (await db.query(queryString, [username])) as DbQuery;
         const userRow = result.rows[0] as UserRow | undefined;
         if (userRow) {
           return res
@@ -50,8 +42,8 @@ const userController = {
             address,
             username,
             hashed,
-          ])) as QueryResult;
-          res.locals.id = result.rows[0].user_id;
+          ])) as DbQuery;
+          res.locals.id = result.rows[0].user_id as UserRow;
           return next();
         }
       } catch (err) {
@@ -72,9 +64,7 @@ const userController = {
       try {
         const queryString =
           "SELECT user_id, username, password FROM users WHERE username = $1";
-        const result = (await db.query(queryString, [
-          username,
-        ])) as ExistingUserQuery;
+        const result = (await db.query(queryString, [username])) as DbQuery;
         if (!result.rows[0]) {
           return res.status(401).json("Invalid username or password");
         }

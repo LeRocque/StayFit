@@ -56,13 +56,9 @@ const authController = {
     const { user_id } = req.params;
     if (token) {
       try {
-        const { payload, protectedHeader } = await jwtStrat.jwtVerify(
-          token,
-          secretEncoded,
-        );
+        const { payload } = await jwtStrat.jwtVerify(token, secretEncoded);
         if (user_id) {
           if (payload.id !== Number(ssid) || user_id !== ssid) {
-            console.log(protectedHeader);
             return next({
               log: "Error occured in authController.isAuthenticated",
               status: 401,
@@ -72,7 +68,6 @@ const authController = {
           return next();
         }
         if (payload.id !== Number(ssid)) {
-          console.log(protectedHeader);
           return next({
             log: "Error occured in authController.isAuthenticated",
             status: 401,

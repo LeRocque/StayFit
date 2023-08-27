@@ -18,11 +18,12 @@ pool.connect((err: Error) => {
 });
 
 const db = {
-  query: async (string: string, params?: any[]): Promise<any> => {
+  query: async (string: string, params?: string[] | number[]) => {
     try {
       return await pool.query(string, params);
     } catch (err) {
-      console.error(`Error executing query: ${err}`);
+      const error = err as string;
+      console.error(`Error executing query: ${error}`);
       throw err;
     }
   },
