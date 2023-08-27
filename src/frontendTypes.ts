@@ -52,13 +52,18 @@ export type WorkoutState = {
   };
 };
 
+export type WorkoutImage = {
+  image: string;
+}
+
 export type WorkoutImages = {
-  images: {
     count: number;
-    next: string;
-    previous: null;
-    results: resultImages[];
-  };
+    next: string | null;
+    previous: null | null;
+    images: {
+      results: WorkoutImage[];
+    }
+    
 };
 
 export type WorkoutImageState = {

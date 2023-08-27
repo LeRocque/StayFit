@@ -5,9 +5,14 @@ import {
   setWorkoutsActionCreator,
 } from "../actions/actions";
 import { useAppDispatch, useAppSelector } from "../hooks";
-import { UserWorkoutsTypes, WorkoutImageState } from "../frontendTypes";
+import {
+  UserWorkoutsTypes,
+  WorkoutImageState,
+  WorkoutImages,
+} from "../frontendTypes";
 import { AddWorkoutModal } from "../components/AddWorkoutModal";
 import { EditWorkoutModal } from "../components/EditWorkoutModal";
+import GetWorkoutImages from "../components/WorkoutImages";
 
 const HomePage = () => {
   const { userId } = useParams();
@@ -16,14 +21,12 @@ const HomePage = () => {
   const [editingWorkoutId, setEditingWorkoutId] = useState<number | null>(null);
   const [workoutDeleted, setWorkoutDeleted] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  // const [workoutImage, setWorkoutImage] = useState("");
 
   const dispatch = useAppDispatch();
 
-  const workoutImages = useAppSelector(
+  const workoutImages: WorkoutImages = useAppSelector(
     (state: WorkoutImageState) => state.workouts.images,
   );
-  console.log("workoutImages are:", workoutImages);
   useEffect(() => {
     const getUserWorkouts = async (): Promise<void> => {
       try {
@@ -83,17 +86,8 @@ const HomePage = () => {
     }
   };
 
-  const handleWorkoutImage = (workoutName: string): string | undefined => {
-    let imageResult;
-    const cleanName = workoutName.replace(/[^a-zA-Z]/g, "").toLowerCase();
-    if (cleanName === "situps") {
-      imageResult = workoutImages.images.results[0].image;
-    } else if (cleanName === "closegripbenchpress") {
-      imageResult = workoutImages.images.results[3].image;
-    } else {
-      imageResult = workoutImages.images.results[22].image;
-    }
-    return imageResult;
+  const handleWorkoutImage = (workoutname: string) => {
+    return GetWorkoutImages(workoutname, workoutImages);
   };
 
   const id = useId();

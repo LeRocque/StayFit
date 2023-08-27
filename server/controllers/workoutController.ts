@@ -89,7 +89,7 @@ const workoutController = {
     if (workout_id && muscleTarget && workoutName && weight && reps) {
       try {
         const queryString = `UPDATE workouts SET muscleTarget = '${muscleTarget}', workoutName = '${workoutName}', weight = '${weight}', reps = '${reps}' WHERE workout_id = ${workout_id} RETURNING *`;
-        const result = await db.query(queryString) as DbQuery;
+        const result = (await db.query(queryString)) as DbQuery;
         res.locals.update = result.rows[0];
         return next();
       } catch (err) {
@@ -110,27 +110,27 @@ const workoutController = {
     next: NextFunction,
   ) => {
     const { workout_id } = req.params;
-    if (workout_id){
-    try {
-      const findQuery = `SELECT * FROM workouts WHERE workout_id = ${workout_id}`;
-      const result = await db.query(findQuery) as DbQuery;
-      if (result.rows.length === 0) {
-        return res.status(400).json("Workout not found");
-      } else {
-        const deleteQuery = `DELETE FROM workouts WHERE workout_id = ${workout_id} RETURNING *`;
-        const result = await db.query(deleteQuery) as DbQuery;
-        res.locals.deleted = result.rows[0];
-        return next();
+    if (workout_id) {
+      try {
+        const findQuery = `SELECT * FROM workouts WHERE workout_id = ${workout_id}`;
+        const result = (await db.query(findQuery)) as DbQuery;
+        if (result.rows.length === 0) {
+          return res.status(400).json("Workout not found");
+        } else {
+          const deleteQuery = `DELETE FROM workouts WHERE workout_id = ${workout_id} RETURNING *`;
+          const result = (await db.query(deleteQuery)) as DbQuery;
+          res.locals.deleted = result.rows[0];
+          return next();
+        }
+      } catch (err) {
+        const error: string = err as string;
+        return next({
+          log: `Error in workoutController.removeWorkout: ${error}`,
+          status: 500,
+          message: "Internal server error",
+        });
       }
-    } catch (err) {
-      const error: string = err as string;
-      return next({
-        log: `Error in workoutController.removeWorkout: ${error}`,
-        status: 500,
-        message: "Internal server error",
-      });
     }
-  }
   },
 
   getImages: async (
@@ -140,9 +140,9 @@ const workoutController = {
   ) => {
     try {
       const response = await fetch(
-        "https://wger.de/api/v2/exerciseimage/?is_main=True&limit=46",
+        "https://wger.de/api/v2/exerciseimage/?is_main=True&limit=200",
       );
-      const images = await response.json() as WorkoutImages;
+      const images = (await response.json()) as WorkoutImages;
       res.locals.images = images;
       return next();
     } catch (err) {
