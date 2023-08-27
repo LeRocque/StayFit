@@ -10,11 +10,12 @@ module.exports = {
     "plugin:@typescript-eslint/recommended-requiring-type-checking",
     "prettier",
   ],
+  ignorePatterns: ["**/*.cjs"],
   parser: "@typescript-eslint/parser",
   parserOptions: {
     ecmaVersion: "latest",
     sourceType: "module",
-    project: "./tsconfig.json",
+    project: ["./tsconfig.json", "./tsconfig.node.json"],
   },
   plugins: [
     "react-refresh",
@@ -33,6 +34,7 @@ module.exports = {
         checksVoidReturn: false,
       },
     ],
+    "import/default": "off",
   },
   settings: {
     react: {

@@ -16,6 +16,7 @@ const HomePage = () => {
   const [editingWorkoutId, setEditingWorkoutId] = useState<number | null>(null);
   const [workoutDeleted, setWorkoutDeleted] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  // const [workoutImage, setWorkoutImage] = useState("");
 
   const dispatch = useAppDispatch();
 
@@ -82,6 +83,19 @@ const HomePage = () => {
     }
   };
 
+  const handleWorkoutImage = (workoutName: string): string | undefined => {
+    let imageResult;
+    const cleanName = workoutName.replace(/[^a-zA-Z]/g, "").toLowerCase();
+    if (cleanName === "situps") {
+      imageResult = workoutImages.images.results[0].image;
+    } else if (cleanName === "closegripbenchpress") {
+      imageResult = workoutImages.images.results[3].image;
+    } else {
+      imageResult = workoutImages.images.results[22].image;
+    }
+    return imageResult;
+  };
+
   const id = useId();
 
   return (
@@ -117,7 +131,8 @@ const HomePage = () => {
               </ul>
               {workoutImages.images.results.length > 0 ? (
                 <img
-                  src={workoutImages.images.results[0].image}
+                  // src={workoutImages.images.results[0].image}
+                  src={handleWorkoutImage(el.workoutname)}
                   alt="Workout"
                 />
               ) : (
