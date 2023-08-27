@@ -5,9 +5,14 @@ import {
   setWorkoutsActionCreator,
 } from "../actions/actions";
 import { useAppDispatch, useAppSelector } from "../hooks";
-import { UserWorkoutsTypes, WorkoutImageState } from "../frontendTypes";
+import {
+  UserWorkoutsTypes,
+  WorkoutImageState,
+  WorkoutImages,
+} from "../frontendTypes";
 import { AddWorkoutModal } from "../components/AddWorkoutModal";
 import { EditWorkoutModal } from "../components/EditWorkoutModal";
+import GetWorkoutImages from "../components/WorkoutImages";
 
 const HomePage = () => {
   const { userId } = useParams();
@@ -16,14 +21,12 @@ const HomePage = () => {
   const [editingWorkoutId, setEditingWorkoutId] = useState<number | null>(null);
   const [workoutDeleted, setWorkoutDeleted] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  // const [workoutImage, setWorkoutImage] = useState("");
 
   const dispatch = useAppDispatch();
 
-  const workoutImages = useAppSelector(
+  const workoutImages: WorkoutImages = useAppSelector(
     (state: WorkoutImageState) => state.workouts.images,
   );
-  console.log("workoutImages are:", workoutImages);
   useEffect(() => {
     const getUserWorkouts = async (): Promise<void> => {
       try {
@@ -83,23 +86,14 @@ const HomePage = () => {
     }
   };
 
-  const handleWorkoutImage = (workoutName: string): string | undefined => {
-    let imageResult;
-    const cleanName = workoutName.replace(/[^a-zA-Z]/g, "").toLowerCase();
-    if (cleanName === "situps") {
-      imageResult = workoutImages.images.results[0].image;
-    } else if (cleanName === "closegripbenchpress") {
-      imageResult = workoutImages.images.results[3].image;
-    } else {
-      imageResult = workoutImages.images.results[22].image;
-    }
-    return imageResult;
+  const handleWorkoutImage = (workoutname: string) => {
+    return GetWorkoutImages(workoutname, workoutImages);
   };
 
   const id = useId();
 
   return (
-    <div>
+    <div className=" flex h-screen flex-col justify-start">
       {errorMessage && (
         <div className="error-message">
           {errorMessage}
@@ -111,33 +105,50 @@ const HomePage = () => {
           </button>
         </div>
       )}
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="flex items-center  justify-around bg-slate-500">
+        {showAddWorkoutModal && (
+          <AddWorkoutModal
+            userId={userId}
+            handleWorkoutModal={handleWorkoutModal}
+          />
+        )}
+        <button className="button-theme" onClick={handleWorkoutModal}>
+          Add Workout
+        </button>
+        <button className="button-theme" onClick={handleLogout}>
+          Logout
+        </button>
+      </div>
+      <div className="grid h-screen grid-cols-1 gap-1 overflow-y-auto sm:grid-cols-2 lg:grid-cols-4">
         {userWorkouts.length ? (
           userWorkouts.map((el) => (
-            <div key={el.workout_id} className=" m-10 ">
-              <ul>
-                <label htmlFor={id}>{el.workoutname}</label>
-                <li>
+            <div key={el.workout_id} className=" m-14 ">
+              <ul className="flex flex-col items-center justify-center rounded-xl bg-white text-blue-700 shadow-lg">
+                <li className="workout-desc">
+                  <label htmlFor={id}>{el.workoutname}</label>
+                </li>
+                <li className="workout-desc">
                   <label htmlFor={id + "2"}>
                     Muscle Target - {el.muscletarget}
                   </label>
                 </li>
-                <li>
+                <li className="workout-desc">
                   <label htmlFor={id + "3"}>Weight - {el.weight}</label>
                 </li>
-                <li>
+                <li className="workout-desc">
                   <label htmlFor={id + "4"}>Reps - {el.reps}</label>
                 </li>
+                {workoutImages.images.results.length > 0 ? (
+                  <img
+                    className="min-w-1/3 min-h-1/3 h-1/3 w-1/3 bg-transparent"
+                    src={handleWorkoutImage(el.workoutname)}
+                    alt="Workout"
+                  />
+                ) : (
+                  <p>No workout images available</p>
+                )}
               </ul>
-              {workoutImages.images.results.length > 0 ? (
-                <img
-                  // src={workoutImages.images.results[0].image}
-                  src={handleWorkoutImage(el.workoutname)}
-                  alt="Workout"
-                />
-              ) : (
-                <p>No workout images available</p>
-              )}
+
               {editingWorkoutId === el.workout_id && (
                 <EditWorkoutModal
                   id={id}
@@ -145,36 +156,24 @@ const HomePage = () => {
                   handleEditModal={() => handleEditModal(el.workout_id)}
                 />
               )}
-              <button
-                className="button-theme"
-                onClick={() => handleEditModal(el.workout_id)}
-              >
-                Edit Workout
-              </button>
-              <button
-                className="button-theme"
-                onClick={() => handleDelete(el.workout_id)}
-              >
-                Delete Workout
-              </button>
+              <div className=" mt-2 flex justify-center">
+                <button
+                  className="button-theme"
+                  onClick={() => handleEditModal(el.workout_id)}
+                >
+                  Edit Workout
+                </button>
+                <button
+                  className="button-theme"
+                  onClick={() => handleDelete(el.workout_id)}
+                >
+                  Delete Workout
+                </button>
+              </div>
             </div>
           ))
         ) : (
           <div>No workouts added yet.</div>
-        )}
-      </div>
-      <div className="flex items-center justify-center">
-        <button className="button-theme" onClick={handleWorkoutModal}>
-          Add Workout
-        </button>
-        <button className="button-theme" onClick={handleLogout}>
-          Logout
-        </button>
-        {showAddWorkoutModal && (
-          <AddWorkoutModal
-            userId={userId}
-            handleWorkoutModal={handleWorkoutModal}
-          />
         )}
       </div>
     </div>

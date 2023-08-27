@@ -104,7 +104,10 @@ export const EditWorkoutModal = ({
           </button>
         </div>
       )}
-      <form id="addWorkoutForm" onSubmit={handleSubmit}>
+      <form
+        className="mt-4 flex flex-col items-center justify-center"
+        onSubmit={handleSubmit}
+      >
         <input
           id={id}
           className="search-input"
@@ -157,6 +160,13 @@ export const EditWorkoutModal = ({
         />
         <button className="button-theme" type="submit">
           Submit
+        </button>
+        <button
+          className="button-theme"
+          type="button"
+          onClick={() => handleEditModal(null)}
+        >
+          Cancel
         </button>
       </form>
     </div>

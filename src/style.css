@@ -11,7 +11,7 @@
 
 @layer components {
   .search-input {
-    @apply mb-5 block w-60;
+    @apply mb-2 block w-60;
     font-family: "Courier New", Courier, monospace;
   }
 }
@@ -19,6 +19,12 @@
 @layer utilities {
   .button-theme {
     @apply m-2 rounded-full bg-blue-600 py-2 px-4 font-bold text-white hover:opacity-50;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  .workout-desc {
+    @apply m-1 rounded-md bg-slate-600 p-1 text-white shadow-md;
+    font-family: Georgia, "Times New Roman", Times, serif;
   }
 }
 
