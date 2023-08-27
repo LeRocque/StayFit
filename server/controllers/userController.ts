@@ -1,7 +1,7 @@
 import bcrypt from "bcryptjs";
 import db from "../models/dbModel";
 import { Response, NextFunction } from "express";
-import { UserRequest } from "../backendTypes";
+import { ReqBodyWorkout, UserRequest } from "../backendTypes";
 
 /*
 Create user table with the following
@@ -19,12 +19,14 @@ CREATE TABLE users (
 const userController = {
   createUser: async (req: UserRequest, res: Response, next: NextFunction) => {
     const { email, firstName, lastName, address, username, password } =
-      req.body;
+      req.body as ReqBodyWorkout;
     // if all fields are passed in, check if username already exists, if so return 'Username exists'
     if (email && firstName && lastName && address && username && password) {
+      console.log("correct inputs hit");
       try {
         let queryString = "SELECT user_id FROM users WHERE username=($1)";
         let result = await db.query(queryString, [username]);
+        console.log("result is:", result);
         if (result.rows[0]) {
           return res
             .status(401)
@@ -32,6 +34,7 @@ const userController = {
         } else {
           // if username does not exist, hash the password, then add fields with hashed password to users table, assign user_id to res.locals.id,  finally return next
           const hashed = await bcrypt.hash(password, 10);
+          console.log("hashed is:", hashed);
           queryString =
             "INSERT INTO users (email, firstName, lastName, address, username, password) VALUES ($1, $2, $3, $4, $5, $6) RETURNING user_id";
           result = await db.query(queryString, [

@@ -24,3 +24,21 @@ export type WorkoutRequest = Request & {
     workout_id?: string;
   };
 };
+
+export interface ResLocalsAssignJwt {
+  id: number;
+}
+
+export interface ReqBodyWorkout {
+  email?: string;
+    firstName?: string;
+    lastName?: string;
+    address?: string;
+    username: string;
+    password: string;
+}
+
+export interface CookieVals {
+  token?: string;
+  ssid?: string;
+}
