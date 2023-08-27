@@ -1,18 +1,18 @@
 import { useEffect, useId, useState } from "react";
 import { useParams } from "react-router-dom";
-import {
-  logoutUserActionCreator,
-  setWorkoutsActionCreator,
-} from "../actions/actions";
 import { useAppDispatch, useAppSelector } from "../hooks";
 import {
   UserWorkoutsTypes,
   WorkoutImageState,
+  WorkoutImage,
   WorkoutImages,
 } from "../frontendTypes";
 import { AddWorkoutModal } from "../components/AddWorkoutModal";
 import { EditWorkoutModal } from "../components/EditWorkoutModal";
 import GetWorkoutImages from "../components/WorkoutImages";
+import { userLogout } from "../slices/usersSlice";
+import { setWorkouts } from "../slices/workoutsSlice";
+import { RootState } from "../store";
 
 const HomePage = () => {
   const { userId } = useParams();
@@ -24,8 +24,8 @@ const HomePage = () => {
 
   const dispatch = useAppDispatch();
 
-  const workoutImages: WorkoutImages = useAppSelector(
-    (state: WorkoutImageState) => state.workouts.images,
+  const workoutImages = useAppSelector(
+    (state: RootState) => state.workouts.images,
   );
   useEffect(() => {
     const getUserWorkouts = async (): Promise<void> => {
@@ -37,7 +37,7 @@ const HomePage = () => {
           }
           const workouts = (await result.json()) as UserWorkoutsTypes[];
           setUserWorkouts(workouts);
-          dispatch(setWorkoutsActionCreator(workouts));
+          dispatch(setWorkouts(workouts));
         }
       } catch (err) {
         console.error(err);
@@ -53,7 +53,7 @@ const HomePage = () => {
         credentials: "include",
       });
       if (result.ok) {
-        dispatch(logoutUserActionCreator());
+        dispatch(userLogout());
       } else {
         alert("unable to logout");
       }

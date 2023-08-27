@@ -9,27 +9,13 @@ export interface ReturnedUserId {
 export type UserWorkoutsTypes = {
   workout_id: number;
   workoutname: string;
-  user_id: string;
+  user_id: number;
   muscletarget: string;
   weight: string;
   reps: string;
 };
 
-export interface resultImages {
-  author_history: Array<number>;
-  exercise_base: number;
-  exercise_base_uuid: string;
-  id: number;
-  image: string;
-  is_main: boolean;
-  license: number;
-  license_author: string;
-  license_derivative_source_url: string;
-  license_object_url: string;
-  license_title: string;
-  style: string;
-  uuid: string;
-}
+
 
 export type WorkoutModalProps = {
   userId: string | undefined;
@@ -42,39 +28,45 @@ export type EditWorkoutModalProps = {
   handleEditModal: (value: null) => void | null;
 };
 
-export type WorkoutState = {
-  workouts: {
-    workouts: {
-      find: (
-        callback: (workout: UserWorkoutsTypes) => boolean,
-      ) => UserWorkoutsTypes | undefined;
-    };
-  };
-};
 
 export type WorkoutImage = {
-  image: string;
-}
+  image?: string;
+};
 
 export type WorkoutImages = {
-    count: number;
-    next: string | null;
-    previous: null | null;
-    images: {
-      results: WorkoutImage[];
-    }
-    
-};
-
-export type WorkoutImageState = {
-  workouts: {
-    images: {
-      count: number;
-      next: string;
-      previous: null;
-      images: {
-        results: resultImages[];
-      };
-    };
+  count: number;
+  next: string | null;
+  previous: null | null;
+  images: {
+    results: WorkoutImage[];
   };
 };
+
+export interface WorkoutsState {
+  workouts: UserWorkoutsTypes[];
+}
+
+
+interface Image {
+  id: number;
+  uuid: string;
+  exercise_base: number;
+  exercise_base_uuid: string;
+  image: string;
+  is_main: boolean;
+  style: string;
+  license: number;
+  license_title: string;
+  license_object_url: string;
+  license_author: string;
+  license_author_url: string;
+  license_derivative_source_url: string;
+  author_history: string[];
+}
+
+export interface ImagesState {
+  count: number;
+  next: null | string;
+  previous: null | string;
+  results: Image[];
+}

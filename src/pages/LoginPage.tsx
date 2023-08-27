@@ -1,12 +1,10 @@
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {
-  loginUserActionCreator,
-  setImagesActionCreator,
-} from "../actions/actions";
+import { userLogin } from "../slices/usersSlice";
 import { SignupModal } from "../components/SignupModal";
 import { useAppDispatch } from "../hooks";
 import { ReturnedUserId, WorkoutImages } from "../frontendTypes";
+import { setImages } from "../slices/workoutsSlice";
 
 const LoginPage = () => {
   const [username, setUsername] = useState("");
@@ -21,8 +19,8 @@ const LoginPage = () => {
     const getWorkoutImages = async () => {
       try {
         const result = await fetch("/workout/images");
-        const images = (await result.json()) as WorkoutImages;
-        dispatch(setImagesActionCreator(images));
+        const images = (await result.json()) as WorkoutImages[];
+        dispatch(setImages(images));
       } catch (err) {
         console.error(err);
         setErrorMessage("An error occured fetching images");
@@ -63,7 +61,7 @@ const LoginPage = () => {
       if (response.ok) {
         const returnedUserId = (await response.json()) as ReturnedUserId;
         const returnedId = returnedUserId.user_id;
-        dispatch(loginUserActionCreator(username));
+        dispatch(userLogin(username));
         navigate(`/home/${returnedId}`);
       } else if (response.status === 401) {
         alert("Invalid username or password");
