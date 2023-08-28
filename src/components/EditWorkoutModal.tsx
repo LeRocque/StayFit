@@ -1,14 +1,10 @@
 import { ChangeEvent, FormEvent, MouseEvent, useEffect, useState } from "react";
-import {
-  EditWorkoutModalProps,
-  UserWorkoutsTypes,
-  WorkoutState,
-} from "../frontendTypes";
+import { EditWorkoutModalProps, UserWorkoutsTypes } from "../frontendTypes";
 import { useAppSelector } from "../hooks";
+import { RootState } from "../store";
 
 export const EditWorkoutModal = ({
-  id,
-  workout_id,
+  workoutId,
   handleEditModal,
 }: EditWorkoutModalProps) => {
   const [workoutName, setWorkoutName] = useState("");
@@ -17,20 +13,24 @@ export const EditWorkoutModal = ({
   const [reps, setReps] = useState("");
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  const workoutToEdit = useAppSelector((state: WorkoutState) =>
-    state.workouts.workouts.find(
-      (workout: UserWorkoutsTypes) => workout.workout_id === workout_id,
-    ),
+  const workoutState = useAppSelector(
+    (state: RootState) =>
+      state.workouts.workouts as unknown as UserWorkoutsTypes[],
   );
 
   useEffect(() => {
-    if (workoutToEdit) {
-      setWorkoutName(workoutToEdit.workoutname);
-      setMuscleTarget(workoutToEdit.muscletarget);
-      setWeight(workoutToEdit.weight);
-      setReps(workoutToEdit.reps);
+    if (workoutState) {
+      const workoutToEdit = workoutState.find(
+        (el: UserWorkoutsTypes) => el.workout_id === workoutId,
+      );
+      if (workoutToEdit) {
+        setWorkoutName(workoutToEdit.workoutname);
+        setMuscleTarget(workoutToEdit.muscletarget);
+        setWeight(workoutToEdit.weight);
+        setReps(workoutToEdit.reps);
+      }
     }
-  }, [workoutToEdit]);
+  }, [workoutId, workoutState]);
 
   const handleSubmit = async (e: FormEvent): Promise<void> => {
     e.preventDefault();
@@ -41,7 +41,7 @@ export const EditWorkoutModal = ({
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          workout_id: workout_id,
+          workout_id: workoutId,
           workoutName: workoutName,
           muscleTarget: muscleTarget,
           weight: weight,
@@ -109,7 +109,6 @@ export const EditWorkoutModal = ({
         onSubmit={handleSubmit}
       >
         <input
-          id={id}
           className="search-input"
           type="text"
           name="workoutname"
@@ -119,7 +118,6 @@ export const EditWorkoutModal = ({
           onChange={handleWorkoutName}
         />
         <select
-          id={id + "2"}
           className="search-input"
           name="muscletarget"
           required
@@ -139,7 +137,6 @@ export const EditWorkoutModal = ({
           <option value="Triceps">Triceps</option>
         </select>
         <input
-          id={id + "3"}
           className="search-input"
           type="text"
           name="weight"
@@ -149,7 +146,6 @@ export const EditWorkoutModal = ({
           onChange={handleWeight}
         />
         <input
-          id={id + "4"}
           className="search-input"
           type="text"
           name="reps"

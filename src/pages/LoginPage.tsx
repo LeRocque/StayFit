@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { userLogin } from "../slices/usersSlice";
 import { SignupModal } from "../components/SignupModal";
 import { useAppDispatch } from "../hooks";
-import { ReturnedUserId, WorkoutImages } from "../frontendTypes";
+import { ImagesState, ReturnedUserId } from "../frontendTypes";
 import { setImages } from "../slices/workoutsSlice";
 
 const LoginPage = () => {
@@ -19,7 +19,8 @@ const LoginPage = () => {
     const getWorkoutImages = async () => {
       try {
         const result = await fetch("/workout/images");
-        const images = (await result.json()) as WorkoutImages[];
+        const images = (await result.json()) as ImagesState;
+
         dispatch(setImages(images));
       } catch (err) {
         console.error(err);

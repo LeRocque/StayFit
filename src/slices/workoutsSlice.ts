@@ -1,21 +1,29 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { ImagesState } from "../frontendTypes";
+import { ImagesState, WorkoutsState } from "../frontendTypes";
 
 const initialImagesState: ImagesState = {
-  count: 0,
-  next: null,
-  previous: null,
-  results: [],
+  images: {
+    count: 0,
+    next: null,
+    previous: null,
+    results: [],
+  },
+};
+
+const initalWorkoutsState: WorkoutsState = {
+  workouts: {
+    workouts: [],
+  },
 };
 
 export const workoutsSlice = createSlice({
   name: "workouts",
   initialState: {
-    workouts: [],
+    workouts: initalWorkoutsState,
     images: initialImagesState,
   },
   reducers: {
-    setWorkouts: (state, action: PayloadAction<[]>) => {
+    setWorkouts: (state, action: PayloadAction<WorkoutsState>) => {
       state.workouts = action.payload;
     },
     setImages: (state, action: PayloadAction<ImagesState>) => {

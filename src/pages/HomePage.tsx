@@ -1,15 +1,14 @@
-import { useEffect, useId, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../hooks";
 import {
+  ImagesState,
   UserWorkoutsTypes,
-  WorkoutImageState,
-  WorkoutImage,
-  WorkoutImages,
+  WorkoutsState,
 } from "../frontendTypes";
 import { AddWorkoutModal } from "../components/AddWorkoutModal";
 import { EditWorkoutModal } from "../components/EditWorkoutModal";
-import GetWorkoutImages from "../components/WorkoutImages";
+import { GetWorkoutImages } from "../components/WorkoutImages";
 import { userLogout } from "../slices/usersSlice";
 import { setWorkouts } from "../slices/workoutsSlice";
 import { RootState } from "../store";
@@ -24,7 +23,7 @@ const HomePage = () => {
 
   const dispatch = useAppDispatch();
 
-  const workoutImages = useAppSelector(
+  const workoutImages: ImagesState = useAppSelector(
     (state: RootState) => state.workouts.images,
   );
   useEffect(() => {
@@ -35,9 +34,27 @@ const HomePage = () => {
           if (result.status === 204) {
             return;
           }
+          const workouts = (await result.json()) as WorkoutsState;
+          dispatch(setWorkouts(workouts));
+        }
+      } catch (err) {
+        console.error(err);
+        setErrorMessage("An error occurred while fetching user workouts.");
+      }
+    };
+    void getUserWorkouts();
+  }, [dispatch, editingWorkoutId, userId, showAddWorkoutModal, workoutDeleted]);
+
+  useEffect(() => {
+    const getUserWorkouts = async (): Promise<void> => {
+      try {
+        if (userId) {
+          const result = await fetch(`/workout/${userId}`);
+          if (result.status === 204) {
+            return;
+          }
           const workouts = (await result.json()) as UserWorkoutsTypes[];
           setUserWorkouts(workouts);
-          dispatch(setWorkouts(workouts));
         }
       } catch (err) {
         console.error(err);
@@ -90,8 +107,6 @@ const HomePage = () => {
     return GetWorkoutImages(workoutname, workoutImages);
   };
 
-  const id = useId();
-
   return (
     <div className=" flex h-screen flex-col justify-start">
       {errorMessage && (
@@ -120,39 +135,27 @@ const HomePage = () => {
         </button>
       </div>
       <div className="grid h-screen grid-cols-1 gap-1 overflow-y-auto sm:grid-cols-2 lg:grid-cols-4">
-        {userWorkouts.length ? (
+        {userWorkouts && userWorkouts.length > 0 ? (
           userWorkouts.map((el) => (
             <div key={el.workout_id} className=" m-14 ">
               <ul className="flex flex-col items-center justify-center rounded-xl bg-white text-blue-700 shadow-lg">
+                <li className="workout-desc">{el.workoutname}</li>
                 <li className="workout-desc">
-                  <label htmlFor={id}>{el.workoutname}</label>
+                  Muscle Target - {el.muscletarget}
                 </li>
-                <li className="workout-desc">
-                  <label htmlFor={id + "2"}>
-                    Muscle Target - {el.muscletarget}
-                  </label>
-                </li>
-                <li className="workout-desc">
-                  <label htmlFor={id + "3"}>Weight - {el.weight}</label>
-                </li>
-                <li className="workout-desc">
-                  <label htmlFor={id + "4"}>Reps - {el.reps}</label>
-                </li>
-                {workoutImages.images.results.length > 0 ? (
-                  <img
-                    className="min-w-1/3 min-h-1/3 h-1/3 w-1/3 bg-transparent"
-                    src={handleWorkoutImage(el.workoutname)}
-                    alt="Workout"
-                  />
-                ) : (
-                  <p>No workout images available</p>
-                )}
+                <li className="workout-desc">Weight - {el.weight}</li>
+                <li className="workout-desc">Reps - {el.reps}</li>
+
+                <img
+                  className="min-w-1/3 min-h-1/3 h-1/3 w-1/3 bg-transparent"
+                  src={handleWorkoutImage(el.workoutname)}
+                  alt="Workout"
+                />
               </ul>
 
               {editingWorkoutId === el.workout_id && (
                 <EditWorkoutModal
-                  id={id}
-                  workout_id={el.workout_id}
+                  workoutId={el.workout_id}
                   handleEditModal={() => handleEditModal(el.workout_id)}
                 />
               )}

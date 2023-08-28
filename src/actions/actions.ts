@@ -26,35 +26,35 @@
 //   };
 // }
 
-interface Workout {
-  user_id: number;
-  workout_id: number;
-  muscletarget: string;
-  workoutname: string;
-  weight: string;
-  reps: string;
-}
+// interface Workout {
+//   user_id: number;
+//   workout_id: number;
+//   muscletarget: string;
+//   workoutname: string;
+//   weight: string;
+//   reps: string;
+// }
 
-interface resultImages {
-  author_history: Array<number>;
-  exercise_base: number;
-  exercise_base_uuid: string;
-  id: number;
-  image: string;
-  is_main: boolean;
-  license: number;
-  license_author: string;
-  license_derivative_source_url: string;
-  license_object_url: string;
-  license_title: string;
-  style: string;
-  uuid: string;
-}
+// interface resultImages {
+//   author_history: Array<number>;
+//   exercise_base: number;
+//   exercise_base_uuid: string;
+//   id: number;
+//   image: string;
+//   is_main: boolean;
+//   license: number;
+//   license_author: string;
+//   license_derivative_source_url: string;
+//   license_object_url: string;
+//   license_title: string;
+//   style: string;
+//   uuid: string;
+// }
 
-export interface WorkoutState {
-  workouts: Workout[];
-  images: resultImages[];
-}
+// export interface WorkoutState {
+//   workouts: Workout[];
+//   images: resultImages[];
+// }
 
 // export type WorkoutActionTypes = SetWorkoutsAction | SetImagesAction;
 

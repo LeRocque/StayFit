@@ -15,19 +15,15 @@ export type UserWorkoutsTypes = {
   reps: string;
 };
 
-
-
 export type WorkoutModalProps = {
   userId: string | undefined;
   handleWorkoutModal: (value: void) => void;
 };
 
 export type EditWorkoutModalProps = {
-  workout_id: number;
-  id: string;
+  workoutId: number;
   handleEditModal: (value: null) => void | null;
 };
-
 
 export type WorkoutImage = {
   image?: string;
@@ -43,9 +39,10 @@ export type WorkoutImages = {
 };
 
 export interface WorkoutsState {
+  workouts: {
   workouts: UserWorkoutsTypes[];
+  }
 }
-
 
 interface Image {
   id: number;
@@ -65,8 +62,14 @@ interface Image {
 }
 
 export interface ImagesState {
-  count: number;
-  next: null | string;
-  previous: null | string;
-  results: Image[];
+  images: {
+    count: number;
+    next: null | string;
+    previous: null | string;
+    results: Image[];
+  };
 }
+
+export type ImagesObj = {
+  images: ImagesState;
+};
