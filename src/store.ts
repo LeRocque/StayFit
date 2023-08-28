@@ -1,5 +1,5 @@
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
-import rootReducer from "./reducers";
+import rootReducer from "./slices/combineReducers";
 import { persistStore, persistReducer, PERSIST } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 

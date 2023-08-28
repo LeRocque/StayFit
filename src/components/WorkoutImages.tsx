@@ -1,11 +1,10 @@
-import { WorkoutImages } from "../frontendTypes";
+import { ImagesState } from "../frontendTypes";
 
-const GetWorkoutImages = (
+export const GetWorkoutImages = (
   workoutName: string,
-  workoutImages: WorkoutImages,
+  workoutImages: ImagesState,
 ): string | undefined => {
-  let imageResult;
-
+  let imageResult: string | undefined;
   const cleanName = workoutName.replace(/[^a-zA-Z]/g, "").toLowerCase();
   if (cleanName === "situps") {
     imageResult = workoutImages.images.results[0].image;
@@ -74,5 +73,3 @@ const GetWorkoutImages = (
   }
   return imageResult;
 };
-
-export default GetWorkoutImages;
