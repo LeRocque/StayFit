@@ -176,7 +176,7 @@ const HomePage = () => {
             </div>
           ))
         ) : (
-          <div>No workouts added yet.</div>
+          <div data-testid="no-workouts">No workouts added yet.</div>
         )}
       </div>
     </div>
