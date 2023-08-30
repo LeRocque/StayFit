@@ -3,18 +3,6 @@ import { Response, NextFunction } from "express";
 import { DbQuery, ReqBodyWorkout, WorkoutRequest } from "../backendTypes";
 import { WorkoutImages } from "../../src/frontendTypes";
 
-/*
-Create workouts table with the following
-CREATE TABLE workouts (
-  workout_id   SERIAL PRIMARY KEY,
-  user_id      INT REFERENCES users(user_id),
-  muscleTarget VARCHAR(50),
-  workoutName  VARCHAR(50),
-  weight       VARCHAR(50),
-  reps         VARCHAR(50)
-);
-*/
-
 const workoutController = {
   addWorkout: async (
     req: WorkoutRequest,
