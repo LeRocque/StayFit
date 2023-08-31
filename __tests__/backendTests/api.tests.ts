@@ -24,7 +24,7 @@ describe("User should be able signup, login, create a workout, get their workout
     expect(response.headers["content-type"]).toMatch(/application\/json/);
   });
   test("User should be able to login, receive a 200 status code, a userId, a ssid cookie, and jwt", async () => {
-    const response = await server.post("/user/login").send({
+    const response: Response = await server.post("/user/login").send({
       username: "testUser",
       password: "testUser",
     });
@@ -38,7 +38,7 @@ describe("User should be able signup, login, create a workout, get their workout
     expect(userId).toBeDefined();
   });
   test("User should be able to create a workout, receieve a 201 status code, and a json response", async () => {
-    const response = await server
+    const response: Response = await server
       .post("/workout/add")
       .send({
         user_id: userId,
@@ -54,14 +54,14 @@ describe("User should be able signup, login, create a workout, get their workout
     expect(workoutId).toBeDefined();
   });
   test("User should be able to get all their workouts as a JSON and receieve a status code of 200", async () => {
-    const response = await server
+    const response: Response = await server
       .get(`/workout/${userId}`)
       .set("Cookie", [token, ssidCookie]);
     expect(response.statusCode).toBe(200);
     expect(response.headers["content-type"]).toMatch(/application\/json/);
   });
   test("User should be able to update their workout and receive the updated workout along with a 202 status code", async () => {
-    const response = await server
+    const response: Response = await server
       .put("/workout/edit")
       .send({
         workout_id: workoutId,
@@ -75,7 +75,7 @@ describe("User should be able signup, login, create a workout, get their workout
     expect(response.headers["content-type"]).toMatch(/application\/json/);
   });
   test("User should be able to delete their workout and receive the deleted workout along with a 202 status code", async () => {
-    const response = await server
+    const response: Response = await server
       .delete(`/workout/remove/${workoutId}`)
       .set("Cookie", [token, ssidCookie]);
     expect(response.statusCode).toBe(202);
@@ -83,7 +83,7 @@ describe("User should be able signup, login, create a workout, get their workout
     console.log(token);
   });
   test("User should be able to logout, clear their cookies, and receive a 202 status code", async () => {
-    const response = await server.get("/user/logout");
+    const response: Response = await server.get("/user/logout");
     expect(response.statusCode).toBe(202);
     expect(response.headers["content-type"]).toMatch(/application\/json/);
     token = response.headers["set-cookie"][1].split(";")[0];
@@ -92,7 +92,7 @@ describe("User should be able signup, login, create a workout, get their workout
     expect(ssidCookie).toMatch("ssid=");
   });
   test("We should be able to delete the user after testing, receive a status code of 202, and the deleted user as a JSON", async () => {
-    const response = await server.delete(`/user/remove/${userId}`);
+    const response: Response = await server.delete(`/user/remove/${userId}`);
     expect(response.statusCode).toBe(202);
     expect(response.headers["content-type"]).toMatch(/application\/json/);
   });
