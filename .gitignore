@@ -12,6 +12,7 @@ build/
 package-lock.json
 *.local
 .env
+coverage/
 
 # Editor directories and files
 .vscode/*

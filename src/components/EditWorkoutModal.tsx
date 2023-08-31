@@ -107,6 +107,7 @@ export const EditWorkoutModal = ({
       <form
         className="mt-4 flex flex-col items-center justify-center"
         onSubmit={handleSubmit}
+        data-testid="editModalForm"
       >
         <input
           className="search-input"

@@ -1,0 +1,261 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`It should match its snapshot 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div />
+    <div>
+      <div
+        class="position-fixed fixed top-0 left-0 z-50 flex h-full w-full items-center justify-center bg-opacity-90 bg-gradient-to-br from-slate-200 via-slate-500 to-slate-700 opacity-90"
+        id="modal-container"
+        role="button"
+        tabindex="0"
+      >
+        <form
+          data-testid="addWorkoutForm"
+          id="addWorkoutForm"
+        >
+          <input
+            class="search-input"
+            name="workoutname"
+            placeholder="Workout Name"
+            required=""
+            type="text"
+            value=""
+          />
+          <select
+            class="search-input"
+            name="muscletarget"
+            placeholder="Muscle Target"
+            required=""
+          >
+            <option
+              disabled=""
+              value="'"
+            >
+              Muscle Target
+            </option>
+            <option
+              value="Back"
+            >
+              Back
+            </option>
+            <option
+              value="Shoulders"
+            >
+              Shoulders
+            </option>
+            <option
+              value="Legs"
+            >
+              Legs
+            </option>
+            <option
+              value="Chest"
+            >
+              Chest
+            </option>
+            <option
+              value="Abs"
+            >
+              Abs
+            </option>
+            <option
+              value="Biceps"
+            >
+              Biceps
+            </option>
+            <option
+              value="Triceps"
+            >
+              Triceps
+            </option>
+          </select>
+          <input
+            class="search-input"
+            name="weight"
+            placeholder="Weight"
+            required=""
+            type="text"
+            value=""
+          />
+          <input
+            class="search-input"
+            name="reps"
+            placeholder="Reps"
+            required=""
+            type="text"
+            value=""
+          />
+          <div>
+            <button
+              class="button-theme"
+              type="submit"
+            >
+              Submit
+            </button>
+            <button
+              class="button-theme"
+              type="button"
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="position-fixed fixed top-0 left-0 z-50 flex h-full w-full items-center justify-center bg-opacity-90 bg-gradient-to-br from-slate-200 via-slate-500 to-slate-700 opacity-90"
+      id="modal-container"
+      role="button"
+      tabindex="0"
+    >
+      <form
+        data-testid="addWorkoutForm"
+        id="addWorkoutForm"
+      >
+        <input
+          class="search-input"
+          name="workoutname"
+          placeholder="Workout Name"
+          required=""
+          type="text"
+          value=""
+        />
+        <select
+          class="search-input"
+          name="muscletarget"
+          placeholder="Muscle Target"
+          required=""
+        >
+          <option
+            disabled=""
+            value="'"
+          >
+            Muscle Target
+          </option>
+          <option
+            value="Back"
+          >
+            Back
+          </option>
+          <option
+            value="Shoulders"
+          >
+            Shoulders
+          </option>
+          <option
+            value="Legs"
+          >
+            Legs
+          </option>
+          <option
+            value="Chest"
+          >
+            Chest
+          </option>
+          <option
+            value="Abs"
+          >
+            Abs
+          </option>
+          <option
+            value="Biceps"
+          >
+            Biceps
+          </option>
+          <option
+            value="Triceps"
+          >
+            Triceps
+          </option>
+        </select>
+        <input
+          class="search-input"
+          name="weight"
+          placeholder="Weight"
+          required=""
+          type="text"
+          value=""
+        />
+        <input
+          class="search-input"
+          name="reps"
+          placeholder="Reps"
+          required=""
+          type="text"
+          value=""
+        />
+        <div>
+          <button
+            class="button-theme"
+            type="submit"
+          >
+            Submit
+          </button>
+          <button
+            class="button-theme"
+            type="button"
+          >
+            Cancel
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
