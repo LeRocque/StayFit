@@ -21,7 +21,7 @@ userRouter.post(
   userController.createUser,
   (_req: UserRequest, res: Response) => {
     const returnedId = res.locals.id as number;
-    return res.status(200).json({ user_id: returnedId });
+    return res.status(201).json({ user_id: returnedId });
   },
 );
 
@@ -29,7 +29,15 @@ userRouter.get(
   "/logout",
   userController.logout,
   (_req: UserRequest, res: Response) => {
-    return res.status(201).json("Successful logout");
+    return res.status(202).json("Successful logout");
+  },
+);
+
+userRouter.delete(
+  "/remove/:user_id",
+  userController.deleteUser,
+  (_req: UserRequest, res: Response) => {
+    return res.status(202).json(res.locals.deleted);
   },
 );
 

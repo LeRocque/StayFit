@@ -29,7 +29,7 @@ workoutRouter.post(
   authController.isAuthenticated,
   workoutController.addWorkout,
   (_req: WorkoutRequest, res: Response) => {
-    return res.status(200).json(res.locals.workout);
+    return res.status(201).json(res.locals.workout);
   },
 );
 
@@ -38,7 +38,7 @@ workoutRouter.put(
   authController.isAuthenticated,
   workoutController.editWorkout,
   (_req: WorkoutRequest, res: Response) => {
-    return res.status(200).json(res.locals.update);
+    return res.status(202).json(res.locals.update);
   },
 );
 
@@ -47,7 +47,7 @@ workoutRouter.delete(
   authController.isAuthenticated,
   workoutController.removeWorkout,
   (_req: WorkoutRequest, res: Response) => {
-    return res.status(200).json(res.locals.deleted);
+    return res.status(202).json(res.locals.deleted);
   },
 );
 

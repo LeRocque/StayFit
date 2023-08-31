@@ -86,6 +86,22 @@ const userController = {
       .clearCookie("token", { httpOnly: true });
     return next();
   },
+  deleteUser: async (req: UserRequest, res: Response, next: NextFunction) => {
+    const {user_id} = req.params;
+    try {
+      const queryString =`DELETE from users WHERE user_id=${user_id} RETURNING *`
+      const result = await db.query(queryString) as DbQuery;
+      res.locals.deleted = result;
+      return next();
+    }catch (err) {
+      const error: string = err as string;
+      return next({
+        log: `Error in deleteUser: ${error}`,
+        status: 500,
+        message: "Error deleting account",
+      });
+    }
+  }
 };
 
 export default userController;
