@@ -5,13 +5,15 @@
   "type": "module",
   "scripts": {
     "build": "cross-env NODE_ENV=production vite build",
-    "lint": "eslint \"{src,server}/**/*.{js,jsx,ts,tsx}\" --quiet",
-    "preview": "vite preview",
-    "start": "cross-env NODE_ENV=production tsx server/server.ts",
-    "test": "cross-env NODE_ENV=test vitest",
     "dev": "cross-env NODE_ENV=development vite & nodemon --watch './**/*.ts' --exec 'node --experimental-specifier-resolution=node --loader ts-node/esm --no-warnings' server/server.ts",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx}\"",
     "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx}\"",
+    "lint": "eslint \"{src,server}/**/*.{js,jsx,ts,tsx}\" --quiet",
+    "preview": "vite preview",
+    "start": "cross-env NODE_ENV=production tsx server/server.ts",
+    "test": "cross-env NODE_ENV=test vitest --run",
+    "test:coverage": "cross-env NODE_ENV=test vitest --coverage",
+    "test:watch": "cross-env NODE_ENV=test vitest",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
@@ -46,6 +48,7 @@
     "@typescript-eslint/eslint-plugin": "^5.40.1",
     "@typescript-eslint/parser": "^5.40.1",
     "@vitejs/plugin-react": "^4.0.0",
+    "@vitest/coverage-v8": "^0.34.3",
     "autoprefixer": "^10.4.12",
     "eslint": "^8.38.0",
     "eslint-config-prettier": "^9.0.0",

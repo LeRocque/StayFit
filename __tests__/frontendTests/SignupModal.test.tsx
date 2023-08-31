@@ -11,3 +11,8 @@ test("displays a signup form", async () => {
   const signupForm = await signupModal.findByTestId("signup-form");
   expect(signupForm).toBeDefined();
 });
+
+test("Should match its snapshot", () => {
+  const signupModal = render(<SignupModal handleModal={modalProp} />);
+  expect(signupModal).toMatchSnapshot();
+});

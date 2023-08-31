@@ -30,8 +30,6 @@ const LoginPage = () => {
     void getWorkoutImages();
   }, [dispatch]);
 
-  // console.log("workoutImages are:", workoutImages);
-
   const handleModal = (): void => {
     setShowSignupModal(!showSignupModal);
   };

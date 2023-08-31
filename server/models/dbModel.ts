@@ -31,8 +31,6 @@ const db = {
 
 export default db;
 
-
-
 /*
 Create user table with the following
 CREATE TABLE users (
@@ -45,7 +43,6 @@ CREATE TABLE users (
   password  VARCHAR(100)
 );
 */
-
 
 /*
 Create workouts table with the following
