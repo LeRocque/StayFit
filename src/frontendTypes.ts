@@ -40,8 +40,8 @@ export type WorkoutImages = {
 
 export interface WorkoutsState {
   workouts: {
-  workouts: UserWorkoutsTypes[];
-  }
+    workouts: UserWorkoutsTypes[];
+  };
 }
 
 interface Image {

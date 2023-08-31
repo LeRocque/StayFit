@@ -3,19 +3,6 @@ import db from "../models/dbModel";
 import { Response, NextFunction } from "express";
 import { DbQuery, ReqBodyUser, UserRequest, UserRow } from "../backendTypes";
 
-/*
-Create user table with the following
-CREATE TABLE users (
-  user_id   SERIAL PRIMARY KEY,
-  email     VARCHAR(50),
-  firstName VARCHAR(50),
-  lastName  VARCHAR(50),
-  address   VARCHAR(50),
-  username  VARCHAR(50),
-  password  VARCHAR(100)
-);
-*/
-
 const userController = {
   createUser: async (req: UserRequest, res: Response, next: NextFunction) => {
     const { email, firstName, lastName, address, username, password } =

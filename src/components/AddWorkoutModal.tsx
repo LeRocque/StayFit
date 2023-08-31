@@ -93,7 +93,7 @@ export const AddWorkoutModal = ({
           </button>
         </div>
       )}
-      <form id="addWorkoutForm" onSubmit={handleSubmit}>
+      <form id="addWorkoutForm" onSubmit={handleSubmit} data-testid="addWorkoutForm">
         <input
           type="text"
           className="search-input"

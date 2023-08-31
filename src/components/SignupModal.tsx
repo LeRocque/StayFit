@@ -99,7 +99,11 @@ export const SignupModal = ({ handleModal }: SignupModalProps) => {
           </button>
         </div>
       )}
-      <form className="signup-form" onSubmit={handleSubmit}>
+      <form
+        className="signup-form"
+        onSubmit={handleSubmit}
+        data-testid="signup-form"
+      >
         <input
           type="text"
           required

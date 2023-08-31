@@ -127,7 +127,7 @@ const HomePage = () => {
             handleWorkoutModal={handleWorkoutModal}
           />
         )}
-        <button className="button-theme" onClick={handleWorkoutModal}>
+        <button className="button-theme" onClick={handleWorkoutModal} data-testid="add-workout-button">
           Add Workout
         </button>
         <button className="button-theme" onClick={handleLogout}>
@@ -176,7 +176,7 @@ const HomePage = () => {
             </div>
           ))
         ) : (
-          <div>No workouts added yet.</div>
+          <div data-testid="no-workouts">No workouts added yet.</div>
         )}
       </div>
     </div>

@@ -117,7 +117,11 @@ const LoginPage = () => {
             Login
           </button>
         </form>
-        <button className="button-theme" onClick={handleModal}>
+        <button
+          className="button-theme"
+          onClick={handleModal}
+          data-testid="signup-button"
+        >
           Signup
         </button>
       </div>
