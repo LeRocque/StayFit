@@ -1,5 +1,5 @@
 import { expect, test } from "vitest";
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render } from "@testing-library/react";
 import { Provider } from "react-redux";
 import { store } from "../../src/store";
 import LoginPage from "../../src/pages/LoginPage";
