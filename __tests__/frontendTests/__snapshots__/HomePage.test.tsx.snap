@@ -4,6 +4,7 @@ exports[`Homepage should match it's snapshot 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
+    <div />
     <div>
       <div
         class=" flex h-screen flex-col justify-start"
@@ -13,35 +14,7 @@ exports[`Homepage should match it's snapshot 1`] = `
         >
           <button
             class="button-theme"
-          >
-            Add Workout
-          </button>
-          <button
-            class="button-theme"
-          >
-            Logout
-          </button>
-        </div>
-        <div
-          class="grid h-screen grid-cols-1 gap-1 overflow-y-auto sm:grid-cols-2 lg:grid-cols-4"
-        >
-          <div
-            data-testid="no-workouts"
-          >
-            No workouts added yet.
-          </div>
-        </div>
-      </div>
-    </div>
-    <div>
-      <div
-        class=" flex h-screen flex-col justify-start"
-      >
-        <div
-          class="flex items-center  justify-around bg-slate-500"
-        >
-          <button
-            class="button-theme"
+            data-testid="add-workout-button"
           >
             Add Workout
           </button>
@@ -72,6 +45,7 @@ exports[`Homepage should match it's snapshot 1`] = `
       >
         <button
           class="button-theme"
+          data-testid="add-workout-button"
         >
           Add Workout
         </button>

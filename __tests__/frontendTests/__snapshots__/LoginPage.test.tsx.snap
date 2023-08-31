@@ -44,6 +44,7 @@ exports[`LoginPage should match it's snapshot 1`] = `
           </form>
           <button
             class="button-theme"
+            data-testid="signup-button"
           >
             Signup
           </button>
@@ -91,6 +92,7 @@ exports[`LoginPage should match it's snapshot 1`] = `
         </form>
         <button
           class="button-theme"
+          data-testid="signup-button"
         >
           Signup
         </button>
