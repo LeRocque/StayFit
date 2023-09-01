@@ -63,6 +63,7 @@ export const SignupModal = ({ handleModal }: SignupModalProps) => {
         setUsername("");
         setPassword("");
         handleModal();
+        alert("Thank you for signing up! Please login");
       } else if (response.status === 401) {
         alert("username already exists, please select another");
         setUsername("");
