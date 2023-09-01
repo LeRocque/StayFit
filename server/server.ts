@@ -6,6 +6,7 @@ import express, {
 } from "express";
 import path from "path";
 import cors from "cors";
+import { fileURLToPath } from "url";
 import cookieParser from "cookie-parser";
 import workoutRouter from "./routes/workoutRouter";
 import userRouter from "./routes/userRouter";
@@ -13,6 +14,8 @@ import userRouter from "./routes/userRouter";
 const app: Express = express();
 
 const PORT = process.env.PORT || 3000;
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -23,10 +26,8 @@ app.use("/workout", workoutRouter);
 app.use("/user", userRouter);
 
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(path.resolve(), "dist")));
-  app.get("/*", function (_req, res) {
-    res.sendFile(path.join(path.resolve(), "dist", "index.html"));
-  });
+  app.use(express.static(path.resolve(__dirname, "../build")));
+  app.use("/assets", express.static(path.resolve(__dirname, "../src/assets")));
 }
 
 // Catch-all error handler
