@@ -7,7 +7,7 @@
     "skipLibCheck": true,
     "esModuleInterop": true,
 
-    /* Bundler mode */
+    /* Bundler mod e */
     "moduleResolution": "Bundler",
     "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
