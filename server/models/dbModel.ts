@@ -3,7 +3,9 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-const PG_URI = process.env.PG_URI;
+const PG_URI = process.env.PG_URI || "";
+
+console.log("PG_URI is:", PG_URI);
 
 const { Pool } = pkg;
 
