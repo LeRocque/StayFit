@@ -63,7 +63,7 @@ export const EditWorkoutModal = ({
     }
   };
 
-  const handleWorkoutName = (e: ChangeEvent<HTMLInputElement>): void =>
+  const handleWorkoutName = (e: ChangeEvent<HTMLSelectElement>): void =>
     setWorkoutName(e.target.value);
   const handleMuscleTarget = (e: ChangeEvent<HTMLSelectElement>): void =>
     setMuscleTarget(e.target.value);
@@ -103,15 +103,52 @@ export const EditWorkoutModal = ({
         onSubmit={handleSubmit}
         data-testid="editModalForm"
       >
-        <input
+        <select
           className="search-input"
-          type="text"
           name="workoutname"
           required
           placeholder="Workout Name"
           value={workoutName}
           onChange={handleWorkoutName}
-        />
+        >
+          {" "}
+          <option value="'" disabled>
+            Workout Name
+          </option>
+          <option value="Barbell Shrugs">Barbell Shrugs</option>
+          <option value="Bench Dips">Bench Dips</option>
+          <option value="Bench Press">Bench Press</option>
+          <option value="Bicep Curl Barbell">Bicep Curl Barbell</option>
+          <option value="Bicep Curl Dumbbells">Bicep Curl Dumbbells</option>
+          <option value="Bicep Curl Pulley">Bicep Curl Pulley</option>
+          <option value="Cable Flys">Cable Flys</option>
+          <option value="Calf Raises">Calf Raises</option>
+          <option value="Close Grip Bench">Close Grip Bench</option>
+          <option value="Deadlifts">Deadlifts</option>
+          <option value="Decline Bench Press">Decline Bench Press</option>
+          <option value="Dips">Dips</option>
+          <option value="Dumbbell Bench Alt">Dumbbell Bench Alt</option>
+          <option value="Dumbbell Bench Press">Dumbbell Bench Press</option>
+          <option value="Dumbbell Flys">Dumbbell Flys</option>
+          <option value="Dumbbell Row">Dumbbell Row</option>
+          <option value="Dumbbell Shrugs">Dumbbell Shrugs</option>
+          <option value="Dumbbell Shoulder Press">
+            Dumbbell Shoulder Press
+          </option>
+          <option value="Front Delt Raises">Front Delt Raises</option>
+          <option value="Hammer Curls">Hammer Curls</option>
+          <option value="Leg Lifts">Leg Lifts</option>
+          <option value="Leg Press">Leg Press</option>
+          <option value="Lunges">Lunges</option>
+          <option value="Pull Ups">Pull Ups</option>
+          <option value="Push Ups">Push Ups</option>
+          <option value="Push Ups Alt">Push Ups Alt</option>
+          <option value="Skull Crushers">Skull Crushers</option>
+          <option value="Squat Alt">Squat Alt</option>
+          <option value="Squats">Squats</option>
+          <option value="Sit Ups">Sit Ups</option>
+          <option value="Tricep Pulldowns">Tricep Pulldowns</option>
+        </select>
         <select
           className="search-input"
           name="muscletarget"
@@ -123,12 +160,12 @@ export const EditWorkoutModal = ({
           <option value="'" disabled>
             Muscle Target
           </option>
-          <option value="Back">Back</option>
-          <option value="Shoulders">Shoulders</option>
-          <option value="Legs">Legs</option>
-          <option value="Chest">Chest</option>
           <option value="Abs">Abs</option>
+          <option value="Back">Back</option>
           <option value="Biceps">Biceps</option>
+          <option value="Chest">Chest</option>
+          <option value="Legs">Legs</option>
+          <option value="Shoulders">Shoulders</option>
           <option value="Triceps">Triceps</option>
         </select>
         <input

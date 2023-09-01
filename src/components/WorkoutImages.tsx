@@ -48,11 +48,11 @@ export const GetWorkoutImages = (
     imageResult = workoutImages.images.results[46].image;
   } else if (cleanName === "dumbbellflys") {
     imageResult = workoutImages.images.results[47].image;
-  } else if (cleanName === "squatstwo") {
+  } else if (cleanName === "squatalt") {
     imageResult = workoutImages.images.results[52].image;
   } else if (cleanName === "frontdeltraises") {
     imageResult = workoutImages.images.results[74].image;
-  } else if (cleanName === "pushupstwo") {
+  } else if (cleanName === "pushupsalt") {
     imageResult = workoutImages.images.results[81].image;
   } else if (cleanName === "triceppulldown") {
     imageResult = workoutImages.images.results[86].image;
@@ -60,7 +60,7 @@ export const GetWorkoutImages = (
     imageResult = workoutImages.images.results[106].image;
   } else if (cleanName === "legpress") {
     imageResult = workoutImages.images.results[107].image;
-  } else if (cleanName === "dumbbellbenchpresstwo") {
+  } else if (cleanName === "dumbbellbenchalt") {
     imageResult = workoutImages.images.results[92].image;
   } else if (cleanName === "calfraises") {
     imageResult = workoutImages.images.results[104].image;
