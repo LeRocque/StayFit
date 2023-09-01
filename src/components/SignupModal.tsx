@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, MouseEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import { SignupModalProps } from "../frontendTypes";
 
 export const SignupModal = ({ handleModal }: SignupModalProps) => {
@@ -29,11 +29,6 @@ export const SignupModal = ({ handleModal }: SignupModalProps) => {
     setPassword(e.target.value);
   };
 
-  const handleModalClick = (e: MouseEvent<HTMLDivElement>): void => {
-    if (e.target === e.currentTarget) {
-      handleModal();
-    }
-  };
   const handleModalKeyPress = (
     e: React.KeyboardEvent<HTMLDivElement>,
   ): void => {
@@ -83,7 +78,6 @@ export const SignupModal = ({ handleModal }: SignupModalProps) => {
   return (
     <div
       className="position-fixed fixed top-0 left-0 z-50 flex h-full w-full items-center justify-center bg-opacity-90 bg-gradient-to-br from-blue-200 via-blue-500 to-blue-700"
-      onClick={handleModalClick}
       onKeyDown={handleModalKeyPress}
       role="button"
       tabIndex={0}

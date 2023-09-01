@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, MouseEvent, useEffect, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { EditWorkoutModalProps, UserWorkoutsTypes } from "../frontendTypes";
 import { useAppSelector } from "../hooks";
 import { RootState } from "../store";
@@ -72,11 +72,6 @@ export const EditWorkoutModal = ({
   const handleReps = (e: ChangeEvent<HTMLInputElement>): void =>
     setReps(e.target.value);
 
-  const handleModalClick = (e: MouseEvent<HTMLDivElement>): void => {
-    if (e.target === e.currentTarget) {
-      handleEditModal(null);
-    }
-  };
   const handleModalKeyPress = (
     e: React.KeyboardEvent<HTMLDivElement>,
   ): void => {
@@ -88,7 +83,6 @@ export const EditWorkoutModal = ({
   return (
     <div
       id="modal-container"
-      onClick={handleModalClick}
       onKeyDown={handleModalKeyPress}
       role="button"
       tabIndex={0}

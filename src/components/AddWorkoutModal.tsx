@@ -1,7 +1,6 @@
 import {
   ChangeEvent,
   FormEvent,
-  MouseEvent,
   useState,
   useTransition,
 } from "react";
@@ -51,11 +50,6 @@ export const AddWorkoutModal = ({
     }
   };
 
-  const handleModalClick = (e: MouseEvent<HTMLDivElement>): void => {
-    if (e.target === e.currentTarget) {
-      handleWorkoutModal();
-    }
-  };
   const handleModalKeyPress = (
     e: React.KeyboardEvent<HTMLDivElement>,
   ): void => {
@@ -77,7 +71,6 @@ export const AddWorkoutModal = ({
     <div
       className="position-fixed fixed top-0 left-0 z-50 flex h-full w-full items-center justify-center bg-opacity-90 bg-gradient-to-br from-slate-200 via-slate-500 to-slate-700 opacity-90"
       id="modal-container"
-      onClick={handleModalClick}
       onKeyDown={handleModalKeyPress}
       role="button"
       tabIndex={0}
@@ -93,7 +86,11 @@ export const AddWorkoutModal = ({
           </button>
         </div>
       )}
-      <form id="addWorkoutForm" onSubmit={handleSubmit} data-testid="addWorkoutForm">
+      <form
+        id="addWorkoutForm"
+        onSubmit={handleSubmit}
+        data-testid="addWorkoutForm"
+      >
         <input
           type="text"
           className="search-input"
