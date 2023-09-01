@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate } from "react-router-dom";
+import React, { Routes, Route, Navigate } from "react-router-dom";
 import { RootState } from "./store";
 import { lazy, Suspense } from "react";
 import { useAppSelector } from "./hooks";

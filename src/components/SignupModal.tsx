@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useState } from "react";
+import React, { ChangeEvent, FormEvent, useState } from "react";
 import { SignupModalProps } from "../frontendTypes";
 
 export const SignupModal = ({ handleModal }: SignupModalProps) => {
