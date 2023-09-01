@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useState, useTransition } from "react";
+import React, { ChangeEvent, FormEvent, useState, useTransition } from "react";
 import { WorkoutModalProps } from "../frontendTypes";
 
 export const AddWorkoutModal = ({

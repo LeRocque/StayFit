@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { EditWorkoutModalProps, UserWorkoutsTypes } from "../frontendTypes";
 import { useAppSelector } from "../hooks";
 import { RootState } from "../store";
