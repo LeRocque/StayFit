@@ -2,7 +2,7 @@
   "name": "storage",
   "private": true,
   "version": "0.0.0",
-  "type": "module",
+  "type": "NodeNext",
   "scripts": {
     "build": "tsc && cross-env NODE_ENV=production vite build",
     "dev": "cross-env NODE_ENV=development vite & nodemon --watch './**/*.ts' --exec 'node --experimental-specifier-resolution=node --loader ts-node/esm --no-warnings' server/server.ts",
