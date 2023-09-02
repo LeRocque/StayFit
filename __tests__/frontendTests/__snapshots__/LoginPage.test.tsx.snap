@@ -14,7 +14,7 @@ exports[`LoginPage should match it's snapshot 1`] = `
           <h1
             class="text-3xl font-semibold text-blue-800"
           >
-            Welcome to Workout Tracker!
+            Welcome to Stay Fit!
           </h1>
           <form
             class="mb-5 mt-3 flex flex-col items-center justify-center rounded-lg bg-slate-400 px-3 py-10"
@@ -62,7 +62,7 @@ exports[`LoginPage should match it's snapshot 1`] = `
         <h1
           class="text-3xl font-semibold text-blue-800"
         >
-          Welcome to Workout Tracker!
+          Welcome to Stay Fit!
         </h1>
         <form
           class="mb-5 mt-3 flex flex-col items-center justify-center rounded-lg bg-slate-400 px-3 py-10"
