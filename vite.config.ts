@@ -10,6 +10,7 @@ export default defineConfig({
       "/user": "http://localhost:3000/",
       "/workout": "http://localhost:3000/",
     },
+    host: true,
   },
   build: {
     outDir: "dist",
