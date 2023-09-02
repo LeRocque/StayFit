@@ -22,12 +22,12 @@ app.use(cors());
 app.use("/workout", workoutRouter);
 app.use("/user", userRouter);
 
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(path.resolve(), "dist")));
-  app.get("/*", function (_req, res) {
-    res.sendFile(path.join(path.resolve(), "dist", "index.html"));
-  });
-}
+// if (process.env.NODE_ENV === "production") {
+app.use(express.static(path.join(path.resolve(), "build")));
+app.get("/*", function (_req, res) {
+  res.sendFile(path.join(path.resolve(), "build", "index.html"));
+});
+// }
 
 // Catch-all error handler
 app.use("*", (_req, res) => {

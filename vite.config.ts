@@ -5,7 +5,7 @@ export default defineConfig({
   plugins: [react()],
   server: {
     open: true,
-    port: 5000,
+    port: 4000,
     proxy: {
       "/user": "http://localhost:3000/",
       "/workout": "http://localhost:3000/",
@@ -13,7 +13,7 @@ export default defineConfig({
     host: true,
   },
   build: {
-    outDir: "dist",
+    outDir: "build",
     sourcemap: true,
   },
 });

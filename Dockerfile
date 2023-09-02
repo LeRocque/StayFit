@@ -11,18 +11,15 @@ COPY . /usr/src/app
 RUN npm install
 
 # build for production
-RUN npm run build
+RUN npm run build:client
 
-RUN tsc
-
-RUN npm run preview
-
+RUN npm run build:server
 
 # EXPOSE server port in the container
 EXPOSE 3000
 
 # Start the server
-ENTRYPOINT [ "node", "dist/server/server.js"  ]
+ENTRYPOINT [ "node", "dist/server/server.js" ] 
 
 
 # docker build -t sf-prod .
