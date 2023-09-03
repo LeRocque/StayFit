@@ -22,6 +22,7 @@
 
 # Introduction
 Welcome to Stay Fit, the app that makes it simple to track your latest workouts.
+
 If you would like to use the live verion of the app, please visit this link https://stayfitt-54e919621472.herokuapp.com/
 
 # Features
@@ -32,14 +33,15 @@ If you would like to use the live verion of the app, please visit this link http
 - Securely logout any time via the "Logout" button
 
 # Getting Started
-Fork and clone the repo to your local machine.
-Then run `npm install` to install dependencies.
-After that, simply run `npm run dev` to start in development mode.
-Run `npm run build` and `npm run start` to start in production mode.
-Run `npm t` to run all frontend/backend unit tests.
-Run `npm run lint` to do a full linting check.
-Run `npm run typecheck` to do a full typecheck.
+- Fork and clone the repo to your local machine.
+- Then run `npm install` to install dependencies.
+- After that, simply run `npm run dev` to start in development mode.
+- Run `npm run build` and `npm run start` to start in production mode.
+- Run `npm t` to run all frontend/backend unit tests.
+- Run `npm run lint` to do a full linting check.
+- Run `npm run typecheck` to do a full typecheck.
 
 # Additional Info
 This app harnesses the power of Redux, so be sure to use the Redux Dev Tools
+
 Workout images are sourced from https://wger.de/en/software/api 
