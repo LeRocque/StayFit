@@ -19,7 +19,7 @@ RUN npm run build:server
 EXPOSE 3000
 
 # Start the server
-ENTRYPOINT [ "node", "dist/server/server.js" ] 
+CMD [ "npm", "run", "start:docker" ] 
 
 
 # docker build -t sf-prod .
