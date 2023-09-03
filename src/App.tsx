@@ -15,7 +15,7 @@ const App = () => {
     >
       <Suspense
         fallback={
-          <div className="loading-pane">
+          <div className="fixed top-1/2 left-1/2 h-5 w-5 -translate-x-1/2 -translate-y-1/2 transform rounded-lg border-2">
             <h2 className="loader">🏋️</h2>
           </div>
         }
