@@ -184,7 +184,7 @@ const HomePage = () => {
             data-testid="no-workouts"
             className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transform rounded-lg border-2 border-blue-500 bg-white p-6 text-blue-400"
           >
-            No workouts added yet.
+            Add a workout in the top left corner to begin
           </div>
         )}
       </div>

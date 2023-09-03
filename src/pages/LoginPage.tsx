@@ -122,6 +122,14 @@ const LoginPage = () => {
         >
           Signup
         </button>
+        <div>
+          <p className="mt-3 text-xl font-semibold text-blue-600">
+            This app is completely free of charge
+          </p>
+          <p className="mt-2 text-xl font-semibold text-blue-600">
+            Login or signup to begin
+          </p>
+        </div>
       </div>
       {showSignupModal && <SignupModal handleModal={handleModal} />}
     </div>
