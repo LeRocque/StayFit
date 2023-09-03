@@ -32,13 +32,9 @@ If you would like to use the live verion of the app, please visit this link http
 - You can easily edit or delete existing workouts by clicking their respective buttons as well.
 - Securely logout any time via the `Logout` button
 
-
 ![ezgif com-video-to-gif](https://github.com/LeRocque/StayFit/assets/125281260/f70561ba-24e8-490e-bf7a-d15510f843bf)
 
-
-![ezgif com-video-to-gif (1)](https://github.com/LeRocque/StayFit/assets/125281260/d14cc7e1-82a3-4010-88b1-3bbf6b9df0e2)
-
-
+![ezgif com-optimize](https://github.com/LeRocque/StayFit/assets/125281260/718571b7-a680-4acf-904c-97d242645b51)
 
 # Getting Started
 - Fork and clone the repo to your local machine.
