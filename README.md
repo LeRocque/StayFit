@@ -23,7 +23,7 @@
 # Introduction
 Welcome to Stay Fit, the app that makes it simple to track your latest workouts.
 
-If you would like to use the live version of the app, please visit this link https://stayfitt-54e919621472.herokuapp.com/
+If you would like to use the live version of the app, please visit this link www.stayfit.dev
 
 # Features
 - Stay Fit allows for quick and safe signup/login so that you can keep track of your latest workouts via a Postgresql database.
