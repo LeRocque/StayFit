@@ -32,6 +32,12 @@ If you would like to use the live verion of the app, please visit this link http
 - You can easily edit or delete existing workouts by clicking their respective buttons as well.
 - Securely logout any time via the `Logout` button
 
+
+
+https://github.com/LeRocque/StayFit/assets/125281260/16c15886-c8d5-4bb8-a62f-e04748ce64de
+
+
+
 # Getting Started
 - Fork and clone the repo to your local machine.
 - Then run `npm install` to install dependencies.
