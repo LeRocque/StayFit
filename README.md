@@ -28,9 +28,9 @@ If you would like to use the live verion of the app, please visit this link http
 # Features
 - Stay Fit allows for quick and safe signup/login so that you can keep track of your latest workouts via a Postgresql database.
 - User workout pages are secured via JSON Web Tokens, so you never have to worry about another user getting access to your page.
-- After signing up and logging in, simply click the "Add Workout" button to add your first workout.
+- After signing up and logging in, simply click the `Add Workout` button to add your first workout.
 - You can easily edit or delete existing workouts by clicking their respective buttons as well.
-- Securely logout any time via the "Logout" button
+- Securely logout any time via the `Logout` button
 
 # Getting Started
 - Fork and clone the repo to your local machine.
