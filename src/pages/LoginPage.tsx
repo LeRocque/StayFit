@@ -75,7 +75,7 @@ const LoginPage = () => {
   return (
     <div className="flex h-screen flex-col items-center justify-center  bg-gradient-to-br from-blue-200 via-blue-500 to-blue-700">
       <div className="mb-10 rounded-md bg-white p-4 text-center shadow-lg">
-        <h1 className="text-3xl font-semibold text-blue-800">
+        <h1 className="mb-7 text-3xl font-semibold text-blue-800">
           Welcome to Stay Fit!
         </h1>
         {errorMessage && (
