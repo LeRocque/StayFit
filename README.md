@@ -33,8 +33,10 @@ If you would like to use the live verion of the app, please visit this link http
 - Securely logout any time via the `Logout` button
 
 
+![ezgif com-video-to-gif](https://github.com/LeRocque/StayFit/assets/125281260/f70561ba-24e8-490e-bf7a-d15510f843bf)
 
-https://github.com/LeRocque/StayFit/assets/125281260/16c15886-c8d5-4bb8-a62f-e04748ce64de
+
+![ezgif com-video-to-gif (1)](https://github.com/LeRocque/StayFit/assets/125281260/d14cc7e1-82a3-4010-88b1-3bbf6b9df0e2)
 
 
 
