@@ -127,7 +127,7 @@ const LoginPage = () => {
             This app is completely free of charge
           </p>
           <p className="mt-2 text-xl font-semibold text-blue-600">
-            Login or signup to begin
+            Login or Signup to begin
           </p>
         </div>
       </div>
