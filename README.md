@@ -23,7 +23,7 @@
 # Introduction
 Welcome to Stay Fit, the app that makes it simple to track your latest workouts.
 
-If you would like to use the live verion of the app, please visit this link https://stayfitt-54e919621472.herokuapp.com/
+If you would like to use the live version of the app, please visit this link www.stayfit.dev
 
 # Features
 - Stay Fit allows for quick and safe signup/login so that you can keep track of your latest workouts via a Postgresql database.
@@ -31,6 +31,10 @@ If you would like to use the live verion of the app, please visit this link http
 - After signing up and logging in, simply click the `Add Workout` button to add your first workout.
 - You can easily edit or delete existing workouts by clicking their respective buttons as well.
 - Securely logout any time via the `Logout` button
+
+![ezgif com-video-to-gif](https://github.com/LeRocque/StayFit/assets/125281260/f70561ba-24e8-490e-bf7a-d15510f843bf)
+
+![ezgif com-optimize](https://github.com/LeRocque/StayFit/assets/125281260/718571b7-a680-4acf-904c-97d242645b51)
 
 # Getting Started
 - Fork and clone the repo to your local machine.
