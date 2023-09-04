@@ -24,7 +24,7 @@ app.use("/user", userRouter);
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(path.resolve(), "dist")));
-  app.get("/*", function (_req, res) {
+  app.get("/*", (_req, res) => {
     res.sendFile(path.join(path.resolve(), "dist", "index.html"));
   });
 }
