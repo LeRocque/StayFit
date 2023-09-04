@@ -20,6 +20,7 @@ EXPOSE 3000
 
 # Start the server
 CMD [ "npm", "run", "start:docker" ] 
+# ENTRYPOINT [ "nodemon", "server/server.ts" ]
 
 
 # docker build -t sf-prod .

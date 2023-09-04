@@ -18,7 +18,8 @@
     "test:coverage": "cross-env NODE_ENV=test vitest --coverage",
     "test:watch": "cross-env NODE_ENV=test vitest",
     "typecheck": "tsc --noEmit",
-    "start:docker": "cross-env NODE_ENV=production node dist/server/server.js"
+    "start:docker": "cross-env NODE_ENV=production nodemon server/server.ts",
+    "start:docker2": "cross-env NODE_ENV=production nodem  dist/server/server.js"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
