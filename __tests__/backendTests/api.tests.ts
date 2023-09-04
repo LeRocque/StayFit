@@ -80,7 +80,6 @@ describe("User should be able signup, login, create a workout, get their workout
       .set("Cookie", [token, ssidCookie]);
     expect(response.statusCode).toBe(202);
     expect(response.headers["content-type"]).toMatch(/application\/json/);
-    console.log(token);
   });
   test("User should be able to logout, clear their cookies, and receive a 202 status code", async () => {
     const response: Response = await server.get("/user/logout");

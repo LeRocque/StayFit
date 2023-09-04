@@ -12,12 +12,12 @@ exports[`LoginPage should match it's snapshot 1`] = `
           class="mb-10 rounded-md bg-white p-4 text-center shadow-lg"
         >
           <h1
-            class="text-3xl font-semibold text-blue-800"
+            class="mb-7 font-semibold text-blue-800 md:text-xl lg:text-xl xl:text-2xl"
           >
             Welcome to Stay Fit!
           </h1>
           <form
-            class="mb-5 mt-3 flex flex-col items-center justify-center rounded-lg bg-slate-400 px-3 py-10"
+            class="mb-5 mt-3 flex flex-col items-center justify-center rounded-lg bg-slate-400 px-1 py-5"
           >
             <input
               class="search-input"
@@ -48,6 +48,20 @@ exports[`LoginPage should match it's snapshot 1`] = `
           >
             Signup
           </button>
+          <div
+            class="lg:text-md mt-4 text-center md:mt-8 md:text-sm xl:text-lg"
+          >
+            <p
+              class="lg:text-md text-base font-semibold text-blue-600 md:text-sm xl:text-lg"
+            >
+              This app is completely free of charge
+            </p>
+            <p
+              class="lg:text-md mt-2 text-base font-semibold text-blue-600 md:text-sm xl:text-lg"
+            >
+              Login or Signup to begin
+            </p>
+          </div>
         </div>
       </div>
     </div>
@@ -60,12 +74,12 @@ exports[`LoginPage should match it's snapshot 1`] = `
         class="mb-10 rounded-md bg-white p-4 text-center shadow-lg"
       >
         <h1
-          class="text-3xl font-semibold text-blue-800"
+          class="mb-7 font-semibold text-blue-800 md:text-xl lg:text-xl xl:text-2xl"
         >
           Welcome to Stay Fit!
         </h1>
         <form
-          class="mb-5 mt-3 flex flex-col items-center justify-center rounded-lg bg-slate-400 px-3 py-10"
+          class="mb-5 mt-3 flex flex-col items-center justify-center rounded-lg bg-slate-400 px-1 py-5"
         >
           <input
             class="search-input"
@@ -96,6 +110,20 @@ exports[`LoginPage should match it's snapshot 1`] = `
         >
           Signup
         </button>
+        <div
+          class="lg:text-md mt-4 text-center md:mt-8 md:text-sm xl:text-lg"
+        >
+          <p
+            class="lg:text-md text-base font-semibold text-blue-600 md:text-sm xl:text-lg"
+          >
+            This app is completely free of charge
+          </p>
+          <p
+            class="lg:text-md mt-2 text-base font-semibold text-blue-600 md:text-sm xl:text-lg"
+          >
+            Login or Signup to begin
+          </p>
+        </div>
       </div>
     </div>
   </div>,
