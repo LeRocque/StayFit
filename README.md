@@ -38,6 +38,8 @@ If you would like to use the live version of the app, please visit this link www
 
 # Getting Started
 - Fork and clone the repo to your local machine.
+- Create a .env file and declare a variable `PG_URI` with the assigned value of your Postresql connection string.
+- Declare a second variable in your .env file as `JWT_SECRET` and assign its value to a random string.
 - Then run `npm install` to install dependencies.
 - After that, simply run `npm run dev` to start in development mode.
 - Run `npm run build` and `npm run start` to start in production mode.
