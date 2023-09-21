@@ -20,6 +20,7 @@ pool.connect((err: Error) => {
 const db = {
   query: async (string: string, params?: string[] | number[]) => {
     try {
+      console.log("Executed query:", string);
       return await pool.query(string, params);
     } catch (err) {
       const error = err as string;

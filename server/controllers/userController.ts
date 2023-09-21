@@ -89,8 +89,8 @@ const userController = {
   deleteUser: async (req: UserRequest, res: Response, next: NextFunction) => {
     const {user_id} = req.params;
     try {
-      const queryString =`DELETE from users WHERE user_id=${user_id} RETURNING *`
-      const result = await db.query(queryString) as DbQuery;
+      const queryString ='DELETE from users WHERE user_id=$1 RETURNING *'
+      const result = await db.query(queryString, [user_id]) as DbQuery;
       res.locals.deleted = result;
       return next();
     }catch (err) {
