@@ -14,7 +14,7 @@ const pool = new Pool({
   connectionString: PG_URI,
 });
 
-pool.connect((err: Error) => {
+pool.connect((err: Error | undefined) => {
   if (err) console.error("Error connecting to database");
   else console.log("connected to database");
   return;
