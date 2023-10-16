@@ -12,16 +12,22 @@ import userRouter from "./routes/userRouter";
 
 const app: Express = express();
 
+// PORT will default to env variable if given, else it will use 3000 (this is used for Heroku)
 const PORT = process.env.PORT || 3000;
 
+// Parse incoming urlcoded content and put in req.body
 app.use(express.urlencoded({ extended: true }));
+// Parse incoming JSON content and put in req.body
 app.use(express.json());
+// Parse incoming cookies and put in req.cookies
 app.use(cookieParser());
+// Enable CORS to prevent potential errors
 app.use(cors());
 
 app.use("/workout", workoutRouter);
 app.use("/user", userRouter);
 
+// If env is prod, serve our static bundle
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(path.resolve(), "dist")));
   app.get("/*", (_req, res) => {
