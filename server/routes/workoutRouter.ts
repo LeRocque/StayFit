@@ -6,6 +6,7 @@ import { WorkoutImages } from "../../src/frontendTypes";
 
 const workoutRouter = express.Router();
 
+// Route that makes fetch request to API and returns workout images
 workoutRouter.get(
   "/images",
   workoutController.getImages,
@@ -15,6 +16,7 @@ workoutRouter.get(
   },
 );
 
+// Protected route that gets all workouts associated with user
 workoutRouter.get(
   "/:user_id",
   authController.isAuthenticated,
@@ -24,6 +26,7 @@ workoutRouter.get(
   },
 );
 
+// Protected route that adds and returns workouts related to user
 workoutRouter.post(
   "/add",
   authController.isAuthenticated,
@@ -33,6 +36,7 @@ workoutRouter.post(
   },
 );
 
+// Protected route that edits and returns a workout related to user
 workoutRouter.put(
   "/edit",
   authController.isAuthenticated,
@@ -42,6 +46,7 @@ workoutRouter.put(
   },
 );
 
+// Protected route that deletes and returns a workout related to a user
 workoutRouter.delete(
   "/remove/:workout_id",
   authController.isAuthenticated,
