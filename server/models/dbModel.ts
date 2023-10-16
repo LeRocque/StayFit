@@ -1,12 +1,15 @@
 import pkg from "pg";
 import dotenv from "dotenv";
 
+// Bring env variables into file
 dotenv.config();
 
+// Default to provided env URI or use empty string
 const PG_URI = process.env.PG_URI || "";
 
 const { Pool } = pkg;
 
+// Connect to PostgreSQL DB via Pool
 const pool = new Pool({
   connectionString: PG_URI,
 });
@@ -20,6 +23,7 @@ pool.connect((err: Error) => {
 const db = {
   query: async (string: string, params?: string[] | number[]) => {
     try {
+      // Log all queries
       console.log("Executed query:", string);
       return await pool.query(string, params);
     } catch (err) {
