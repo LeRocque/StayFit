@@ -27,9 +27,11 @@ const db = {
       console.log("Executed query:", string);
       return await pool.query(string, params);
     } catch (err) {
-      const error = err as string;
-      console.error(`Error executing query: ${error}`);
-      throw err;
+      if (err) {
+        const error = err as string;
+        console.error(`Error executing query: ${error}`);
+        throw err;
+      }
     }
   },
 };
