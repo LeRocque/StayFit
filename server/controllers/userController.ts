@@ -4,6 +4,7 @@ import { Response, NextFunction } from "express";
 import { DbQuery, ReqBodyUser, UserRequest, UserRow } from "../backendTypes";
 
 const userController = {
+  // method that will create a new user in the DB if that username does not already exist, password is hashed via Bcrypt, and new user id is persisted on res.locals
   createUser: async (req: UserRequest, res: Response, next: NextFunction) => {
     const { email, firstName, lastName, address, username, password } =
       req.body as ReqBodyUser;
@@ -79,21 +80,22 @@ const userController = {
     }
     return res.status(400).json("Please enter a username and password");
   },
-
+  // method to "logout" user by clearing their ssid and token cookies (On the frontend we will also change their isAuthenticated state to false in our Redux store)
   logout: (_req: UserRequest, res: Response, next: NextFunction) => {
     res
       .clearCookie("ssid", { httpOnly: true })
       .clearCookie("token", { httpOnly: true });
     return next();
   },
+  // method to delete user (currently only being used for testing purposes)
   deleteUser: async (req: UserRequest, res: Response, next: NextFunction) => {
-    const {user_id} = req.params;
+    const { user_id } = req.params;
     try {
-      const queryString ='DELETE from users WHERE user_id=$1 RETURNING *'
-      const result = await db.query(queryString, [user_id]) as DbQuery;
+      const queryString = "DELETE from users WHERE user_id=$1 RETURNING *";
+      const result = (await db.query(queryString, [user_id])) as DbQuery;
       res.locals.deleted = result;
       return next();
-    }catch (err) {
+    } catch (err) {
       const error: string = err as string;
       return next({
         log: `Error in deleteUser: ${error}`,
@@ -101,7 +103,7 @@ const userController = {
         message: "Error deleting account",
       });
     }
-  }
+  },
 };
 
 export default userController;

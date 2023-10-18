@@ -49,7 +49,7 @@ const workoutController = {
         const queryString =
           "SELECT * FROM workouts where user_id =$1 ORDER BY muscletarget";
         const result = (await db.query(queryString, [user_id])) as DbQuery;
-        // if result.rows length is 0, return 'No workouts exist for this user', otherwise store result.rows on res.locals.workouts and call next
+        // if result.rows length is 0, return an empty array, otherwise store result.rows on res.locals.workouts and call next
         if (result.rows.length === 0) {
           return res.status(204).json([]);
         } else {
@@ -100,6 +100,7 @@ const workoutController = {
     return res.status(400).json("Please enter all fields");
   },
 
+  // method to delete workout if it exists
   removeWorkout: async (
     req: WorkoutRequest,
     res: Response,
@@ -130,6 +131,7 @@ const workoutController = {
     }
   },
 
+  // method that will fetch workout images from API and store them on res.locals
   getImages: async (
     _req: WorkoutRequest,
     res: Response,
