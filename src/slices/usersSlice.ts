@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-// create usersSlice that will be used to track if a user is authenticated. Initial state will be a username as an empty string and an isAuthenticated as false. Reducers will be a userLogin and a userLogout. Slice will be named users
+// create and export usersSlice that will be used to store if a user is authenticated. Initial state will be a username as an empty string and an isAuthenticated as false. Reducers will be a userLogin and a userLogout. Slice will be named users
 export const usersSlice = createSlice({
   name: "users",
   initialState: {
