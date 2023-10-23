@@ -12,6 +12,7 @@ export const AddWorkoutModal = ({
   const [isPending, startTransition] = useTransition();
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
+  // function that will send userId, workoutName, muscleTarget, weight, and reps state values to the backend to create new workout related to user
   const handleSubmit = async (e: FormEvent): Promise<void> => {
     e.preventDefault();
     try {
@@ -28,6 +29,7 @@ export const AddWorkoutModal = ({
           reps: reps,
         }),
       });
+      // if workout was successfully created we will change workoutName, muscleTarget, weight, and reps state back to an empty string, and we will close the workoutModal
       if (response.ok) {
         setWorkoutName("");
         setMuscleTarget("");
@@ -45,6 +47,7 @@ export const AddWorkoutModal = ({
     }
   };
 
+  // if user clicks enter on modal div, we will close the modal
   const handleModalKeyPress = (
     e: React.KeyboardEvent<HTMLDivElement>,
   ): void => {
@@ -53,6 +56,7 @@ export const AddWorkoutModal = ({
     }
   };
 
+  // functions to update state with current values inputted by user in our form
   const handleWorkoutName = (e: ChangeEvent<HTMLSelectElement>): void =>
     setWorkoutName(e.target.value);
   const handleMuscleTarget = (e: ChangeEvent<HTMLSelectElement>): void =>
@@ -62,6 +66,7 @@ export const AddWorkoutModal = ({
   const handleReps = (e: ChangeEvent<HTMLInputElement>): void =>
     setReps(e.target.value);
 
+  // we will create and render a div that will contain our form. If an error occurs we will render a div to describe the error to the user (this will also include a button to remove the message for the user). Our form will have input fields for workoutNames, muscleTargets, weight, and reps (workoutNames and muscleTargets will be selects and weight/reps will be text inputs)
   return (
     <div
       className="position-fixed fixed top-0 left-0 z-50 flex h-full w-full items-center justify-center bg-opacity-90 bg-gradient-to-br from-slate-200 via-slate-500 to-slate-700 opacity-90"
