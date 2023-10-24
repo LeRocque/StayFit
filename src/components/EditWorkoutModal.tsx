@@ -69,7 +69,7 @@ export const EditWorkoutModal = ({
     }
   };
 
-   // functions to update state with current values inputted by user in our form
+  // functions to update state with current values inputted by user in our form
   const handleWorkoutName = (e: ChangeEvent<HTMLSelectElement>): void =>
     setWorkoutName(e.target.value);
   const handleMuscleTarget = (e: ChangeEvent<HTMLSelectElement>): void =>
@@ -79,6 +79,7 @@ export const EditWorkoutModal = ({
   const handleReps = (e: ChangeEvent<HTMLInputElement>): void =>
     setReps(e.target.value);
 
+  // if user clicks enter on modal div, we will close the modal
   const handleModalKeyPress = (
     e: React.KeyboardEvent<HTMLDivElement>,
   ): void => {
@@ -87,6 +88,7 @@ export const EditWorkoutModal = ({
     }
   };
 
+  // we will create and render a div that will contain our form. If an error occurs we will render a div to describe the error to the user (this will also include a button to remove the message for the user). Our form will have input fields for workoutNames, muscleTargets, weight, and reps (workoutNames and muscleTargets will be selects and weight/reps will be text inputs)
   return (
     <div
       id="modal-container"
