@@ -13,16 +13,19 @@ export const EditWorkoutModal = ({
   const [reps, setReps] = useState("");
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
+  // access the store to get user workouts
   const workoutState = useAppSelector(
     (state: RootState) =>
       state.workouts.workouts as unknown as UserWorkoutsTypes[],
   );
 
+  // if user has workouts, initialize workoutToEdit variable that matches workout id that was passed to our EditWorkoutModal props
   useEffect(() => {
     if (workoutState) {
       const workoutToEdit = workoutState.find(
         (el: UserWorkoutsTypes) => el.workout_id === workoutId,
       );
+      // if there is a workout to edit, update name, muscleTarget, weight, and reps state to match workout to edit
       if (workoutToEdit) {
         setWorkoutName(workoutToEdit.workoutname);
         setMuscleTarget(workoutToEdit.muscletarget);
@@ -30,8 +33,10 @@ export const EditWorkoutModal = ({
         setReps(workoutToEdit.reps);
       }
     }
+    // update workout name, muscleTarget, weight, and reps any time workoutId prop changes or workoutState is updated
   }, [workoutId, workoutState]);
 
+  // function that will make fetch request to our edit endpoint. We will send the passed down workoutId prop along with the current workoutName, muscleTarget, weight, and reps state
   const handleSubmit = async (e: FormEvent): Promise<void> => {
     e.preventDefault();
     try {
@@ -48,6 +53,7 @@ export const EditWorkoutModal = ({
           reps: reps,
         }),
       });
+      // if workout was successfully editted we will update corresponding state values to empty strings and we will update handleEditModal to be null
       if (response.ok) {
         setWorkoutName("");
         setMuscleTarget("");
@@ -63,6 +69,7 @@ export const EditWorkoutModal = ({
     }
   };
 
+   // functions to update state with current values inputted by user in our form
   const handleWorkoutName = (e: ChangeEvent<HTMLSelectElement>): void =>
     setWorkoutName(e.target.value);
   const handleMuscleTarget = (e: ChangeEvent<HTMLSelectElement>): void =>
