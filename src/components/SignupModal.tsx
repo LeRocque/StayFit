@@ -80,6 +80,7 @@ export const SignupModal = ({ handleModal }: SignupModalProps) => {
     }
   };
 
+  // we will create and render a div that will contain our form. If an error occurs we will render a div to describe the error to the user (this will also include a button to remove the message for the user). Our form will have input fields for email, firstName, lastName, address, username, and password. They will all be text inputs
   return (
     <div
       className="position-fixed fixed top-0 left-0 z-50 flex h-full w-full items-center justify-center bg-opacity-90 bg-gradient-to-br from-blue-200 via-blue-500 to-blue-700"
