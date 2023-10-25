@@ -10,6 +10,7 @@ export const SignupModal = ({ handleModal }: SignupModalProps) => {
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
+  // functions to update state with current values inputted by user in our form
   const handleSetEmail = (e: ChangeEvent<HTMLInputElement>): void => {
     setEmail(e.target.value);
   };
@@ -29,6 +30,7 @@ export const SignupModal = ({ handleModal }: SignupModalProps) => {
     setPassword(e.target.value);
   };
 
+  // if user clicks enter on modal div, we will close the modal
   const handleModalKeyPress = (
     e: React.KeyboardEvent<HTMLDivElement>,
   ): void => {
@@ -37,6 +39,7 @@ export const SignupModal = ({ handleModal }: SignupModalProps) => {
     }
   };
 
+  // function that will make fetch request to our signup endpoint. We will send the state values that hold the user inputted email, firstName, lastName, address, username, and password in our body
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     try {
@@ -55,6 +58,7 @@ export const SignupModal = ({ handleModal }: SignupModalProps) => {
           password: password,
         }),
       });
+      // if user was successfully created we will update the values for the states related to the form fields with an empty string (reset the form). If we get back a 401 we will alert the user that the inputted username already exists and we will reset the username field. If we get back a 400 we will alert the user that all fields are required
       if (response.ok) {
         setEmail("");
         setFirstName("");
