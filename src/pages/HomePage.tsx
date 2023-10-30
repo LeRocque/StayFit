@@ -13,6 +13,7 @@ import { userLogout } from "../slices/usersSlice";
 import { setWorkouts } from "../slices/workoutsSlice";
 import { RootState } from "../store";
 
+// Component that will render the user's saved workouts with their corresponging images fetched from the API
 const HomePage = () => {
   const { userId } = useParams();
   const [userWorkouts, setUserWorkouts] = useState<UserWorkoutsTypes[]>([]);
