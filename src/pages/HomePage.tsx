@@ -126,6 +126,10 @@ const HomePage = () => {
     return GetWorkoutImages(workoutname, workoutImages);
   };
 
+  // our HomePage component will render a div that will conditionally render an error-message div if the errorMessage state is truthy. This will display a message to the user signifying which type of error occurred and it will come with a dismiss button.
+  // the top of out component will have a div which contains an Add Workout and Logout button. If the Add Workout button is clicked it will show our AddWorkoutModal component. If our Logout button is clicked the user will be have their cookies cleared, isAuthenticated state set to false, and be redirected to the LoginPage component
+  // if the user has no workouts we will render a div that tells the user to add a workout in the top left corner to begin.
+  // if the user has workouts we will render a div for each workout that will contain the workoutName, muscleTarget, weight, reps, and corresponding image. These divs will always contain Edit and Delete workout buttons. The Edit workout button will show the EditWorkoutModal and the Delete workout button delete the workout from the database and re-render our workouts
   return (
     <div className=" flex h-screen flex-col justify-start">
       {errorMessage && (
