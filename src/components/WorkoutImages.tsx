@@ -1,5 +1,6 @@
 import { ImagesState } from "../frontendTypes";
 
+// function that will accept workoutName and workoutImages state. First we will assign a variable to the returned result of invoking the replace method on the workoutName state to handle case input by user. Next we will check to see what the name is and reassign imageResult to the corresponding image from the images results array. Finally our function will return the corresponding image.
 export const GetWorkoutImages = (
   workoutName: string,
   workoutImages: ImagesState,

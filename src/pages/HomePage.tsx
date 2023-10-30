@@ -13,7 +13,9 @@ import { userLogout } from "../slices/usersSlice";
 import { setWorkouts } from "../slices/workoutsSlice";
 import { RootState } from "../store";
 
+// Component that will render the user's saved workouts with their corresponging images fetched from the API
 const HomePage = () => {
+  // grab userId from useParams hook
   const { userId } = useParams();
   const [userWorkouts, setUserWorkouts] = useState<UserWorkoutsTypes[]>([]);
   const [showAddWorkoutModal, setShowAddWorkoutModal] = useState(false);
@@ -23,28 +25,36 @@ const HomePage = () => {
 
   const dispatch = useAppDispatch();
 
+  // get workoutImages from our Redux store
   const workoutImages: ImagesState = useAppSelector(
     (state: RootState) => state.workouts.images,
   );
+
+  // useEffect hook that will trigger on initial render, any time dispatch is called, or any time editingWorkoutId, userId, showAddWorkoutModal, or workoutDeleted state changes
   useEffect(() => {
     const getUserWorkouts = async (): Promise<void> => {
       try {
+        // if userId is defined we will send a fetch request to our '/workout/userId' endpoint.
         if (userId) {
           const result = await fetch(`/workout/${userId}`);
+          // if response is 204 it means the user does not yet have workouts so we will return undefined and exit the getUserWorkouts function
           if (result.status === 204) {
             return;
           }
+          // assign JSON response to workouts variable and dispatch to our setWorkouts action. This will set our workoutState in our redux store with returned user workouts
           const workouts = (await result.json()) as WorkoutsState;
           dispatch(setWorkouts(workouts));
         }
       } catch (err) {
         console.error(err);
+        // if there is an error will we log it and update the errorMessage state with appropriate message
         setErrorMessage("An error occurred while fetching user workouts.");
       }
     };
     void getUserWorkouts();
   }, [dispatch, editingWorkoutId, userId, showAddWorkoutModal, workoutDeleted]);
 
+  // repeat our useEffect hook exactly the same way as we did prior except this time we will assert the response type as UserWorkoutTypes array and update the userWorkouts state with this response to make TypeScript happy
   useEffect(() => {
     const getUserWorkouts = async (): Promise<void> => {
       try {
@@ -64,6 +74,7 @@ const HomePage = () => {
     void getUserWorkouts();
   }, [dispatch, editingWorkoutId, userId, showAddWorkoutModal, workoutDeleted]);
 
+  // function that will send fetch request to our '/user/logout' endpoint. In the backend this will simply clear the SSID and Token cookies for the user. If the cookies were successfully cleared we will call our dispatch hook with our userLogout action to update the isAuthenticated state to false in our Redux store (we are using double auth here)
   const handleLogout = async (): Promise<void> => {
     try {
       const result = await fetch("/user/logout", {
@@ -76,22 +87,27 @@ const HomePage = () => {
       }
     } catch (err) {
       console.error(err);
+      // if there is an error will we log it and update the errorMessage state with appropriate message
       setErrorMessage("An error occurred while logging out.");
     }
   };
 
+  // function that will update showAddWorkoutModal state with opposite of its current value (true or false)
   const handleWorkoutModal = (): void =>
     setShowAddWorkoutModal(!showAddWorkoutModal);
 
+  // function that will accept workout_id which will be a number or null. We will then update the editingWorkoutId state based off of the workout_id. If the prevId (current id we are editing) is equal to the passed in workout_id that means we are done editing and we can update the editingWorkoutId state to null, otherwise we will update the editingWorkoutId state with the new workout_id
   const handleEditModal = (workout_id: number | null): void => {
     setEditingWorkoutId((prevId) =>
       prevId === workout_id ? null : workout_id,
     );
   };
 
-  const handleDelete = async (e: number): Promise<void> => {
+  // function that will accept a workoutId ad send a fetch request to our '/workout/remove/workoutId' endpoint. If the workout was successfully deleted we will alert the user and update the workoutDeleted state (this will trigger our useEffect and re-render the page to remove the workout)
+
+  const handleDelete = async (workoutId: number): Promise<void> => {
     try {
-      const result = await fetch(`/workout/remove/${e}`, {
+      const result = await fetch(`/workout/remove/${workoutId}`, {
         method: "DELETE",
       });
       if (result.ok) {
@@ -100,13 +116,20 @@ const HomePage = () => {
       }
     } catch (err) {
       console.error(err);
+      // if there is an error will we log it and update the errorMessage state with appropriate message
+      setErrorMessage("An error occurred while deleting workout.");
     }
   };
 
+  // function that will accept a workoutName, invoke our GetWorkoutImages function with that workoutName and our workoutImages state array, then return the correct workout image to us
   const handleWorkoutImage = (workoutname: string) => {
     return GetWorkoutImages(workoutname, workoutImages);
   };
 
+  // our HomePage component will render a div that will conditionally render an error-message div if the errorMessage state is truthy. This will display a message to the user signifying which type of error occurred and it will come with a dismiss button.
+  // the top of out component will have a div which contains an Add Workout and Logout button. If the Add Workout button is clicked it will show our AddWorkoutModal component. If our Logout button is clicked the user will be have their cookies cleared, isAuthenticated state set to false, and be redirected to the LoginPage component
+  // if the user has no workouts we will render a div that tells the user to add a workout in the top left corner to begin.
+  // if the user has workouts we will render a div for each workout that will contain the workoutName, muscleTarget, weight, reps, and corresponding image. These divs will always contain Edit and Delete workout buttons. The Edit workout button will show the EditWorkoutModal and the Delete workout button delete the workout from the database and re-render our workouts
   return (
     <div className=" flex h-screen flex-col justify-start">
       {errorMessage && (
