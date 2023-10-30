@@ -15,6 +15,7 @@ import { RootState } from "../store";
 
 // Component that will render the user's saved workouts with their corresponging images fetched from the API
 const HomePage = () => {
+  // grab userId from useParams hook
   const { userId } = useParams();
   const [userWorkouts, setUserWorkouts] = useState<UserWorkoutsTypes[]>([]);
   const [showAddWorkoutModal, setShowAddWorkoutModal] = useState(false);
@@ -24,28 +25,36 @@ const HomePage = () => {
 
   const dispatch = useAppDispatch();
 
+  // get workoutImages from our Redux store
   const workoutImages: ImagesState = useAppSelector(
     (state: RootState) => state.workouts.images,
   );
+
+  // useEffect hook that will trigger on initial render, any time dispatch is called, or any time editingWorkoutId, userId, showAddWorkoutModal, or workoutDeleted state changes
   useEffect(() => {
     const getUserWorkouts = async (): Promise<void> => {
       try {
+        // if userId is defined we will send a fetch request to our '/workout/userId' endpoint.
         if (userId) {
           const result = await fetch(`/workout/${userId}`);
+          // if response is 204 it means the user does not yet have workouts so we will return undefined and exit the getUserWorkouts function
           if (result.status === 204) {
             return;
           }
+          // assign JSON response to workouts variable and dispatch to our setWorkouts action. This will set our workoutState in our redux store with returned user workouts
           const workouts = (await result.json()) as WorkoutsState;
           dispatch(setWorkouts(workouts));
         }
       } catch (err) {
         console.error(err);
+        // if there is an error will we log it and update the errorMessage state with appropriate message
         setErrorMessage("An error occurred while fetching user workouts.");
       }
     };
     void getUserWorkouts();
   }, [dispatch, editingWorkoutId, userId, showAddWorkoutModal, workoutDeleted]);
 
+  // repeat our useEffect hook exactly the same way as we did prior except this time we will assert the response type as UserWorkoutTypes array to make TypeScript happy
   useEffect(() => {
     const getUserWorkouts = async (): Promise<void> => {
       try {
