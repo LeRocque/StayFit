@@ -54,7 +54,7 @@ const HomePage = () => {
     void getUserWorkouts();
   }, [dispatch, editingWorkoutId, userId, showAddWorkoutModal, workoutDeleted]);
 
-  // repeat our useEffect hook exactly the same way as we did prior except this time we will assert the response type as UserWorkoutTypes array to make TypeScript happy
+  // repeat our useEffect hook exactly the same way as we did prior except this time we will assert the response type as UserWorkoutTypes array and update the userWorkouts state with this response to make TypeScript happy
   useEffect(() => {
     const getUserWorkouts = async (): Promise<void> => {
       try {
@@ -74,6 +74,7 @@ const HomePage = () => {
     void getUserWorkouts();
   }, [dispatch, editingWorkoutId, userId, showAddWorkoutModal, workoutDeleted]);
 
+  // function that will send fetch request to our '/user/logout' endpoint. In the backend this will simply clear the SSID and Token cookies for the user. If the cookies were successfully cleared we will call our dispatch hook with our userLogout action to update the isAuthenticated state to false in our Redux store (we are using double auth here)
   const handleLogout = async (): Promise<void> => {
     try {
       const result = await fetch("/user/logout", {
@@ -86,22 +87,27 @@ const HomePage = () => {
       }
     } catch (err) {
       console.error(err);
+      // if there is an error will we log it and update the errorMessage state with appropriate message
       setErrorMessage("An error occurred while logging out.");
     }
   };
 
+  // function that will update showAddWorkoutModal state with opposite of its current value (true or false)
   const handleWorkoutModal = (): void =>
     setShowAddWorkoutModal(!showAddWorkoutModal);
 
+  // function that will accept workout_id which will be a number or null. We will then update the editingWorkoutId state based off of the workout_id. If the prevId (current id we are editing) is equal to the passed in workout_id that means we are done editing and we can update the editingWorkoutId state to null, otherwise we will update the editingWorkoutId state with the new workout_id
   const handleEditModal = (workout_id: number | null): void => {
     setEditingWorkoutId((prevId) =>
       prevId === workout_id ? null : workout_id,
     );
   };
 
-  const handleDelete = async (e: number): Promise<void> => {
+  // function that will accept a workoutId ad send a fetch request to our '/workout/remove/workoutId' endpoint. If the workout was successfully deleted we will alert the user and update the workoutDeleted state (this will trigger our useEffect and re-render the page to remove the workout)
+
+  const handleDelete = async (workoutId: number): Promise<void> => {
     try {
-      const result = await fetch(`/workout/remove/${e}`, {
+      const result = await fetch(`/workout/remove/${workoutId}`, {
         method: "DELETE",
       });
       if (result.ok) {
@@ -110,9 +116,12 @@ const HomePage = () => {
       }
     } catch (err) {
       console.error(err);
+      // if there is an error will we log it and update the errorMessage state with appropriate message
+      setErrorMessage("An error occurred while deleting workout.");
     }
   };
 
+  // function that will accept a workoutName, invoke our GetWorkoutImages function with that workoutName and our workoutImages state array, then return the correct workout image to us
   const handleWorkoutImage = (workoutname: string) => {
     return GetWorkoutImages(workoutname, workoutImages);
   };
