@@ -81,6 +81,11 @@ const LoginPage = () => {
       setErrorMessage("An error occured while attempting to log in");
     }
   };
+
+  // we will create and render a div that serve as the landing page for our App! If there is an errorMessage we will render a div that contains that message as well as a button to dismiss the error message.
+  // we will create a render a form that will contain text inputs for a username and password as well as a login button that will trigger our handleSubmit function to send the user inputted name and password to the backend.
+  // we will also create a signup button that will show our SignupModal when clicked.
+  // Finally we will
   return (
     <div className="flex h-screen flex-col items-center justify-center  bg-gradient-to-br from-blue-200 via-blue-500 to-blue-700">
       <div className="mb-10 rounded-md bg-white p-4 text-center shadow-lg">
